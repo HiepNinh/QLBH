@@ -121,4 +121,23 @@ public class DAOQLNHANVIEN {
         }
     }
     // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" View all from NHANVIEN ">
+    public ResultSet Search(){
+        try {
+            Connection c = getConnection();
+            if (c == null) {
+                //Connect database failure
+                return null;
+            } else {
+                String sql = "select nv.MANV,nv.TENNV,nv.DIACHI,nv.DIENTHOAI,nv.EMAIL,cv.TENCV from nhanvien nv inner join chucvu cv on nv.MACV = cv.MACV";
+                PreparedStatement pstm = c.prepareStatement(sql);
+                ResultSet rs = pstm.executeQuery();
+                return rs;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    // </editor-fold>
 }
