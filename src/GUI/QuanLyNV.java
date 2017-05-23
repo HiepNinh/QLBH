@@ -24,26 +24,25 @@ public class QuanLyNV extends javax.swing.JFrame {
     boolean isAdding = false;
     private DefaultTableModel tableModel;
     private String[] colsName = {"STT", "Mã NV", "Tên NV", "Địa chỉ", "Số điện thoại", "Email", "Chức vụ"};
-    
+
     public QuanLyNV() {
         initComponents();
-        ChangeText("-", "", "", "", "", "");
+        ChangeText("-", "     ", "     ", "    ", "     ", "      ");
         this.setLocationRelativeTo(null);
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(colsName);
         JtableNV.setModel(tableModel);
     }
 
-    public void ChangeText(String ma, String Ten, String DC, String SDT, String email, String cv){
+    public void ChangeText(String ma, String Ten, String DC, String SDT, String email, String cv) {
         this.lbMa.setText(ma);
         this.txbTen.setText(Ten);
         this.txbDC.setText(DC);
         this.txbDT.setText(SDT);
         this.txbEmail.setText(email);
         this.cbCV.setSelectedItem(cv);
-
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -111,6 +110,11 @@ public class QuanLyNV extends javax.swing.JFrame {
             }
         ));
         JtableNV.getTableHeader().setReorderingAllowed(false);
+        JtableNV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JtableNVMouseClicked(evt);
+            }
+        });
         jspaneNV.setViewportView(JtableNV);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -196,7 +200,7 @@ public class QuanLyNV extends javax.swing.JFrame {
         txbTen.setText("Trịnh Thị Hà");
         txbTen.setMinimumSize(new java.awt.Dimension(400, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -231,7 +235,6 @@ public class QuanLyNV extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel4.add(lbMa, gridBagConstraints);
 
-        cbCV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D" }));
         cbCV.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
@@ -368,16 +371,13 @@ public class QuanLyNV extends javax.swing.JFrame {
     }//GEN-LAST:event_AnhDaiDienMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if(isAdding == false)
-        {
+        if (isAdding == false) {
             //Tự lấy mã kh tiếp theo??
             this.lbMa.setText("??");
             isAdding = true;
             this.btnSua.setEnabled(false);
             this.btnXoa.setEnabled(false);
-        }
-        else
-        {
+        } else {
             //thêm nv
             this.btnSua.setEnabled(true);
             this.btnXoa.setEnabled(true);
@@ -385,36 +385,56 @@ public class QuanLyNV extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        int reply = JOptionPane.showConfirmDialog(null,"Bạn có chắc muốn xóa nhân viên này?","Xóa nhân viên",JOptionPane.WARNING_MESSAGE);
-        if(reply == JOptionPane.YES_OPTION){
-            //xóa nhân viên
+        if (JtableNV.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên muốn xóa!","Chú ý", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa nhân viên này?", "Xóa nhân viên", JOptionPane.WARNING_MESSAGE);
+            if (reply == JOptionPane.YES_OPTION) {
+                //xóa nhân viên            
+                int manv = Integer.parseInt(lbMa.getText());
+                if(BUSQLNHANVIEN.getInstance().Delete(manv))
+                {
+                    JOptionPane.showMessageDialog(null, "Xóa thành công","Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Xóa thất bại","Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         //tìm kiếm
-        
+
         tableModel.setRowCount(0);
-        
+
         ArrayList<String[]> al = BUSQLNHANVIEN.getInstance().SearchNV(txbSearch.getText());
         if (al != null) {
-                Object count = 1;
-                for(int i = 0; i<al.size();i++)
-                {
-                    String rows[] = new String[7];
-                    rows[0] = count.toString();                 //STT
-                    rows[1] = al.get(i)[0];                     //MaNV
-                    rows[2] = al.get(i)[1];                     //TenNV
-                    rows[3] = al.get(i)[2];                     //DIACHI
-                    rows[4] = al.get(i)[3];                     //Phone
-                    rows[5] = al.get(i)[4];                     //Email
-                    rows[6] = al.get(i)[5];                     //Chuc vu
-                    tableModel.addRow(rows);
-                    //mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
-                    count = (int)count + 1;
-                }
+            Object count = 1;
+            for (int i = 0; i < al.size(); i++) {
+                String rows[] = new String[7];
+                rows[0] = count.toString();                 //STT
+                rows[1] = al.get(i)[0];                     //MaNV
+                rows[2] = al.get(i)[1];                     //TenNV
+                rows[3] = al.get(i)[2];                     //DIACHI
+                rows[4] = al.get(i)[3];                     //Phone
+                rows[5] = al.get(i)[4];                     //Email
+                rows[6] = al.get(i)[5];                     //Chuc vu
+                tableModel.addRow(rows);
+                //mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
+                count = (int) count + 1;
+            }
         }
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void JtableNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtableNVMouseClicked
+        int row = JtableNV.getSelectedRow();
+        lbMa.setText(JtableNV.getModel().getValueAt(row, 1).toString());
+        txbTen.setText(JtableNV.getModel().getValueAt(row, 2).toString());
+        txbDC.setText(JtableNV.getModel().getValueAt(row, 3).toString());
+        txbDT.setText(JtableNV.getModel().getValueAt(row, 4).toString());
+        txbEmail.setText(JtableNV.getModel().getValueAt(row, 5).toString());
+    }//GEN-LAST:event_JtableNVMouseClicked
 
     /**
      * @param args the command line arguments

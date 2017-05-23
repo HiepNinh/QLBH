@@ -85,9 +85,45 @@ public class DAOQLNHANVIEN {
                 //Connect database failure
                 return false;
             } else {
-                String sql = "Delete from NHANVIEN where MANV = ?";
-                PreparedStatement pstm = c.prepareStatement(sql);
+                String sql;
+                PreparedStatement pstm;
+                // <editor-fold defaultstate="collapsed" desc=" Kiem tra nhan vien thu ngan">
+                sql = "select * from hoadon where MANV = ?";
+                pstm = c.prepareStatement(sql);
                 pstm.setInt(1,Manv);
+                ResultSet rs1 = pstm.executeQuery();
+                if(rs1.next())
+                    return false;
+                // </editor-fold>
+                
+                // <editor-fold defaultstate="collapsed" desc=" Kiem tra nhan vien kho">
+                sql = "select * from phieunhap where MANV = ?";
+                pstm = c.prepareStatement(sql);
+                pstm.setInt(1,Manv);
+                ResultSet rs2 = pstm.executeQuery();
+                if(rs2.next())
+                    return false; 
+                // </editor-fold>
+                
+                // <editor-fold defaultstate="collapsed" desc=" Kiem tra nhan vien quay">
+                sql = "select * from phieuxuat where MANV = ?";
+                pstm = c.prepareStatement(sql);
+                pstm.setInt(1,Manv);
+                ResultSet rs3 = pstm.executeQuery();
+                if(rs3.next())
+                    return false;
+                // </editor-fold>
+                
+                //Nhan vien moi
+                //Delete tai khoan cua nhan vien
+                sql = "Delete from taikhoan where MANV = ?";
+                pstm.setInt(1,Manv);
+                pstm.executeUpdate();
+                //Delete nhan vien
+                sql = "Delete from nhanvien where MANV = ?";
+                pstm = c.prepareStatement(sql);
+                pstm.setInt(1,Manv);
+                pstm.executeUpdate();
                 //Delete succees
                 return true;
             }
