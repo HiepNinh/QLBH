@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import BUS.BUSQLNHANVIEN;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
@@ -37,15 +40,15 @@ public class ThemNV extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         AnhDaiDien = new javax.swing.JLabel();
-        TenNV = new javax.swing.JTextField();
-        DiaChi = new javax.swing.JTextField();
-        SDT = new javax.swing.JTextField();
-        ChucVu = new javax.swing.JComboBox<>();
-        Email = new javax.swing.JTextField();
+        txbTen = new javax.swing.JTextField();
+        txbDC = new javax.swing.JTextField();
+        txbDT = new javax.swing.JTextField();
+        cbCV = new javax.swing.JComboBox<>();
+        txbEmail = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnHuy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nhập bánh");
@@ -110,17 +113,15 @@ public class ThemNV extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
         jPanel1.add(AnhDaiDien, gridBagConstraints);
 
-        TenNV.setText("Trịnh Thị Hà");
-        TenNV.setMinimumSize(new java.awt.Dimension(400, 20));
+        txbTen.setText("tam thoi chua co");
+        txbTen.setMinimumSize(new java.awt.Dimension(400, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(TenNV, gridBagConstraints);
-
-        DiaChi.setText("60 Nguyễn Đình Chiểu, P2, Quận 1");
+        jPanel1.add(txbTen, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
@@ -128,9 +129,7 @@ public class ThemNV extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(DiaChi, gridBagConstraints);
-
-        SDT.setText("01241520113");
+        jPanel1.add(txbDC, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
@@ -138,26 +137,23 @@ public class ThemNV extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(SDT, gridBagConstraints);
+        jPanel1.add(txbDT, gridBagConstraints);
 
-        ChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D" }));
-        ChucVu.setToolTipText("");
+        cbCV.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(4, 11, 5, 10);
-        jPanel1.add(ChucVu, gridBagConstraints);
-
-        Email.setText("bdf@hm.com");
+        jPanel1.add(cbCV, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(Email, gridBagConstraints);
+        jPanel1.add(txbEmail, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -189,21 +185,31 @@ public class ThemNV extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel2.add(jLabel1, gridBagConstraints);
 
-        jButton1.setText("Thêm");
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 30;
-        jPanel2.add(jButton1, gridBagConstraints);
+        jPanel2.add(btnThem, gridBagConstraints);
 
-        jButton2.setText("Hủy");
+        btnHuy.setText("Hủy");
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel2.add(jButton2, gridBagConstraints);
+        jPanel2.add(btnHuy, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -228,6 +234,26 @@ public class ThemNV extends javax.swing.JFrame {
     private void AnhDaiDienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnhDaiDienMouseClicked
         
     }//GEN-LAST:event_AnhDaiDienMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+
+            /*int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn sửa nhân viên này?", "Sửa nhân viên", JOptionPane.WARNING_MESSAGE);
+            if (reply == JOptionPane.YES_OPTION) {
+                //Sửa nhân viên            
+                int manv = Integer.parseInt(lbMa.getText());   //Ma NhanVien can sua
+                int x = this.cbCV.getSelectedIndex();          //Lay index cua combobox
+                 int macv = al.get(x).getMacv();                 // Lay ma chuc vu
+                if (BUSQLNHANVIEN.getInstance().Update(manv,txbTen.getText(),txbDC.getText(),txbEmail.getText(),txbDT.getText(),macv)) {
+                    JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sửa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }*/
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_btnHuyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,13 +295,9 @@ public class ThemNV extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AnhDaiDien;
-    private javax.swing.JComboBox<String> ChucVu;
-    private javax.swing.JTextField DiaChi;
-    private javax.swing.JTextField Email;
-    private javax.swing.JTextField SDT;
-    private javax.swing.JTextField TenNV;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnHuy;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JComboBox<String> cbCV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -285,5 +307,9 @@ public class ThemNV extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField txbDC;
+    private javax.swing.JTextField txbDT;
+    private javax.swing.JTextField txbEmail;
+    private javax.swing.JTextField txbTen;
     // End of variables declaration//GEN-END:variables
 }

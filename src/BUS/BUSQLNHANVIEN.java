@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import qlbh.CHUCVU;
 import qlbh.DAOQLNHANVIEN;
 
 /**
@@ -82,6 +83,25 @@ public class BUSQLNHANVIEN {
         } catch (SQLException ex) {
             Logger.getLogger(BUSQLNHANVIEN.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return al;
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" View  nhan vien ">
+    public ArrayList<CHUCVU> GetAllCV() throws SQLException
+    {
+        ResultSet src = DAOQLNHANVIEN.getInstance().GetAllCV();
+        
+        ArrayList<CHUCVU> al = new ArrayList<CHUCVU>();
+        
+        while (src.next())
+        {
+            CHUCVU cv = new CHUCVU();
+            cv.setMacv(src.getInt(1));
+            cv.setTencv(src.getString(2));
+            al.add(cv);
+        }
+        
         return al;
     }
     // </editor-fold>

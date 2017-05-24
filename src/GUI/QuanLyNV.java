@@ -13,8 +13,11 @@ import BUS.BUSQLNHANVIEN;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.*;
+import qlbh.CHUCVU;
 
 public class QuanLyNV extends javax.swing.JFrame {
 
@@ -24,6 +27,7 @@ public class QuanLyNV extends javax.swing.JFrame {
     boolean isAdding = false;
     private DefaultTableModel tableModel;
     private String[] colsName = {"STT", "Mã NV", "Tên NV", "Địa chỉ", "Số điện thoại", "Email", "Chức vụ"};
+    ArrayList<CHUCVU> al;
 
     public QuanLyNV() {
         initComponents();
@@ -32,6 +36,18 @@ public class QuanLyNV extends javax.swing.JFrame {
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(colsName);
         JtableNV.setModel(tableModel);
+        LoadComBoBox();
+    }
+
+    public void LoadComBoBox() {
+        try {
+            al = BUSQLNHANVIEN.getInstance().GetAllCV();
+            for (int i = 0; i < al.size(); i++) {
+                 this.cbCV.addItem(al.get(i).getTencv());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyNV.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void ChangeText(String ma, String Ten, String DC, String SDT, String email, String cv) {
@@ -40,7 +56,7 @@ public class QuanLyNV extends javax.swing.JFrame {
         this.txbDC.setText(DC);
         this.txbDT.setText(SDT);
         this.txbEmail.setText(email);
-        this.cbCV.setSelectedItem(cv);
+        this.cbCV.setSelectedItem(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -364,6 +380,22 @@ public class QuanLyNV extends javax.swing.JFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         //sửa tt
+        if (JtableNV.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên muốn sửa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn sửa nhân viên này?", "Sửa nhân viên", JOptionPane.WARNING_MESSAGE);
+            if (reply == JOptionPane.YES_OPTION) {
+                //Sửa nhân viên            
+                int manv = Integer.parseInt(lbMa.getText());   //Ma NhanVien can sua
+                int x = this.cbCV.getSelectedIndex();          //Lay index cua combobox
+                 int macv = al.get(x).getMacv();                 // Lay ma chuc vu
+                if (BUSQLNHANVIEN.getInstance().Update(manv,txbTen.getText(),txbDC.getText(),txbEmail.getText(),txbDT.getText(),macv)) {
+                    JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sửa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void AnhDaiDienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnhDaiDienMouseClicked
@@ -372,8 +404,6 @@ public class QuanLyNV extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         if (isAdding == false) {
-            //Tự lấy mã kh tiếp theo??
-            this.lbMa.setText("??");
             isAdding = true;
             this.btnSua.setEnabled(false);
             this.btnXoa.setEnabled(false);
@@ -382,22 +412,22 @@ public class QuanLyNV extends javax.swing.JFrame {
             this.btnSua.setEnabled(true);
             this.btnXoa.setEnabled(true);
         }
+        ThemNV themnv = new ThemNV();
+        themnv.show();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         if (JtableNV.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên muốn xóa!","Chú ý", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên muốn xóa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
         } else {
             int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa nhân viên này?", "Xóa nhân viên", JOptionPane.WARNING_MESSAGE);
             if (reply == JOptionPane.YES_OPTION) {
                 //xóa nhân viên            
                 int manv = Integer.parseInt(lbMa.getText());
-                if(BUSQLNHANVIEN.getInstance().Delete(manv))
-                {
-                    JOptionPane.showMessageDialog(null, "Xóa thành công","Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "Xóa thất bại","Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                if (BUSQLNHANVIEN.getInstance().Delete(manv)) {
+                    JOptionPane.showMessageDialog(null, "Xóa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Xóa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }
@@ -434,6 +464,7 @@ public class QuanLyNV extends javax.swing.JFrame {
         txbDC.setText(JtableNV.getModel().getValueAt(row, 3).toString());
         txbDT.setText(JtableNV.getModel().getValueAt(row, 4).toString());
         txbEmail.setText(JtableNV.getModel().getValueAt(row, 5).toString());
+        this.cbCV.setSelectedItem(JtableNV.getModel().getValueAt(row, 6).toString());
     }//GEN-LAST:event_JtableNVMouseClicked
 
     /**
