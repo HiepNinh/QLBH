@@ -51,12 +51,14 @@ public class DAOQLNHANVIEN {
                 // </editor-fold>
 
                 // <editor-fold defaultstate="collapsed" desc=" Lay id cua nhan vien vua them ">
-                String sql1 = "Select MANV from nhanvien where TEN= ? and DIENTHOAI = ?";
+                String sql1 = "Select MANV from nhanvien where TENNV = ? and DIENTHOAI = ? ";
                 PreparedStatement pstm1 = c.prepareStatement(sql1);
                 pstm1.setString(1, Tennv);
                 pstm1.setString(2, Dienthoai);
                 ResultSet rs = pstm1.executeQuery();
-                int manv = rs.getInt(0);
+                int manv = -1;
+                if(rs.next())
+                  manv = rs.getInt(1);
                 // </editor-fold>
 
                 // <editor-fold defaultstate="collapsed" desc=" Them 1 tai khoan cua nhan vien vua nhap">

@@ -6,7 +6,12 @@
 package GUI;
 
 import BUS.BUSQLNHANVIEN;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import qlbh.CHUCVU;
 
 /**
  *
@@ -14,12 +19,38 @@ import javax.swing.JOptionPane;
  */
 public class ThemNV extends javax.swing.JFrame {
 
+    ArrayList<CHUCVU> al;
+
     /**
      * Creates new form ThemBanh
      */
     public ThemNV() {
         initComponents();
         this.setLocationRelativeTo(null);
+        LoadComBoBox();
+        LoadData();
+    }
+
+    public void LoadData()
+    {
+        txbTen.setText("Your Name");
+        txbAcc.setText("          ");
+        txbPass.setText("          ");
+        txbDC.setText("");
+        txbDT.setText("");
+        txbEmail.setText("");
+        cbCV.setSelectedItem(al.get(0).getTencv());
+    }
+    
+    public void LoadComBoBox() {
+        try {
+            al = BUSQLNHANVIEN.getInstance().GetAllCV();
+            for (int i = 0; i < al.size(); i++) {
+                this.cbCV.addItem(al.get(i).getTencv());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyNV.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -45,6 +76,10 @@ public class ThemNV extends javax.swing.JFrame {
         txbDT = new javax.swing.JTextField();
         cbCV = new javax.swing.JComboBox<>();
         txbEmail = new javax.swing.JTextField();
+        txbAcc = new javax.swing.JTextField();
+        jXLabel1 = new org.jdesktop.swingx.JXLabel();
+        jXLabel2 = new org.jdesktop.swingx.JXLabel();
+        txbPass = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         btnThem = new javax.swing.JButton();
@@ -155,6 +190,30 @@ public class ThemNV extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbEmail, gridBagConstraints);
 
+        txbAcc.setText("jTextField1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 3;
+        jPanel1.add(txbAcc, gridBagConstraints);
+
+        jXLabel1.setText("Tên đăng nhập");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        jPanel1.add(jXLabel1, gridBagConstraints);
+
+        jXLabel2.setText("Mật khẩu");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        jPanel1.add(jXLabel2, gridBagConstraints);
+
+        txbPass.setText("jPasswordField1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        jPanel1.add(txbPass, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -199,9 +258,9 @@ public class ThemNV extends javax.swing.JFrame {
         jPanel2.add(btnThem, gridBagConstraints);
 
         btnHuy.setText("Hủy");
-        btnHuy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHuyActionPerformed(evt);
+        btnHuy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHuyMouseClicked(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -232,28 +291,34 @@ public class ThemNV extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AnhDaiDienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnhDaiDienMouseClicked
-        
+
     }//GEN-LAST:event_AnhDaiDienMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
 
-            /*int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn sửa nhân viên này?", "Sửa nhân viên", JOptionPane.WARNING_MESSAGE);
+        if (txbTen.getText().equals("Your Name") || txbDC.getText().equals("") || txbAcc.getText().equals("          ") || txbPass.getText().equals("          ")
+                || cbCV.getSelectedItem() == null || txbDT.getText().equals("") || txbEmail.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin nhân viên!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn thêm nhân viên này?", "Thêm nhân viên", JOptionPane.WARNING_MESSAGE);
             if (reply == JOptionPane.YES_OPTION) {
-                //Sửa nhân viên            
-                int manv = Integer.parseInt(lbMa.getText());   //Ma NhanVien can sua
+                //Thêm nhân viên            
                 int x = this.cbCV.getSelectedIndex();          //Lay index cua combobox
-                 int macv = al.get(x).getMacv();                 // Lay ma chuc vu
-                if (BUSQLNHANVIEN.getInstance().Update(manv,txbTen.getText(),txbDC.getText(),txbEmail.getText(),txbDT.getText(),macv)) {
-                    JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                int macv = al.get(x).getMacv();                 // Lay ma chuc vu
+                if (BUSQLNHANVIEN.getInstance().Insert(txbTen.getText(), txbDC.getText(), txbEmail.getText(), txbDT.getText(), macv, txbAcc.getText(), txbPass.getText())) {
+                    JOptionPane.showMessageDialog(null, "Thêm thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    LoadData();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Sửa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Thêm thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
-            }*/
+            }
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-       this.dispose();
-    }//GEN-LAST:event_btnHuyActionPerformed
+    private void btnHuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHuyMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnHuyMouseClicked
 
     /**
      * @param args the command line arguments
@@ -269,16 +334,28 @@ public class ThemNV extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemNV.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ThemNV.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ThemNV.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ThemNV.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -307,9 +384,13 @@ public class ThemNV extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
+    private org.jdesktop.swingx.JXLabel jXLabel1;
+    private org.jdesktop.swingx.JXLabel jXLabel2;
+    private javax.swing.JTextField txbAcc;
     private javax.swing.JTextField txbDC;
     private javax.swing.JTextField txbDT;
     private javax.swing.JTextField txbEmail;
+    private javax.swing.JPasswordField txbPass;
     private javax.swing.JTextField txbTen;
     // End of variables declaration//GEN-END:variables
 }

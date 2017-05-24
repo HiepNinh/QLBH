@@ -10,6 +10,8 @@ package GUI;
  * @author Admin
  */
 import BUS.BUSQLNHANVIEN;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -24,7 +26,7 @@ public class QuanLyNV extends javax.swing.JFrame {
     /**
      * Creates new form QuanLyKH
      */
-    boolean isAdding = false;
+    private boolean isShowing = false;
     private DefaultTableModel tableModel;
     private String[] colsName = {"STT", "Mã NV", "Tên NV", "Địa chỉ", "Số điện thoại", "Email", "Chức vụ"};
     ArrayList<CHUCVU> al;
@@ -37,6 +39,7 @@ public class QuanLyNV extends javax.swing.JFrame {
         tableModel.setColumnIdentifiers(colsName);
         JtableNV.setModel(tableModel);
         LoadComBoBox();
+        LoadButton();
     }
 
     public void LoadComBoBox() {
@@ -391,6 +394,7 @@ public class QuanLyNV extends javax.swing.JFrame {
                  int macv = al.get(x).getMacv();                 // Lay ma chuc vu
                 if (BUSQLNHANVIEN.getInstance().Update(manv,txbTen.getText(),txbDC.getText(),txbEmail.getText(),txbDT.getText(),macv)) {
                     JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    btnSearchActionPerformed(evt);
                 } else {
                     JOptionPane.showMessageDialog(null, "Sửa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -402,17 +406,33 @@ public class QuanLyNV extends javax.swing.JFrame {
         //đổi ảnh
     }//GEN-LAST:event_AnhDaiDienMouseClicked
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if (isAdding == false) {
-            isAdding = true;
-            this.btnSua.setEnabled(false);
-            this.btnXoa.setEnabled(false);
-        } else {
-            //thêm nv
-            this.btnSua.setEnabled(true);
-            this.btnXoa.setEnabled(true);
+    
+    public void LoadButton()
+    {
+        if(this.isShowing == true)
+        {
+             this.btnSua.setEnabled(false);
+             this.btnXoa.setEnabled(false);
         }
+        else
+        {
+            this.btnSua.setEnabled(true);
+             this.btnXoa.setEnabled(true);
+        }
+    }
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+          this.isShowing = true;
+            //thêm nv
         ThemNV themnv = new ThemNV();
+                themnv.addWindowListener( new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent we) {
+                        btnSearchActionPerformed(evt);
+                        isShowing = false;
+                       LoadButton();
+                    }
+                } );
+        LoadButton();
         themnv.show();
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -426,6 +446,7 @@ public class QuanLyNV extends javax.swing.JFrame {
                 int manv = Integer.parseInt(lbMa.getText());
                 if (BUSQLNHANVIEN.getInstance().Delete(manv)) {
                     JOptionPane.showMessageDialog(null, "Xóa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    btnSearchActionPerformed(evt);
                 } else {
                     JOptionPane.showMessageDialog(null, "Xóa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
