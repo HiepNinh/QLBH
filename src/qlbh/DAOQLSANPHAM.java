@@ -103,38 +103,15 @@ public class DAOQLSANPHAM {
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Lay MASP bang TENSP ">
-    public float GetDG(int masp)
-    {
-        try {
-            Connection c = getConnection();
-            if (c == null) {
-                //Connect database failure
-                return -1;
-            } else {
-                    String query = "select DONGIA from sanpham where MASP = ? limit 1";
-                    PreparedStatement pstmex = c.prepareStatement(query);
-                    pstmex.setInt(1, masp);
-                    ResultSet rsex = pstmex.executeQuery();
-                    if(rsex.next())
-                        return rsex.getInt(1);
-                return 0;
-            }
-        } catch (Exception e) {
-            return -1;
-        }
-    }
-    // </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc="Load ten sp ">
-    public ResultSet LoadTENSP() {
+    // <editor-fold defaultstate="collapsed" desc=" View all from NHANVIEN ">
+    public ResultSet Search() {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return null;
-            } else {    
-                String sql="select TENSP from sanpham";
+            } else {
+                String sql = "select nv.MANV,nv.TENNV,nv.DIACHI,nv.DIENTHOAI,nv.EMAIL,cv.TENCV from nhanvien nv inner join chucvu cv on nv.MACV = cv.MACV";
                 PreparedStatement pstm = c.prepareStatement(sql);
                 ResultSet rs = pstm.executeQuery();
                 return rs;
@@ -145,25 +122,21 @@ public class DAOQLSANPHAM {
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Lay DONGIA cua SP ">
-    public int GetMASP(String tensp)
-    {
+    // <editor-fold defaultstate="collapsed" desc=" View all CHUCVU ">
+    public ResultSet GetAllCV() {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
-                return -1;
+                return null;
             } else {
-                    String query = "select MASP from sanpham where TENSP = ? limit 1";
-                    PreparedStatement pstmex = c.prepareStatement(query);
-                    pstmex.setString(1, tensp);
-                    ResultSet rsex = pstmex.executeQuery();
-                    if(rsex.next())
-                        return rsex.getInt(1);
-                return 0;
+                String sql = "select MACV,TENCV from chucvu";
+                PreparedStatement pstm = c.prepareStatement(sql);
+                ResultSet rs = pstm.executeQuery();
+                return rs;
             }
         } catch (Exception e) {
-            return -1;
+            return null;
         }
     }
     // </editor-fold>

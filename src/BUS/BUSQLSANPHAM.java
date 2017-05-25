@@ -46,21 +46,51 @@ public class BUSQLSANPHAM {
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho BUSQLKHO ">
-    public float GetDG(int masp){
-        return DAOQLSANPHAM.getInstance().GetDG(masp);
+    // <editor-fold defaultstate="collapsed" desc=" View  nhan vien ">
+    public ArrayList<String[]> SearchNV(String hint)
+    {
+        ResultSet src = DAOQLNHANVIEN.getInstance().Search();
+        
+        ArrayList<String[]> al = new ArrayList<String[]>();
+        try {
+            while(src.next())
+            {
+                String[] s = new String[6];
+                if(src.getString(2).contains(hint) || src.getString(3).contains(hint))
+                {
+                    Object ob = src.getInt(1);
+                    s[0]=ob.toString();
+                    s[1]=src.getString(2);
+                    s[2]=src.getString(3);
+                    s[3]=src.getString(4);
+                    s[4]=src.getString(5);
+                    s[5]=src.getString(6);
+                    al.add(s);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BUSQLNHANVIEN.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return al;
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho BUSQLKHO ">
-    public int GetMasp(String tensp){
-        return DAOQLSANPHAM.getInstance().GetMASP(tensp);
-    }
-    // </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho BUSQLKHO ">
-    public ResultSet Delete(){
-        return DAOQLSANPHAM.getInstance().LoadTENSP();
+    // <editor-fold defaultstate="collapsed" desc=" View  nhan vien ">
+    public ArrayList<CHUCVU> GetAllCV() throws SQLException
+    {
+        ResultSet src = DAOQLNHANVIEN.getInstance().GetAllCV();
+        
+        ArrayList<CHUCVU> al = new ArrayList<CHUCVU>();
+        
+        while (src.next())
+        {
+            CHUCVU cv = new CHUCVU();
+            cv.setMacv(src.getInt(1));
+            cv.setTencv(src.getString(2));
+            al.add(cv);
+        }
+        
+        return al;
     }
     // </editor-fold>
 }
