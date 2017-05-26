@@ -5,7 +5,10 @@
  */
 package BUS;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import qlbh.DAOQLSANPHAM;
+import qlbh.SANPHAM;
 
 /**
  *
@@ -46,21 +49,23 @@ public class BUSQLSANPHAM {
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho BUSQLKHO ">
-    public float GetDG(int masp){
-        return DAOQLSANPHAM.getInstance().GetDG(masp);
-    }
-    // </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho BUSQLKHO ">
-    public int GetMasp(String tensp){
-        return DAOQLSANPHAM.getInstance().GetMASP(tensp);
-    }
-    // </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho BUSQLKHO ">
-    public ResultSet Delete(){
-        return DAOQLSANPHAM.getInstance().LoadTENSP();
+    // <editor-fold defaultstate="collapsed" desc=" View  sanpham ">
+    public ArrayList<SANPHAM> GetAllSP() throws SQLException 
+    {
+        ResultSet src = DAOQLSANPHAM.getInstance().GetAllSP();
+        
+        ArrayList<SANPHAM> al = new ArrayList<SANPHAM>();
+        
+        while (src.next())
+        {
+            SANPHAM sp = new SANPHAM();
+            sp.setMasp(src.getInt(1));
+            sp.setTensp(src.getString(2));
+            sp.setDg(src.getFloat(3));
+            al.add(sp);
+        }
+        
+        return al;
     }
     // </editor-fold>
 }

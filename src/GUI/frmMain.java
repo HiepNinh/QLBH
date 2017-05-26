@@ -98,11 +98,6 @@ public class frmMain extends javax.swing.JFrame {
         buttTlbrHD.setFocusable(false);
         buttTlbrHD.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttTlbrHD.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        buttTlbrHD.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttTlbrHDMouseClicked(evt);
-            }
-        });
         buttTlbrHD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttTlbrHDActionPerformed(evt);
@@ -345,11 +340,6 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.add(iconBanh, gridBagConstraints);
 
         buttHD.setText("Hóa đơn");
-        buttHD.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttHDMouseClicked(evt);
-            }
-        });
         buttHD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttHDActionPerformed(evt);
@@ -600,10 +590,6 @@ public class frmMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttTlbrHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttTlbrHDMouseClicked
-        new QuanLyHoaDon().setVisible(true);
-    }//GEN-LAST:event_buttTlbrHDMouseClicked
-
     private void jMenuItemHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHDActionPerformed
         new QuanLyHoaDon().setVisible(true);
     }//GEN-LAST:event_jMenuItemHDActionPerformed
@@ -615,10 +601,6 @@ public class frmMain extends javax.swing.JFrame {
     private void buttTlbrGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrGDActionPerformed
         new About().setVisible(true);
     }//GEN-LAST:event_buttTlbrGDActionPerformed
-
-    private void buttHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttHDMouseClicked
-        new QuanLyHoaDon().setVisible(true);
-    }//GEN-LAST:event_buttHDMouseClicked
 
     private void buttBanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttBanhActionPerformed
         new DanhMucBanh().setVisible(true);

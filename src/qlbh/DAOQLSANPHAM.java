@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import static qlbh.DataConnection.getConnection;
-
 /**
  *
  * @author Golden Darkness
@@ -103,67 +102,43 @@ public class DAOQLSANPHAM {
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Lay MASP bang TENSP ">
-    public float GetDG(int masp)
-    {
+     // <editor-fold defaultstate="collapsed" desc="Get DG in a SANPAHM">
+    public float GetDG(int masp) {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
-                return -1;
-            } else {
-                    String query = "select DONGIA from sanpham where MASP = ? limit 1";
-                    PreparedStatement pstmex = c.prepareStatement(query);
-                    pstmex.setInt(1, masp);
-                    ResultSet rsex = pstmex.executeQuery();
-                    if(rsex.next())
-                        return rsex.getInt(1);
                 return 0;
+            } else {
+                String sql = "select DONGIA from sanpham where MASP = ?";
+                PreparedStatement pstm = c.prepareStatement(sql);
+                pstm.setInt(1, masp);
+                ResultSet rs = pstm.executeQuery();
+                if(rs.next())
+                    return rs.getFloat(1);
             }
+            return 0;
         } catch (Exception e) {
-            return -1;
+            return 0;
         }
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="Load ten sp ">
-    public ResultSet LoadTENSP() {
+    // <editor-fold defaultstate="collapsed" desc=" View all CHUCVU ">
+    public ResultSet GetAllSP() {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return null;
-            } else {    
-                String sql="select TENSP from sanpham";
+            } else {
+                String sql = "select MASP,TENSP,DONGIA from sanpham";
                 PreparedStatement pstm = c.prepareStatement(sql);
                 ResultSet rs = pstm.executeQuery();
                 return rs;
             }
         } catch (Exception e) {
             return null;
-        }
-    }
-    // </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc=" Lay DONGIA cua SP ">
-    public int GetMASP(String tensp)
-    {
-        try {
-            Connection c = getConnection();
-            if (c == null) {
-                //Connect database failure
-                return -1;
-            } else {
-                    String query = "select MASP from sanpham where TENSP = ? limit 1";
-                    PreparedStatement pstmex = c.prepareStatement(query);
-                    pstmex.setString(1, tensp);
-                    ResultSet rsex = pstmex.executeQuery();
-                    if(rsex.next())
-                        return rsex.getInt(1);
-                return 0;
-            }
-        } catch (Exception e) {
-            return -1;
         }
     }
     // </editor-fold>

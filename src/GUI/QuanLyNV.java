@@ -10,6 +10,8 @@ package GUI;
  * @author Admin
  */
 import BUS.BUSQLNHANVIEN;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -24,7 +26,7 @@ public class QuanLyNV extends javax.swing.JFrame {
     /**
      * Creates new form QuanLyKH
      */
-    boolean isAdding = false;
+    private boolean isShowing = false;
     private DefaultTableModel tableModel;
     private String[] colsName = {"STT", "Mã NV", "Tên NV", "Địa chỉ", "Số điện thoại", "Email", "Chức vụ"};
     ArrayList<CHUCVU> al;
@@ -37,6 +39,7 @@ public class QuanLyNV extends javax.swing.JFrame {
         tableModel.setColumnIdentifiers(colsName);
         JtableNV.setModel(tableModel);
         LoadComBoBox();
+        LoadButton();
     }
 
     public void LoadComBoBox() {
@@ -391,6 +394,7 @@ public class QuanLyNV extends javax.swing.JFrame {
                  int macv = al.get(x).getMacv();                 // Lay ma chuc vu
                 if (BUSQLNHANVIEN.getInstance().Update(manv,txbTen.getText(),txbDC.getText(),txbEmail.getText(),txbDT.getText(),macv)) {
                     JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    btnSearchActionPerformed(evt);
                 } else {
                     JOptionPane.showMessageDialog(null, "Sửa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -402,17 +406,33 @@ public class QuanLyNV extends javax.swing.JFrame {
         //đổi ảnh
     }//GEN-LAST:event_AnhDaiDienMouseClicked
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if (isAdding == false) {
-            isAdding = true;
-            this.btnSua.setEnabled(false);
-            this.btnXoa.setEnabled(false);
-        } else {
-            //thêm nv
-            this.btnSua.setEnabled(true);
-            this.btnXoa.setEnabled(true);
+    
+    public void LoadButton()
+    {
+        if(this.isShowing == true)
+        {
+             this.btnSua.setEnabled(false);
+             this.btnXoa.setEnabled(false);
         }
+        else
+        {
+            this.btnSua.setEnabled(true);
+             this.btnXoa.setEnabled(true);
+        }
+    }
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+          this.isShowing = true;
+            //thêm nv
         ThemNV themnv = new ThemNV();
+                themnv.addWindowListener( new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent we) {
+                        btnSearchActionPerformed(evt);
+                        isShowing = false;
+                       LoadButton();
+                    }
+                } );
+        LoadButton();
         themnv.show();
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -426,6 +446,7 @@ public class QuanLyNV extends javax.swing.JFrame {
                 int manv = Integer.parseInt(lbMa.getText());
                 if (BUSQLNHANVIEN.getInstance().Delete(manv)) {
                     JOptionPane.showMessageDialog(null, "Xóa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    btnSearchActionPerformed(evt);
                 } else {
                     JOptionPane.showMessageDialog(null, "Xóa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -438,18 +459,18 @@ public class QuanLyNV extends javax.swing.JFrame {
 
         tableModel.setRowCount(0);
 
-        ArrayList<String[]> al = BUSQLNHANVIEN.getInstance().SearchNV(txbSearch.getText());
-        if (al != null) {
+        ArrayList<String[]> al1 = BUSQLNHANVIEN.getInstance().SearchNV(txbSearch.getText());
+        if (al1 != null) {
             Object count = 1;
-            for (int i = 0; i < al.size(); i++) {
+            for (int i = 0; i < al1.size(); i++) {
                 String rows[] = new String[7];
-                rows[0] = count.toString();                 //STT
-                rows[1] = al.get(i)[0];                     //MaNV
-                rows[2] = al.get(i)[1];                     //TenNV
-                rows[3] = al.get(i)[2];                     //DIACHI
-                rows[4] = al.get(i)[3];                     //Phone
-                rows[5] = al.get(i)[4];                     //Email
-                rows[6] = al.get(i)[5];                     //Chuc vu
+                rows[0] = count.toString();                  //STT
+                rows[1] = al1.get(i)[0];                     //MaNV
+                rows[2] = al1.get(i)[1];                     //TenNV
+                rows[3] = al1.get(i)[2];                     //DIACHI
+                rows[4] = al1.get(i)[3];                     //Phone
+                rows[5] = al1.get(i)[4];                     //Email
+                rows[6] = al1.get(i)[5];                     //Chuc vu
                 tableModel.addRow(rows);
                 //mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
                 count = (int) count + 1;
