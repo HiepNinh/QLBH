@@ -34,26 +34,18 @@ public class ThemKH extends javax.swing.JFrame {
         lblDiaChi = new javax.swing.JLabel();
         lblSDT = new javax.swing.JLabel();
         lblTenKH = new javax.swing.JLabel();
-        lblMaKH = new javax.swing.JLabel();
         lblLoaiKH = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
-        lblGioiTinh = new javax.swing.JLabel();
-        TenKH = new javax.swing.JTextField();
-        DiaChi = new javax.swing.JTextField();
-        SDT = new javax.swing.JTextField();
-        MaKH = new javax.swing.JLabel();
-        LoaiKH = new javax.swing.JComboBox<>();
-        Email = new javax.swing.JTextField();
-        GioiTinh = new javax.swing.JComboBox<>();
-        lblNgayDangKy = new javax.swing.JLabel();
-        NgayDangKy = new com.toedter.calendar.JDateChooser();
+        txbTen = new javax.swing.JTextField();
+        txbDC = new javax.swing.JTextField();
+        txbDT = new javax.swing.JTextField();
+        cbLoai = new javax.swing.JComboBox<>();
+        txbEmail = new javax.swing.JTextField();
         AnhDaiDien = new javax.swing.JLabel();
-        ThanhToan = new javax.swing.JTextField();
-        lblTongThanhToan = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblThemKH = new javax.swing.JLabel();
-        buttOK = new javax.swing.JButton();
-        buttDiscard = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnHuy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nhập bánh");
@@ -88,14 +80,6 @@ public class ThemKH extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
         jPanel1.add(lblTenKH, gridBagConstraints);
 
-        lblMaKH.setText("Mã KH:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
-        jPanel1.add(lblMaKH, gridBagConstraints);
-
         lblLoaiKH.setText("Loại KH:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
@@ -112,25 +96,17 @@ public class ThemKH extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
         jPanel1.add(lblEmail, gridBagConstraints);
 
-        lblGioiTinh.setText("Giới tính:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
-        jPanel1.add(lblGioiTinh, gridBagConstraints);
-
-        TenKH.setText("Mạch Thị Thu Ngân");
-        TenKH.setMinimumSize(new java.awt.Dimension(400, 20));
+        txbTen.setText("Mạch Thị Thu Ngân");
+        txbTen.setMinimumSize(new java.awt.Dimension(400, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(TenKH, gridBagConstraints);
+        jPanel1.add(txbTen, gridBagConstraints);
 
-        DiaChi.setText("50/11 Tân Sơn, Gò Vấp, TP. HCM");
+        txbDC.setText("50/11 Tân Sơn, Gò Vấp, TP. HCM");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
@@ -138,9 +114,9 @@ public class ThemKH extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(DiaChi, gridBagConstraints);
+        jPanel1.add(txbDC, gridBagConstraints);
 
-        SDT.setText("0909999999");
+        txbDT.setText("0909999999");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
@@ -148,18 +124,10 @@ public class ThemKH extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(SDT, gridBagConstraints);
+        jPanel1.add(txbDT, gridBagConstraints);
 
-        MaKH.setText("KH001");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(MaKH, gridBagConstraints);
-
-        LoaiKH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D" }));
-        LoaiKH.setToolTipText("");
+        cbLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vip", "Normal" }));
+        cbLoai.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 6;
@@ -167,42 +135,16 @@ public class ThemKH extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 10);
-        jPanel1.add(LoaiKH, gridBagConstraints);
+        jPanel1.add(cbLoai, gridBagConstraints);
 
-        Email.setText("abc@gm.com");
+        txbEmail.setText("abc@gm.com");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(Email, gridBagConstraints);
-
-        GioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
-        GioiTinh.setSelectedIndex(1);
-        GioiTinh.setToolTipText("");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(GioiTinh, gridBagConstraints);
-
-        lblNgayDangKy.setText("Ngày đăng ký:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
-        jPanel1.add(lblNgayDangKy, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 10);
-        jPanel1.add(NgayDangKy, gridBagConstraints);
+        jPanel1.add(txbEmail, gridBagConstraints);
 
         AnhDaiDien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/Preppy-icon (1).png"))); // NOI18N
         AnhDaiDien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -217,22 +159,6 @@ public class ThemKH extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 5;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
         jPanel1.add(AnhDaiDien, gridBagConstraints);
-
-        ThanhToan.setText("3400000");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 10);
-        jPanel1.add(ThanhToan, gridBagConstraints);
-
-        lblTongThanhToan.setText("Tổng thanh toán:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
-        jPanel1.add(lblTongThanhToan, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -265,10 +191,10 @@ public class ThemKH extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel2.add(lblThemKH, gridBagConstraints);
 
-        buttOK.setText("Thêm");
-        buttOK.addActionListener(new java.awt.event.ActionListener() {
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttOKActionPerformed(evt);
+                btnThemActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -276,12 +202,12 @@ public class ThemKH extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 30;
-        jPanel2.add(buttOK, gridBagConstraints);
+        jPanel2.add(btnThem, gridBagConstraints);
 
-        buttDiscard.setText("Hủy");
-        buttDiscard.addActionListener(new java.awt.event.ActionListener() {
+        btnHuy.setText("Hủy");
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttDiscardActionPerformed(evt);
+                btnHuyActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -289,7 +215,7 @@ public class ThemKH extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel2.add(buttDiscard, gridBagConstraints);
+        jPanel2.add(btnHuy, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -315,13 +241,13 @@ public class ThemKH extends javax.swing.JFrame {
 
     }//GEN-LAST:event_AnhDaiDienMouseClicked
 
-    private void buttOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttOKActionPerformed
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttOKActionPerformed
+    }//GEN-LAST:event_btnThemActionPerformed
 
-    private void buttDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttDiscardActionPerformed
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttDiscardActionPerformed
+    }//GEN-LAST:event_btnHuyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,29 +287,21 @@ public class ThemKH extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AnhDaiDien;
-    private javax.swing.JTextField DiaChi;
-    private javax.swing.JTextField Email;
-    private javax.swing.JComboBox<String> GioiTinh;
-    private javax.swing.JComboBox<String> LoaiKH;
-    private javax.swing.JLabel MaKH;
-    private com.toedter.calendar.JDateChooser NgayDangKy;
-    private javax.swing.JTextField SDT;
-    private javax.swing.JTextField TenKH;
-    private javax.swing.JTextField ThanhToan;
-    private javax.swing.JButton buttDiscard;
-    private javax.swing.JButton buttOK;
+    private javax.swing.JButton btnHuy;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JComboBox<String> cbLoai;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblDiaChi;
     private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblGioiTinh;
     private javax.swing.JLabel lblLoaiKH;
-    private javax.swing.JLabel lblMaKH;
-    private javax.swing.JLabel lblNgayDangKy;
     private javax.swing.JLabel lblSDT;
     private javax.swing.JLabel lblTenKH;
     private javax.swing.JLabel lblThemKH;
-    private javax.swing.JLabel lblTongThanhToan;
+    private javax.swing.JTextField txbDC;
+    private javax.swing.JTextField txbDT;
+    private javax.swing.JTextField txbEmail;
+    private javax.swing.JTextField txbTen;
     // End of variables declaration//GEN-END:variables
 }

@@ -56,7 +56,7 @@ public class BUSQLPHIEUXUAT {
             {
                 if((int)sl.get(i)<0)
                     return false;
-                tt = DAOQLSANPHAM.getInstance().GetDG((int)masp.get(i))*(int)sl.get(i);
+                tt = DAOQLSANPHAM.getInstance().GetDG((int)masp.get(i)) * (int)sl.get(i);
             }
             
             return DAOQLPHIEUXUAT.getInstance().Update(mapx, ngay, masp, sl);

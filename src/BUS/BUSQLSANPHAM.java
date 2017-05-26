@@ -5,7 +5,10 @@
  */
 package BUS;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import qlbh.DAOQLSANPHAM;
+import qlbh.SANPHAM;
 
 /**
  *
@@ -46,48 +49,20 @@ public class BUSQLSANPHAM {
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" View  nhan vien ">
-    public ArrayList<String[]> SearchNV(String hint)
+    // <editor-fold defaultstate="collapsed" desc=" View  sanpham ">
+    public ArrayList<SANPHAM> GetAllSP() throws SQLException 
     {
-        ResultSet src = DAOQLNHANVIEN.getInstance().Search();
+        ResultSet src = DAOQLSANPHAM.getInstance().GetAllSP();
         
-        ArrayList<String[]> al = new ArrayList<String[]>();
-        try {
-            while(src.next())
-            {
-                String[] s = new String[6];
-                if(src.getString(2).contains(hint) || src.getString(3).contains(hint))
-                {
-                    Object ob = src.getInt(1);
-                    s[0]=ob.toString();
-                    s[1]=src.getString(2);
-                    s[2]=src.getString(3);
-                    s[3]=src.getString(4);
-                    s[4]=src.getString(5);
-                    s[5]=src.getString(6);
-                    al.add(s);
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(BUSQLNHANVIEN.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return al;
-    }
-    // </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc=" View  nhan vien ">
-    public ArrayList<CHUCVU> GetAllCV() throws SQLException
-    {
-        ResultSet src = DAOQLNHANVIEN.getInstance().GetAllCV();
-        
-        ArrayList<CHUCVU> al = new ArrayList<CHUCVU>();
+        ArrayList<SANPHAM> al = new ArrayList<SANPHAM>();
         
         while (src.next())
         {
-            CHUCVU cv = new CHUCVU();
-            cv.setMacv(src.getInt(1));
-            cv.setTencv(src.getString(2));
-            al.add(cv);
+            SANPHAM sp = new SANPHAM();
+            sp.setMasp(src.getInt(1));
+            sp.setTensp(src.getString(2));
+            sp.setDg(src.getFloat(3));
+            al.add(sp);
         }
         
         return al;

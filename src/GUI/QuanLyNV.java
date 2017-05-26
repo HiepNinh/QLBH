@@ -459,18 +459,18 @@ public class QuanLyNV extends javax.swing.JFrame {
 
         tableModel.setRowCount(0);
 
-        ArrayList<String[]> al = BUSQLNHANVIEN.getInstance().SearchNV(txbSearch.getText());
-        if (al != null) {
+        ArrayList<String[]> al1 = BUSQLNHANVIEN.getInstance().SearchNV(txbSearch.getText());
+        if (al1 != null) {
             Object count = 1;
-            for (int i = 0; i < al.size(); i++) {
+            for (int i = 0; i < al1.size(); i++) {
                 String rows[] = new String[7];
-                rows[0] = count.toString();                 //STT
-                rows[1] = al.get(i)[0];                     //MaNV
-                rows[2] = al.get(i)[1];                     //TenNV
-                rows[3] = al.get(i)[2];                     //DIACHI
-                rows[4] = al.get(i)[3];                     //Phone
-                rows[5] = al.get(i)[4];                     //Email
-                rows[6] = al.get(i)[5];                     //Chuc vu
+                rows[0] = count.toString();                  //STT
+                rows[1] = al1.get(i)[0];                     //MaNV
+                rows[2] = al1.get(i)[1];                     //TenNV
+                rows[3] = al1.get(i)[2];                     //DIACHI
+                rows[4] = al1.get(i)[3];                     //Phone
+                rows[5] = al1.get(i)[4];                     //Email
+                rows[6] = al1.get(i)[5];                     //Chuc vu
                 tableModel.addRow(rows);
                 //mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
                 count = (int) count + 1;

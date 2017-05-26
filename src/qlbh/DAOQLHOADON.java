@@ -30,7 +30,7 @@ public class DAOQLHOADON {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Them HOADON ">
-    public boolean Insert(int makh,Date ngay, float tongtien, ArrayList masp, ArrayList soluong) {
+    public boolean InsertHD(int makh,Date ngay, float tongtien, ArrayList masp, ArrayList soluong) {
         try {
             Connection c = getConnection();
             if (c == null) {
@@ -79,7 +79,7 @@ public class DAOQLHOADON {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Cap nhat HOADON ">
-    public boolean Update(int mahd, int makh,Date ngay, ArrayList masp, ArrayList soluong, float tongtien) {
+    public boolean UpdateHD(int mahd, int makh,Date ngay, ArrayList masp, ArrayList soluong, float tongtien) {
         try {
             Connection c = getConnection();
             if (c == null) {
@@ -118,7 +118,7 @@ public class DAOQLHOADON {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Xoa HOADON ">
-    public boolean Delete(int mahd) {
+    public boolean DeleteHD(int mahd) {
         try {
             Connection c = getConnection();
             if (c == null) {
@@ -146,6 +146,113 @@ public class DAOQLHOADON {
             }
         } catch (Exception e) {
             return false;
+        }
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Sửa CHITIETHOADON ">
+    public boolean UpdateCTHD(int mahd, int masp, int sl) {
+        try {
+            Connection c = getConnection();
+            if (c == null) {
+                //Connect database failure
+                return false;
+            } else {                            
+                    String query = "update cthd set SLMUA = ? where MAHD = ? and MASP = ?";
+                    PreparedStatement pstmex = c.prepareStatement(query);
+                    pstmex.setInt(1, sl);
+                    pstmex.setInt(2, mahd);
+                    pstmex.setInt(3, masp);
+                    pstmex.executeUpdate();
+                //Tra ve so dong sp vua them vao kho- 1(succeed) hoac 0(failure)
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Xóa CHITIETHOADON ">
+    public boolean DeleteCTHD(int mahd, int masp) {
+        try {
+            Connection c = getConnection();
+            if (c == null) {
+                //Connect database failure
+                return false;
+            } else {                            
+                    String query = "delete from cthd where MAHD = ? and MASP = ?";
+                    PreparedStatement pstmex = c.prepareStatement(query);
+                    pstmex.setInt(1, mahd);
+                    pstmex.setInt(2, masp);
+                    pstmex.executeUpdate();
+                //Tra ve so dong sp vua them vao kho- 1(succeed) hoac 0(failure)
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Them CHITIETHOADON ">
+    public boolean InsertCTHD(int mahd, int masp, int sl) {
+        try {
+            Connection c = getConnection();
+            if (c == null) {
+                //Connect database failure
+                return false;
+            } else {                            
+                    String query = "insert into cthd value(?,?,?)";
+                    PreparedStatement pstmex = c.prepareStatement(query);
+                    pstmex.setInt(1, mahd);
+                    pstmex.setInt(2, masp);
+                    pstmex.setInt(3, sl);
+                    pstmex.executeUpdate();
+                //Tra ve so dong sp vua them vao kho- 1(succeed) hoac 0(failure)
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" View all from hoadon ">
+    public ResultSet Search() {
+        try {
+            Connection c = getConnection();
+            if (c == null) {
+                //Connect database failure
+                return null;
+            } else {
+                String sql = "select v.MAHD,v.TENKH,v.TENNV,V.NGAYHD,v.TONGTIEN,v.MAKH,v.MANV from vwhoadon v";
+                PreparedStatement pstm = c.prepareStatement(sql);
+                ResultSet rs = pstm.executeQuery();
+                return rs;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    // </editor-fold>
+        
+    // <editor-fold defaultstate="collapsed" desc=" View all CTHD">
+    public ResultSet SearchCT(int mahd) {
+        try {
+            Connection c = getConnection();
+            if (c == null) {
+                //Connect database failure
+                return null;
+            } else {
+                String sql = "select v.MASP,v.TENSP,v.SLMUA,v.DONGIA from vwcthd v where MAHD = ?";
+                PreparedStatement pstm = c.prepareStatement(sql);
+                pstm.setInt(1, mahd);
+                ResultSet rs = pstm.executeQuery();
+                return rs;
+            }
+        } catch (Exception e) {
+            return null;
         }
     }
     // </editor-fold>

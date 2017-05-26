@@ -35,12 +35,12 @@ public class BUSQLPHIEUNHAP {
             return false;
         else 
         {
-            float tt=0;
+            float tt = 0;
             for(int i=0;i<sl.size();i++)
             {
                 if((int)sl.get(i)<0 || (slht+(int)sl.get(i) > toida))
                     return false;
-                tt += DAOQLSANPHAM.getInstance().GetDG((int)masp.get(i))*(int)sl.get(i);
+                tt += DAOQLSANPHAM.getInstance().GetDG((int)masp.get(i)) * (int)sl.get(i);
             }
             
             return DAOQLPHIEUNHAP.getInstance().Insert(ngay, ncc, masp, sl, tt);
@@ -60,7 +60,7 @@ public class BUSQLPHIEUNHAP {
             {
                 if((int)sl.get(i)<0)
                     return false;
-                tt = DAOQLSANPHAM.getInstance().GetDG((int)masp.get(i))*(int)sl.get(i);
+                tt += DAOQLSANPHAM.getInstance().GetDG((int)masp.get(i)) * (int)sl.get(i);
             }
             
             return DAOQLPHIEUNHAP.getInstance().Update(mapn, ngay, ncc, masp, sl, tt);

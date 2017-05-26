@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import static qlbh.DataConnection.getConnection;
-
 /**
  *
  * @author Golden Darkness
@@ -103,34 +102,37 @@ public class DAOQLSANPHAM {
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" View all from NHANVIEN ">
-    public ResultSet Search() {
+     // <editor-fold defaultstate="collapsed" desc="Get DG in a SANPAHM">
+    public float GetDG(int masp) {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
-                return null;
+                return 0;
             } else {
-                String sql = "select nv.MANV,nv.TENNV,nv.DIACHI,nv.DIENTHOAI,nv.EMAIL,cv.TENCV from nhanvien nv inner join chucvu cv on nv.MACV = cv.MACV";
+                String sql = "select DONGIA from sanpham where MASP = ?";
                 PreparedStatement pstm = c.prepareStatement(sql);
+                pstm.setInt(1, masp);
                 ResultSet rs = pstm.executeQuery();
-                return rs;
+                if(rs.next())
+                    return rs.getFloat(1);
             }
+            return 0;
         } catch (Exception e) {
-            return null;
+            return 0;
         }
     }
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" View all CHUCVU ">
-    public ResultSet GetAllCV() {
+    public ResultSet GetAllSP() {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return null;
             } else {
-                String sql = "select MACV,TENCV from chucvu";
+                String sql = "select MASP,TENSP,DONGIA from sanpham";
                 PreparedStatement pstm = c.prepareStatement(sql);
                 ResultSet rs = pstm.executeQuery();
                 return rs;

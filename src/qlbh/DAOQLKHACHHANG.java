@@ -106,5 +106,29 @@ public class DAOQLKHACHHANG {
             return false;
         }
     }
+    // </editor-fold>
+    
+    
+    // <editor-fold defaultstate="collapsed" desc="Search all KH "> 
+    public ResultSet Search() {
+        try {
+            Connection c = getConnection();
+            if (c == null) {
+                //Connect database failure
+                return null;
+            } else {
+                String sql = "select * from khachhang";
+                PreparedStatement pstm = c.prepareStatement(sql);
+                ResultSet rs = pstm.executeQuery();
+                return rs;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    // </editor-fold>
 }
-// </editor-fold>
+
+
+
+

@@ -23,6 +23,16 @@ public class User {
         this.manv = manv;
     }
     
+    private String tennv;
+
+    public String getTennv() {
+        return tennv;
+    }
+
+    public void setTennv(String tennv) {
+        this.tennv = tennv;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho DAOPHIEUNHAP ">
     private static User instance = new User();
     //private contructor
@@ -50,7 +60,8 @@ public class User {
                 ResultSet rs = pstm.executeQuery();
                 if(rs.next())
                 {
-                    this.setManv(rs.getInt(3));                 
+                    this.setManv(rs.getInt(3));  
+                    this.setTennv(rs.getString(4));
                     return true;
                 }
                 return false;
