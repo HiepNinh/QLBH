@@ -10,6 +10,8 @@ package GUI;
  * @author Admin
  */
 import BUS.BUSQLKHACHHANG;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.*;
@@ -18,26 +20,28 @@ public class QuanLyKH extends javax.swing.JFrame {
     /**
      * Creates new form QuanLyKH
      */
-    boolean isAdding = false;
+    boolean isShowing = false;
     private DefaultTableModel tableModel;
     private String[] colsName = {"STT", "Mã KH", "Tên KH", "Địa chỉ", "Email", "Điện thoại", "Loại"};
     
     public QuanLyKH() {
         initComponents();
-        ChangeText("-","","","","","");
+        ClearComponent();
         this.setLocationRelativeTo(null);
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(colsName);
         JtableKH.setModel(tableModel);
     }
+    
+    
 
-    public void ChangeText(String ma, String Ten, String DC, String SDT, String email, String loaikh){
-        this.lbMa.setText(ma);
-        this.txbTen.setText(Ten);
-        this.txbDC.setText(DC);
-        this.txbDT.setText(SDT);
-        this.txbEmail.setText(email);
-        this.cbLoai.setSelectedItem(loaikh);
+    public void ClearComponent(){
+        this.lbMa.setText("");
+        this.txbTen.setText("");
+        this.txbDC.setText("");
+        this.txbDT.setText("");
+        this.txbEmail.setText("example@gmail.com");
+        this.cbLoai.setSelectedIndex(0);
     }
 
     /**
@@ -376,24 +380,54 @@ public class QuanLyKH extends javax.swing.JFrame {
     }//GEN-LAST:event_AnhDaiDienMouseClicked
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        //sửa thông tin
+        //sửa tt
+        if (JtableKH.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn khách hàng muốn sửa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn sửa khách hàng này?", "Sửa khách hàng", JOptionPane.WARNING_MESSAGE);
+            if (reply == JOptionPane.YES_OPTION) {
+                //Sửa nhân viên            
+                int makh = Integer.parseInt(lbMa.getText());   //Ma NhanVien can sua
+                if (BUSQLKHACHHANG.getInstance().Update(makh, txbTen.getText(), txbDC.getText(), txbEmail.getText(), txbDT.getText(), cbLoai.getSelectedItem().toString())) {
+                    JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    btnSearchActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sửa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if(isAdding == false)
+    public void LoadButton()
+    {
+        if(this.isShowing == true)
         {
-            //Tự lấy mã kh tiếp theo??
-            this.lbMa.setText("??");
-            isAdding = true;
-            this.btnSua.setEnabled(false);
-            this.btnXoa.setEnabled(false);
+             this.btnSua.setEnabled(false);
+             this.btnXoa.setEnabled(false);
+             this.btnThem.setEnabled(false);
         }
         else
         {
-            //thêm kh
             this.btnSua.setEnabled(true);
             this.btnXoa.setEnabled(true);
+            this.btnThem.setEnabled(true);
         }
+    }
+    
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        this.isShowing = true;
+            //thêm nv
+        ThemKH themkh = new ThemKH();
+                themkh.addWindowListener( new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent we) {
+                        btnSearchActionPerformed(evt);
+                        isShowing = false;
+                        LoadButton();
+                    }
+                } );
+        LoadButton();
+        themkh.show();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -420,9 +454,20 @@ public class QuanLyKH extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        int reply = JOptionPane.showConfirmDialog(null,"Bạn có chắc muốn xóa khách hàng này?","Xóa khách hàng",JOptionPane.WARNING_MESSAGE);
-        if(reply == JOptionPane.YES_OPTION){
-            //xóa kh
+        if (JtableKH.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn khách hàng muốn xóa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa khách hàng này?", "Xóa khách hàng", JOptionPane.WARNING_MESSAGE);
+            if (reply == JOptionPane.YES_OPTION) {
+                //xóa khách hàng            
+                int makh = Integer.parseInt(lbMa.getText());
+                if (BUSQLKHACHHANG.getInstance().Delete(makh)) {
+                    JOptionPane.showMessageDialog(null, "Xóa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    btnSearchActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Xóa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 

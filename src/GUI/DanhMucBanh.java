@@ -5,37 +5,39 @@
  */
 package GUI;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Admin
  */
 public class DanhMucBanh extends javax.swing.JFrame {
 
-    boolean isAdding = false;
+    boolean isShowing = false;
+    private DefaultTableModel tableModel;
+    private String[] colsName = {};
     /**
      * Creates new form DanhMucBanh
      */
     public DanhMucBanh() {
         initComponents();
-        ChangeText("-","","","","");
         this.setLocationRelativeTo(null);
+        tableModel = new DefaultTableModel();
+        tableModel.setColumnIdentifiers(colsName);
+        JtableKH.setModel(tableModel);
+        
+        
     }
     
-    public void ChangeText(String ma, String Ten, String DG, String SL, String NCC){
-        this.MaBanh.setText(ma);
-        this.TenBanh.setText(Ten);
-        this.DonGia.setText(DG);
-        this.SoLuong.setText(SL);
-        this.buttSuaBanh.setEnabled(false);
-        this.buttXoaBanh.setEnabled(false);
+    public void ClearComponent(){
+        this.lbMa.setText("");
+        this.txbTen.setText("");
+        this.txbDG.setText("");
     }
     
-    public void ChuThich(){
-        this.TenBanh.setText("Tên bánh");
-        this.DonGia.setText("Đơn giá");
-        this.SoLuong.setText("Số lượng");
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,23 +52,20 @@ public class DanhMucBanh extends javax.swing.JFrame {
         lblDanhMucBanh = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPaneDSB = new javax.swing.JScrollPane();
-        DSBanh = new javax.swing.JTable();
+        JtableSP = new javax.swing.JTable();
         jPanelCTB = new javax.swing.JPanel();
         lblMaBanh = new javax.swing.JLabel();
         lblTenBanh = new javax.swing.JLabel();
-        lblSoLuong = new javax.swing.JLabel();
         lblDonGia = new javax.swing.JLabel();
-        buttThemBanh = new javax.swing.JButton();
-        buttXoaBanh = new javax.swing.JButton();
-        buttSuaBanh = new javax.swing.JButton();
-        MaBanh = new javax.swing.JLabel();
-        SoLuong = new javax.swing.JTextField();
-        DonGia = new javax.swing.JTextField();
-        TenBanh = new javax.swing.JTextField();
+        btnThem = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        lbMa = new javax.swing.JLabel();
+        txbDG = new javax.swing.JTextField();
+        txbTen = new javax.swing.JTextField();
         jPanelTK = new javax.swing.JPanel();
-        buttTK = new javax.swing.JButton();
-        NoiDungTK = new javax.swing.JTextField();
-        buttNhapBanh = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        txbSearch = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Danh mục bánh");
@@ -99,26 +98,18 @@ public class DanhMucBanh extends javax.swing.JFrame {
 
         jScrollPaneDSB.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách"));
 
-        DSBanh.setModel(new javax.swing.table.DefaultTableModel(
+        JtableSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "STT", "Mã bánh", "Tên bánh", "Đơn giá", "Nhà cung cấp", "Số lượng"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.Integer.class
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-        });
-        DSBanh.setColumnSelectionAllowed(true);
-        DSBanh.getTableHeader().setReorderingAllowed(false);
-        jScrollPaneDSB.setViewportView(DSBanh);
-        DSBanh.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        ));
+        JtableSP.setColumnSelectionAllowed(true);
+        JtableSP.getTableHeader().setReorderingAllowed(false);
+        jScrollPaneDSB.setViewportView(JtableSP);
+        JtableSP.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -151,14 +142,6 @@ public class DanhMucBanh extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(21, 36, 0, 0);
         jPanelCTB.add(lblTenBanh, gridBagConstraints);
 
-        lblSoLuong.setText("Số lượng:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 36, 0, 0);
-        jPanelCTB.add(lblSoLuong, gridBagConstraints);
-
         lblDonGia.setText("Đơn giá:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -167,11 +150,11 @@ public class DanhMucBanh extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(21, 36, 0, 0);
         jPanelCTB.add(lblDonGia, gridBagConstraints);
 
-        buttThemBanh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/cake_plus.png"))); // NOI18N
-        buttThemBanh.setText("Thêm");
-        buttThemBanh.addActionListener(new java.awt.event.ActionListener() {
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/cake_plus.png"))); // NOI18N
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttThemBanhActionPerformed(evt);
+                btnThemActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -181,13 +164,13 @@ public class DanhMucBanh extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(21, 30, 0, 0);
-        jPanelCTB.add(buttThemBanh, gridBagConstraints);
+        jPanelCTB.add(btnThem, gridBagConstraints);
 
-        buttXoaBanh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/cake_minus.png"))); // NOI18N
-        buttXoaBanh.setText("Xóa");
-        buttXoaBanh.addActionListener(new java.awt.event.ActionListener() {
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/cake_minus.png"))); // NOI18N
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttXoaBanhActionPerformed(evt);
+                btnXoaActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -195,13 +178,13 @@ public class DanhMucBanh extends javax.swing.JFrame {
         gridBagConstraints.gridy = 11;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.insets = new java.awt.Insets(21, 30, 0, 0);
-        jPanelCTB.add(buttXoaBanh, gridBagConstraints);
+        jPanelCTB.add(btnXoa, gridBagConstraints);
 
-        buttSuaBanh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/cake_pencil.png"))); // NOI18N
-        buttSuaBanh.setText("Sửa");
-        buttSuaBanh.addActionListener(new java.awt.event.ActionListener() {
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/cake_pencil.png"))); // NOI18N
+        btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttSuaBanhActionPerformed(evt);
+                btnSuaActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -211,37 +194,16 @@ public class DanhMucBanh extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(21, 30, 0, 30);
-        jPanelCTB.add(buttSuaBanh, gridBagConstraints);
+        jPanelCTB.add(btnSua, gridBagConstraints);
 
-        MaBanh.setText("BN004");
+        lbMa.setText("NA");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(21, 36, 0, 0);
-        jPanelCTB.add(MaBanh, gridBagConstraints);
-
-        SoLuong.setEnabled(false);
-        SoLuong.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                SoLuongFocusGained(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 136;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 36, 0, 0);
-        jPanelCTB.add(SoLuong, gridBagConstraints);
-
-        DonGia.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                DonGiaFocusGained(evt);
-            }
-        });
+        jPanelCTB.add(lbMa, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 7;
@@ -249,18 +211,7 @@ public class DanhMucBanh extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 136;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(21, 36, 0, 0);
-        jPanelCTB.add(DonGia, gridBagConstraints);
-
-        TenBanh.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                TenBanhCaretUpdate(evt);
-            }
-        });
-        TenBanh.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                TenBanhFocusGained(evt);
-            }
-        });
+        jPanelCTB.add(txbDG, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
@@ -268,7 +219,7 @@ public class DanhMucBanh extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 136;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(21, 36, 0, 0);
-        jPanelCTB.add(TenBanh, gridBagConstraints);
+        jPanelCTB.add(txbTen, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -281,11 +232,11 @@ public class DanhMucBanh extends javax.swing.JFrame {
         jPanelTK.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
         jPanelTK.setLayout(new java.awt.GridBagLayout());
 
-        buttTK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/search.png"))); // NOI18N
-        buttTK.setText("Tìm kiếm");
-        buttTK.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/search.png"))); // NOI18N
+        btnSearch.setText("Tìm kiếm");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttTKActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -294,17 +245,17 @@ public class DanhMucBanh extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 6, 0);
-        jPanelTK.add(buttTK, gridBagConstraints);
+        jPanelTK.add(btnSearch, gridBagConstraints);
 
-        NoiDungTK.setMinimumSize(new java.awt.Dimension(200, 20));
-        NoiDungTK.setPreferredSize(new java.awt.Dimension(200, 20));
+        txbSearch.setMinimumSize(new java.awt.Dimension(200, 20));
+        txbSearch.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
-        jPanelTK.add(NoiDungTK, gridBagConstraints);
+        jPanelTK.add(txbSearch, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -313,20 +264,6 @@ public class DanhMucBanh extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         jPanel.add(jPanelTK, gridBagConstraints);
-
-        buttNhapBanh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/cake_arrow.png"))); // NOI18N
-        buttNhapBanh.setText("Nhập bánh");
-        buttNhapBanh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttNhapBanhActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
-        jPanel.add(buttNhapBanh, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -348,64 +285,71 @@ public class DanhMucBanh extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttThemBanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttThemBanhActionPerformed
-        if(isAdding == false)
+    public void LoadButton()
+    {
+        if(this.isShowing == true)
         {
-            //Tự lấy mã bánh tiếp theo??
-            this.MaBanh.setText("??");
-            isAdding = true;
-            this.SoLuong.setEnabled(true);
-            ChuThich();
-            this.buttSuaBanh.setEnabled(false);
-            this.buttXoaBanh.setEnabled(false);
+             this.btnSua.setEnabled(false);
+             this.btnXoa.setEnabled(false);
+             this.btnThem.setEnabled(false);
         }
         else
         {
-            //thêm bánh
-            this.SoLuong.setEnabled(false);
-            this.buttSuaBanh.setEnabled(true);
-            this.buttXoaBanh.setEnabled(true);
+            this.btnSua.setEnabled(true);
+            this.btnXoa.setEnabled(true);
+            this.btnThem.setEnabled(true);
         }
-    }//GEN-LAST:event_buttThemBanhActionPerformed
+    }
+    
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        this.isShowing = true;
+            //thêm nv
+        ThemBanh themB  = new ThemBanh();
+                themB.addWindowListener( new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent we) {
+                        btnSearchActionPerformed(evt);
+                        isShowing = false;
+                        LoadButton();
+                    }
+                } );
+        LoadButton();
+        themB.show();
+    }//GEN-LAST:event_btnThemActionPerformed
 
-    private void buttXoaBanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttXoaBanhActionPerformed
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         int reply = JOptionPane.showConfirmDialog(null,"Bạn có chắc muốn xóa bánh này?","Xóa bánh",JOptionPane.WARNING_MESSAGE);
         if(reply == JOptionPane.YES_OPTION){
             //xóa bánh
         }
-    }//GEN-LAST:event_buttXoaBanhActionPerformed
+    }//GEN-LAST:event_btnXoaActionPerformed
 
-    private void buttSuaBanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttSuaBanhActionPerformed
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         //sửa bánh
-    }//GEN-LAST:event_buttSuaBanhActionPerformed
+    }//GEN-LAST:event_btnSuaActionPerformed
 
-    private void TenBanhFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TenBanhFocusGained
-        this.TenBanh.setText("");
-    }//GEN-LAST:event_TenBanhFocusGained
-
-    private void SoLuongFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SoLuongFocusGained
-        this.SoLuong.setText("");
-    }//GEN-LAST:event_SoLuongFocusGained
-
-    private void DonGiaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DonGiaFocusGained
-        this.DonGia.setText("");
-    }//GEN-LAST:event_DonGiaFocusGained
-
-    private void buttTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTKActionPerformed
-        String tukhoa = this.NoiDungTK.getText();
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         //tìm kiếm
-    }//GEN-LAST:event_buttTKActionPerformed
+      tableModel.setRowCount(0);
 
-    private void TenBanhCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_TenBanhCaretUpdate
-        if(!isAdding)
-        {
-         // enable xoa and sua button
+        ArrayList<String[]> al1 = BUSQLKHACHHANG.getInstance().SearchNV(txbSearch.getText());
+        if (al1 != null) {
+            Object count = 1;
+            for (int i = 0; i < al1.size(); i++) {
+                String rows[] = new String[7];
+                rows[0] = count.toString();                  //STT
+                rows[1] = al1.get(i)[0];                     //MaKH
+                rows[2] = al1.get(i)[1];                     //TenKH
+                rows[3] = al1.get(i)[2];                     //DIACHI
+                rows[4] = al1.get(i)[3];                     //Email
+                rows[5] = al1.get(i)[4];                     //Phone
+                rows[6] = al1.get(i)[5];                     //Loai
+                tableModel.addRow(rows);
+                //mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
+                count = (int) count + 1;
+            }
         }
-    }//GEN-LAST:event_TenBanhCaretUpdate
-
-    private void buttNhapBanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttNhapBanhActionPerformed
-        new LapPhieuNhap().setVisible(true);
-    }//GEN-LAST:event_buttNhapBanhActionPerformed
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -444,26 +388,23 @@ public class DanhMucBanh extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable DSBanh;
-    private javax.swing.JTextField DonGia;
-    private javax.swing.JLabel MaBanh;
-    private javax.swing.JTextField NoiDungTK;
-    private javax.swing.JTextField SoLuong;
-    private javax.swing.JTextField TenBanh;
-    private javax.swing.JButton buttNhapBanh;
-    private javax.swing.JButton buttSuaBanh;
-    private javax.swing.JButton buttTK;
-    private javax.swing.JButton buttThemBanh;
-    private javax.swing.JButton buttXoaBanh;
+    private javax.swing.JTable JtableSP;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanelCTB;
     private javax.swing.JPanel jPanelTK;
     private javax.swing.JScrollPane jScrollPaneDSB;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbMa;
     private javax.swing.JLabel lblDanhMucBanh;
     private javax.swing.JLabel lblDonGia;
     private javax.swing.JLabel lblMaBanh;
-    private javax.swing.JLabel lblSoLuong;
     private javax.swing.JLabel lblTenBanh;
+    private javax.swing.JTextField txbDG;
+    private javax.swing.JTextField txbSearch;
+    private javax.swing.JTextField txbTen;
     // End of variables declaration//GEN-END:variables
 }

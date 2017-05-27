@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="L&#x1ead;p phi&#x1ebf;u nh&#x1ead;p"/>
@@ -90,41 +90,20 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="lblGhiChu" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="lblMaPN" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblNgayNhap" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="NgayNhap" min="-2" pref="100" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                                  <Component id="MaHD" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="lblMaNV" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblNCC" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
+                                  <Component id="lblNgayNhap" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="NgayNhap" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                                  <Component id="lblNCC" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="MaNV" min="-2" pref="70" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                                           <Component id="lblTenNV" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="TenNV" pref="169" max="32767" attributes="0"/>
                                       </Group>
                                       <Component id="NCC" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="GhiChu" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="jScrollPane" alignment="1" min="-2" pref="702" max="-2" attributes="0"/>
@@ -151,12 +130,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblMaPN" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblMaNV" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblTenNV" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="MaNV" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="TenNV" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="MaHD" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -178,14 +153,9 @@
                           <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblGhiChu" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="GhiChu" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                           <Component id="jScrollPane" min="-2" pref="221" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="10" max="32767" attributes="0"/>
                           <Component id="jPanel22" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       </Group>
@@ -199,11 +169,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lblMaPN">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="M&#xe3; phi&#x1ebf;u nh&#x1ead;p:"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="lblNCC">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nh&#xe0; cung c&#x1ea5;p:"/>
@@ -214,35 +179,10 @@
             <Property name="text" type="java.lang.String" value="Ng&#xe0;y nh&#x1ead;p:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblMaNV">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="M&#xe3; nh&#xe2;n vi&#xea;n:"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="lblTenNV">
           <Properties>
             <Property name="text" type="java.lang.String" value="T&#xea;n nh&#xe2;n vi&#xea;n:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblGhiChu">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ghi ch&#xfa;:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="MaNV">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value=""/>
-                <StringItem index="1" value="KH001"/>
-                <StringItem index="2" value="KH002"/>
-              </StringArray>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="NCC">
           <Properties>
@@ -258,8 +198,6 @@
           <Properties>
             <Property name="autoscrolls" type="boolean" value="false"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="GhiChu">
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="NgayNhap">
           <Properties>
@@ -382,11 +320,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttCloseActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="MaHD">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="HD001"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

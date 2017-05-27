@@ -31,50 +31,31 @@ public class BUSQLHOADON {
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Them 1 phieu nhap Nhap hang vao kho ">
-    public boolean Insert(int makh,Date ngay, ArrayList masp, ArrayList sl, int slht)
+    // <editor-fold defaultstate="collapsed" desc=" Them 1 hoadon ">
+    public boolean Insert(int makh,Date ngay,float tt, ArrayList masp, ArrayList sl)
     {
-        if(masp == null || sl== null)
-            return false;
-        else 
-        {
-            float tt=0;
-            for(int i=0;i<sl.size();i++)
-            {
-                if((int)sl.get(i)<0 || ((int)sl.get(i) > slht))
-                    return false;
-                tt += DAOQLSANPHAM.getInstance().GetDG((int)masp.get(i))*(int)sl.get(i);
-            }
-            
-            return DAOQLHOADON.getInstance().InsertHD(makh, ngay, tt, masp, sl);
-        }
+        return DAOQLHOADON.getInstance().InsertHD(makh, ngay, tt, masp, sl);
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Sua 1 phieu nhap Nhap hang vao kho ">
-    public boolean Update(int mahd, int makh,Date ngay, ArrayList masp, ArrayList sl)
+    // <editor-fold defaultstate="collapsed" desc=" Sua 1 hoadon ">
+    public boolean Update(int mahd,Date ngay)
     {
-        if(masp == null || sl== null)
-            return false;
-        else 
-        {
-            float tt=0;
-            for(int i=0;i<sl.size();i++)
-            {
-                if((int)sl.get(i)<0)
-                    return false;
-                tt += DAOQLSANPHAM.getInstance().GetDG((int)masp.get(i))*(int)sl.get(i);
-            }
-            
-            return DAOQLHOADON.getInstance().UpdateHD(mahd, makh, ngay, masp, sl, tt);
-        }
+        return DAOQLHOADON.getInstance().UpdateHD(mahd,ngay);      
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Xoa 1 phieu nhap Nhap hang vao kho ">
-    public boolean Delete(int makh)
+    // <editor-fold defaultstate="collapsed" desc=" Xoa 1 hd ">
+    public boolean Delete(int mahd)
     {
-            return DAOQLHOADON.getInstance().DeleteHD(makh);
+       return DAOQLHOADON.getInstance().DeleteHD(mahd);
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Update tong tien trong hd ">
+    public boolean UpdateTT(int mahd, float tt)
+    { 
+            return DAOQLHOADON.getInstance().UpdateTT(mahd, tt);
     }
     // </editor-fold>
     

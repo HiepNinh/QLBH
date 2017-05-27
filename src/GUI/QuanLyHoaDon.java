@@ -9,6 +9,9 @@ import BUS.BUSQLSANPHAM;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import static java.time.Instant.now;
 import java.util.*;
 import java.util.logging.Level;
@@ -27,19 +30,24 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
      */
     
     boolean isShowing = false;
+    private  float Tongtien;
+    
     private DefaultTableModel tableModelHD;
     private String[] colsName = {"STT", "Mã HD", "Tên KH", "Tên NV", "Ngày lập", "Tổng tiền"};
     private DefaultTableModel tableModelCT;
     private String[] colsNameCT = {"STT", "Mã SP", "Tên SP","SL Mua","Thành tiền"};
+    
     ArrayList<SANPHAM> al;
     ArrayList<String[]> alrow;
     ArrayList<String[]> alrowCT;
+    DateFormat dateFormat;
     
     public static int mahd =-1;
     public QuanLyHoaDon() {
         initComponents();
-        LamMoi();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         this.setLocationRelativeTo(null);
+        LamMoi();
         tableModelHD = new DefaultTableModel();
         tableModelHD.setColumnIdentifiers(colsName);
         JtableHD.setModel(tableModelHD);
@@ -51,14 +59,14 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
         DisableComponent();
     }
    
-    public void LamMoiTTHD(String mahd, String makh, String manv, String tenkh, String tennv, Date ngl, String tgt, String gc){
-        lbMaHD.setText(mahd);
-        txbMaKH.setText(makh);
-        txbMaNV.setText(manv);
-        txbTenKH.setText(tenkh);
-        txbTenNV.setText(tennv);
-        dpNgayHD.setDate(ngl);
-        lbTong.setText(tgt);
+    public void LamMoiTTHD(String mahd, String makh, String manv, String tenkh, String tennv, Date ngl, String tgt){
+        this.lbMaHD.setText(mahd);
+        this.txbMaKH.setText(makh);
+        this.txbMaNV.setText(manv);
+        this.txbTenKH.setText(tenkh);
+        this.txbTenNV.setText(tennv);
+        this.dpNgayHD.setDate(ngl);
+        this.lbTong.setText(tgt);
     }
     
     public void LamMoiCTHD(String dg, String sl){
@@ -67,7 +75,8 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
     }
     
     public void LamMoi(){
-        LamMoiTTHD("-","","","","",new Date(), "", "");
+        
+        LamMoiTTHD("-","","","","",new Date(), "");
         LamMoiCTHD("","");
         this.txbSearch.setText("");
     }
@@ -137,9 +146,9 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
         txbTenNV = new javax.swing.JTextField();
         btnXoa = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
-        dpNgayHD = new com.toedter.calendar.JDateChooser();
         lbTong = new javax.swing.JLabel();
         lbMaHD = new javax.swing.JLabel();
+        dpNgayHD = new com.toedter.calendar.JDateChooser();
         jPanel5 = new javax.swing.JPanel();
         btnLapHD = new javax.swing.JButton();
         lblQuanLyHD = new javax.swing.JLabel();
@@ -165,8 +174,8 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
         ));
         JtableHD.getTableHeader().setReorderingAllowed(false);
         JtableHD.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JtableHDMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                JtableHDMousePressed(evt);
             }
         });
         jScollHD.setViewportView(JtableHD);
@@ -470,18 +479,6 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(24, 18, 6, 0);
         jPanel2.add(btnSua, gridBagConstraints);
 
-        dpNgayHD.setDateFormatString("dd-mm-yyyy");
-        dpNgayHD.setEnabled(false);
-        dpNgayHD.setFocusTraversalPolicyProvider(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 60;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 15, 0, 10);
-        jPanel2.add(dpNgayHD, gridBagConstraints);
-
         lbTong.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbTong.setText("5000000");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -499,6 +496,10 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(11, 15, 0, 0);
         jPanel2.add(lbMaHD, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 0;
+        jPanel2.add(dpNgayHD, gridBagConstraints);
 
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
@@ -611,7 +612,8 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
        formThemHD.addWindowListener( new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent we) {
-                        LoadCTHD(mahd);
+                        btnSearchActionPerformed(evt);
+                        clearCTHD();
                         isShowing = false;
                         LoadButton();
                     }
@@ -626,17 +628,55 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
        //sửa hóa đơn
-       
+       if(JtableHD.getSelectedRow() == -1)
+       {
+           JOptionPane.showMessageDialog(null, "Vui lòng chọn thông tin muốn sửa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+       }
+       else
+       {
+           Date date = this.dpNgayHD.getDate();
+           java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+           if(BUSQLHOADON.getInstance().Update(mahd, sqlDate))
+           {
+               JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+               btnSearchActionPerformed(evt);
+           }
+           else{
+               JOptionPane.showMessageDialog(null, "Sửa thất bại!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+           }
+       }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
        // xóa hóa đơn
-       int reply = JOptionPane.showConfirmDialog(null,"Bạn có chắc muốn xóa hóa đơn này?","Xóa hóa đơn",JOptionPane.WARNING_MESSAGE);
-        if(reply == JOptionPane.YES_OPTION){
-            //xóa hđ
+       if(JtableHD.getSelectedRow() == -1)
+       {
+           JOptionPane.showMessageDialog(null, "Vui lòng chọn thông tin muốn xóa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+       }
+       else
+       {
+           int reply = JOptionPane.showConfirmDialog(null,"Bạn có chắc muốn xóa hóa đơn này?","Xóa hóa đơn",JOptionPane.WARNING_MESSAGE);
+           if(reply == JOptionPane.YES_OPTION){
+            //xóa hđ        
+            if(BUSQLHOADON.getInstance().Delete(mahd))
+           {
+               JOptionPane.showMessageDialog(null, "Xóa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+               btnSearchActionPerformed(evt);
+           }
+           else{
+               JOptionPane.showMessageDialog(null, "Xóa thất bại!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+           }  
         }
+       }
     }//GEN-LAST:event_btnXoaActionPerformed
 
+    public void clearCTHD()
+    {
+        tableModelCT = new DefaultTableModel();
+        tableModelCT.setColumnIdentifiers(colsNameCT);
+        JtableCTHD.setModel(tableModelCT);
+    }
+    
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         //thêm cthd
         isShowing = true;
@@ -646,7 +686,12 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
                     public void windowClosed(WindowEvent we) {
                         LoadCTHD(mahd);
                         isShowing = false;
+                        if(BUSQLHOADON.getInstance().UpdateTT(mahd, Tongtien))
+                        {
+                            JOptionPane.showMessageDialog(null, "Load thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+                        }
                         LoadButton();
+                        btnSearchActionPerformed(evt);
                     }
                 } );
        LoadButton();
@@ -665,6 +710,12 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
                 if (BUSQLHOADON.getInstance().DeleteCTHD(mahd, masp)) {
                     JOptionPane.showMessageDialog(null, "Xóa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     LoadCTHD(mahd);
+                    if(BUSQLHOADON.getInstance().UpdateTT(mahd, Tongtien))
+                        {
+                            JOptionPane.showMessageDialog(null, "Load thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        LoadButton();
+                    btnSearchActionPerformed(evt);
                 } else {
                     JOptionPane.showMessageDialog(null, "Xóa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -686,6 +737,12 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
                 if (BUSQLHOADON.getInstance().UpdateCTHD(mahd, masp, sl)) {
                     JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     LoadCTHD(mahd);
+                    if(BUSQLHOADON.getInstance().UpdateTT(mahd, Tongtien))
+                        {
+                            JOptionPane.showMessageDialog(null, "Load thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        LoadButton();
+                    btnSearchActionPerformed(evt);
                 } else {
                     JOptionPane.showMessageDialog(null, "Sửa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -695,6 +752,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
             LamMoiCTHD("","");
+            this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     
@@ -719,14 +777,17 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
             }
         }
          DisableComponent();
+         clearCTHD();
+         LamMoi();
     }//GEN-LAST:event_btnSearchActionPerformed
 
     public void LoadCTHD(int mahd)
     {
+        Tongtien = 0;
         tableModelCT.setRowCount(0);
        
         alrowCT = BUSQLHOADON.getInstance().SearchCT(mahd);
-        //JOptionPane.showMessageDialog(null, alrowCT.get(1)[1], "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+      
         if (alrowCT != null) {
             Object count = 1;
             for (int i = 0; i < alrowCT.size(); i++) {
@@ -742,16 +803,25 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
                 tableModelCT.addRow(rows);
                 //mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
                 count = (int)count + 1;
+                Tongtien += (float)tt;
             }
         }
     }
     
-    private void JtableHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtableHDMouseClicked
+    private void JtableCTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtableCTHDMouseClicked
+        int row = JtableCTHD.getSelectedRow();
+        this.txbTenSP.setText(JtableCTHD.getModel().getValueAt(row, 2).toString());
+        this.txbSL.setText(JtableCTHD.getModel().getValueAt(row, 3).toString());
+        this.txbDG.setText(alrowCT.get(row)[3]);
+    }//GEN-LAST:event_JtableCTHDMouseClicked
+
+    private void JtableHDMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtableHDMousePressed
+        // TODO add your handling code here:
         int row = JtableHD.getSelectedRow();
         lbMaHD.setText(JtableHD.getModel().getValueAt(row, 1).toString());
         txbTenKH.setText(JtableHD.getModel().getValueAt(row, 2).toString());
         txbTenNV.setText(JtableHD.getModel().getValueAt(row, 3).toString());
-        dpNgayHD.setDateFormatString(JtableHD.getModel().getValueAt(row, 4).toString());
+        //dpNgayHD.setDateFormatString(JtableHD.getModel().getValueAt(row, 4).toString());
         lbTong.setText(JtableHD.getModel().getValueAt(row, 5).toString());
         txbMaKH.setText(alrow.get(row)[5]);
         txbMaNV.setText(alrow.get(row)[6]);
@@ -759,14 +829,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
         mahd = Integer.parseInt(alrow.get(row)[0]);
         EnableComponent();
         LoadCTHD(mahd);
-    }//GEN-LAST:event_JtableHDMouseClicked
-
-    private void JtableCTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtableCTHDMouseClicked
-        int row = JtableCTHD.getSelectedRow();
-        this.txbTenSP.setText(JtableCTHD.getModel().getValueAt(row, 2).toString());
-        this.txbSL.setText(JtableCTHD.getModel().getValueAt(row, 3).toString());
-        this.txbDG.setText(alrowCT.get(row)[3]);
-    }//GEN-LAST:event_JtableCTHDMouseClicked
+    }//GEN-LAST:event_JtableHDMousePressed
 
     /**
      * @param args the command line arguments

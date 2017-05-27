@@ -29,25 +29,21 @@ public class BUSQLKHACHHANG {
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho BUSQLKHO ">
+    // <editor-fold defaultstate="collapsed" desc=" Insert kh ">
     public boolean Insert(String tenkh, String diachi, String email, String dienthoai, String loai)
     {
-        if(tenkh == "" || email=="" || diachi =="" || dienthoai=="" || loai == "")
-            return false;
         return DAOQLKHACHHANG.getInstance().Insert(tenkh, diachi, email, dienthoai, loai);
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho BUSQLKHO ">
+    // <editor-fold defaultstate="collapsed" desc=" Update kh ">
     public boolean Update(int makh,String tenkh, String diachi, String email, String dienthoai, String loai)
     {
-        if(tenkh == "" || email=="" || diachi =="" || dienthoai=="" || loai == "")
-            return false;
         return DAOQLKHACHHANG.getInstance().Update(makh, tenkh, diachi, email, dienthoai, loai);
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho BUSQLKHO ">
+    // <editor-fold defaultstate="collapsed" desc=" Delete kh ">
     public boolean Delete(int makh)
     {
         return DAOQLKHACHHANG.getInstance().Delete(makh);

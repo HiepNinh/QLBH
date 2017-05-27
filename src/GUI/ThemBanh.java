@@ -5,20 +5,20 @@
  */
 package GUI;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 /**
  *
  * @author Admin
  */
 public class ThemBanh extends javax.swing.JFrame {
-
     /**
      * Creates new form ThemBanh
      */
     public ThemBanh() {
         initComponents();
         this.TenBanh.setText("");
-        this.MaBanh.setText("");
-        this.SoLuong.setText("");
         this.DonGia.setText("");
         this.setLocationRelativeTo(null);
     }
@@ -36,13 +36,9 @@ public class ThemBanh extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblDonGia = new javax.swing.JLabel();
-        lblSoLuong = new javax.swing.JLabel();
         lblTenBanh = new javax.swing.JLabel();
-        lblMaBanh = new javax.swing.JLabel();
         TenBanh = new javax.swing.JTextField();
         DonGia = new javax.swing.JTextField();
-        SoLuong = new javax.swing.JTextField();
-        MaBanh = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblThemBanhMoi = new javax.swing.JLabel();
         buttThem = new javax.swing.JButton();
@@ -65,14 +61,6 @@ public class ThemBanh extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 0);
         jPanel1.add(lblDonGia, gridBagConstraints);
 
-        lblSoLuong.setText("Số lượng:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 0);
-        jPanel1.add(lblSoLuong, gridBagConstraints);
-
         lblTenBanh.setText("Tên bánh:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -80,14 +68,6 @@ public class ThemBanh extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 0);
         jPanel1.add(lblTenBanh, gridBagConstraints);
-
-        lblMaBanh.setText("Mã bánh:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 0);
-        jPanel1.add(lblMaBanh, gridBagConstraints);
 
         TenBanh.setText("Bánh Bông Lan");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -109,25 +89,6 @@ public class ThemBanh extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(DonGia, gridBagConstraints);
-
-        SoLuong.setText("10");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 100;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(SoLuong, gridBagConstraints);
-
-        MaBanh.setText("BN001");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.insets = new java.awt.Insets(0, 21, 0, 0);
-        jPanel1.add(MaBanh, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -212,7 +173,7 @@ public class ThemBanh extends javax.swing.JFrame {
     }//GEN-LAST:event_buttHuyActionPerformed
 
     private void buttThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttThemActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_buttThemActionPerformed
 
     /**
@@ -252,8 +213,6 @@ public class ThemBanh extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DonGia;
-    private javax.swing.JLabel MaBanh;
-    private javax.swing.JTextField SoLuong;
     private javax.swing.JTextField TenBanh;
     private javax.swing.JButton buttHuy;
     private javax.swing.JButton buttThem;
@@ -261,8 +220,6 @@ public class ThemBanh extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblDonGia;
-    private javax.swing.JLabel lblMaBanh;
-    private javax.swing.JLabel lblSoLuong;
     private javax.swing.JLabel lblTenBanh;
     private javax.swing.JLabel lblThemBanhMoi;
     // End of variables declaration//GEN-END:variables

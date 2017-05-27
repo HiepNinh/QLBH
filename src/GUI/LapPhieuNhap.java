@@ -30,16 +30,11 @@ public class LapPhieuNhap extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel21 = new javax.swing.JPanel();
-        lblMaPN = new javax.swing.JLabel();
         lblNCC = new javax.swing.JLabel();
         lblNgayNhap = new javax.swing.JLabel();
-        lblMaNV = new javax.swing.JLabel();
         lblTenNV = new javax.swing.JLabel();
-        lblGhiChu = new javax.swing.JLabel();
-        MaNV = new javax.swing.JComboBox<>();
         NCC = new javax.swing.JComboBox<>();
         TenNV = new javax.swing.JTextField();
-        GhiChu = new javax.swing.JTextField();
         NgayNhap = new com.toedter.calendar.JDateChooser();
         jScrollPane = new javax.swing.JScrollPane();
         BangCTHD = new javax.swing.JTable();
@@ -51,7 +46,6 @@ public class LapPhieuNhap extends javax.swing.JFrame {
         DelCTPN = new javax.swing.JLabel();
         buttOK = new javax.swing.JButton();
         buttClose = new javax.swing.JButton();
-        MaHD = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lập phiếu nhập");
@@ -61,20 +55,11 @@ public class LapPhieuNhap extends javax.swing.JFrame {
         jLabel1.setText("Lập phiếu nhập");
         jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        lblMaPN.setText("Mã phiếu nhập:");
-
         lblNCC.setText("Nhà cung cấp:");
 
         lblNgayNhap.setText("Ngày nhập:");
 
-        lblMaNV.setText("Mã nhân viên:");
-
         lblTenNV.setText("Tên nhân viên:");
-
-        lblGhiChu.setText("Ghi chú:");
-
-        MaNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "KH001", "KH002" }));
-        MaNV.setToolTipText("");
 
         TenNV.setAutoscrolls(false);
 
@@ -160,8 +145,6 @@ public class LapPhieuNhap extends javax.swing.JFrame {
             }
         });
 
-        MaHD.setText("HD001");
-
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
@@ -177,33 +160,20 @@ public class LapPhieuNhap extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
-                                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblGhiChu)
-                                    .addGroup(jPanel21Layout.createSequentialGroup()
-                                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(lblMaPN)
-                                            .addComponent(lblNgayNhap))
-                                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel21Layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(NgayNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel21Layout.createSequentialGroup()
-                                                .addGap(34, 34, 34)
-                                                .addComponent(MaHD)))
-                                        .addGap(63, 63, 63)
-                                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(lblMaNV)
-                                            .addComponent(lblNCC))))
+                                .addGap(24, 24, 24)
+                                .addComponent(lblNgayNhap)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(NgayNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(63, 63, 63)
+                                .addComponent(lblNCC)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel21Layout.createSequentialGroup()
-                                        .addComponent(MaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
+                                        .addGap(88, 88, 88)
                                         .addComponent(lblTenNV)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(TenNV, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
-                                    .addComponent(NCC, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(GhiChu)))
+                                    .addComponent(NCC, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel21Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -220,12 +190,8 @@ public class LapPhieuNhap extends javax.swing.JFrame {
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMaPN)
-                    .addComponent(lblMaNV)
                     .addComponent(lblTenNV)
-                    .addComponent(MaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MaHD))
+                    .addComponent(TenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -243,13 +209,9 @@ public class LapPhieuNhap extends javax.swing.JFrame {
                         .addComponent(DelCTPN)
                         .addGap(178, 178, 178))
                     .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblGhiChu)
-                            .addComponent(GhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(69, 69, 69)
                         .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                         .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,7 +249,7 @@ public class LapPhieuNhap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddCTPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddCTPNMouseClicked
-        new NhapBanh().setVisible(true);
+        
     }//GEN-LAST:event_AddCTPNMouseClicked
 
     private void EditCTPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditCTPNMouseClicked
@@ -347,9 +309,6 @@ public class LapPhieuNhap extends javax.swing.JFrame {
     private javax.swing.JTable BangCTHD;
     private javax.swing.JLabel DelCTPN;
     private javax.swing.JLabel EditCTPN;
-    private javax.swing.JTextField GhiChu;
-    private javax.swing.JLabel MaHD;
-    private javax.swing.JComboBox<String> MaNV;
     private javax.swing.JComboBox<String> NCC;
     private com.toedter.calendar.JDateChooser NgayNhap;
     private javax.swing.JTextField TenNV;
@@ -361,9 +320,6 @@ public class LapPhieuNhap extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel22;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblGhiChu;
-    private javax.swing.JLabel lblMaNV;
-    private javax.swing.JLabel lblMaPN;
     private javax.swing.JLabel lblNCC;
     private javax.swing.JLabel lblNgayNhap;
     private javax.swing.JLabel lblTenNV;

@@ -413,11 +413,13 @@ public class QuanLyNV extends javax.swing.JFrame {
         {
              this.btnSua.setEnabled(false);
              this.btnXoa.setEnabled(false);
+             this.btnThem.setEnabled(false);
         }
         else
         {
             this.btnSua.setEnabled(true);
-             this.btnXoa.setEnabled(true);
+            this.btnXoa.setEnabled(true);
+            this.btnThem.setEnabled(true);
         }
     }
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed

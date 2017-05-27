@@ -221,7 +221,7 @@ public class ThemCTHD extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if(cbTenSP.getSelectedItem() == null || txbSL.getText() == "" || mahd == -1)
+        if(cbTenSP.getSelectedItem() == null || txbSL.getText().equals("") || mahd == -1)
         {
             JOptionPane.showMessageDialog(null, "Không thể để trống giá trị", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         }

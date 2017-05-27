@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import BUS.BUSQLKHACHHANG;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
@@ -17,6 +20,15 @@ public class ThemKH extends javax.swing.JFrame {
     public ThemKH() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    
+    public void LoadData()
+    {
+        txbTen.setText("Your Name");
+        txbDC.setText("");
+        txbDT.setText("");
+        txbEmail.setText("example@gmail.com");
+        cbLoai.setSelectedIndex(0);
     }
 
     /**
@@ -96,7 +108,7 @@ public class ThemKH extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
         jPanel1.add(lblEmail, gridBagConstraints);
 
-        txbTen.setText("Mạch Thị Thu Ngân");
+        txbTen.setText("Your Name");
         txbTen.setMinimumSize(new java.awt.Dimension(400, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -105,8 +117,6 @@ public class ThemKH extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbTen, gridBagConstraints);
-
-        txbDC.setText("50/11 Tân Sơn, Gò Vấp, TP. HCM");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
@@ -115,8 +125,6 @@ public class ThemKH extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbDC, gridBagConstraints);
-
-        txbDT.setText("0909999999");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
@@ -137,7 +145,7 @@ public class ThemKH extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 10);
         jPanel1.add(cbLoai, gridBagConstraints);
 
-        txbEmail.setText("abc@gm.com");
+        txbEmail.setText("example@gmail.com");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 10;
@@ -198,7 +206,7 @@ public class ThemKH extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 30;
@@ -243,10 +251,26 @@ public class ThemKH extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        if (txbTen.getText().equals("Your Name") || txbDC.getText().equals("") || cbLoai.getSelectedItem() == null 
+                || txbDT.getText().equals("") || txbEmail.getText().equals("example@gmail.com")) {
+            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn thêm khách hàng này?", "Thêm khách hàng", JOptionPane.WARNING_MESSAGE);
+            if (reply == JOptionPane.YES_OPTION) {
+                //Thêm khach hang            
+                if (BUSQLKHACHHANG.getInstance().Insert(txbTen.getText(), txbDC.getText(), txbEmail.getText(), txbDT.getText(), cbLoai.getSelectedItem().toString())) {
+                    JOptionPane.showMessageDialog(null, "Thêm thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    LoadData();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Thêm thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnHuyActionPerformed
 
     /**

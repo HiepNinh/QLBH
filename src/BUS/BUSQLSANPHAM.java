@@ -15,7 +15,7 @@ import qlbh.SANPHAM;
  * @author Golden Darkness
  */
 public class BUSQLSANPHAM {
-    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho BUSQLKHO ">
+    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho BUSQLSANPHAM ">
     private static BUSQLSANPHAM instance = new BUSQLSANPHAM();
 
     //private contructor
@@ -27,10 +27,8 @@ public class BUSQLSANPHAM {
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho BUSQLKHO ">
+    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho QLSANPHAM ">
     public boolean Insert(String tensp, float dongia){
-        if(tensp == "" || dongia <=0)
-            return false;
         return DAOQLSANPHAM.getInstance().Insert(tensp, dongia);
     }
     // </editor-fold>

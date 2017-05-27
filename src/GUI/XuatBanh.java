@@ -37,8 +37,6 @@ public class XuatBanh extends javax.swing.JFrame {
         TenBanh = new javax.swing.JTextField();
         SoLuong = new javax.swing.JTextField();
         MaBanh = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -108,20 +106,6 @@ public class XuatBanh extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(0, 21, 0, 0);
         jPanel1.add(MaBanh, gridBagConstraints);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 10);
-        jPanel1.add(jComboBox1, gridBagConstraints);
-
-        jLabel1.setText("Kệ số:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 0);
-        jPanel1.add(jLabel1, gridBagConstraints);
 
         jLabel2.setText("Số lượng còn lại:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -278,8 +262,6 @@ public class XuatBanh extends javax.swing.JFrame {
     private javax.swing.JTextField TenBanh;
     private javax.swing.JButton buttHuy;
     private javax.swing.JButton buttThem;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
