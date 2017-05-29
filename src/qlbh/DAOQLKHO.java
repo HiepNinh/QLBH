@@ -8,6 +8,7 @@ package qlbh;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import static qlbh.DataConnection.getConnection;
 
@@ -16,7 +17,7 @@ import static qlbh.DataConnection.getConnection;
  * @author Golden Darkness
  */
 public class DAOQLKHO {
-    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho DAOPHIEUNHAP ">
+    // <editor-fold defaultstate="collapsed" desc=" Khoi tao singleton cho DAOQLKHO ">
     private static DAOQLKHO instance = new DAOQLKHO();
 
     //private contructor
@@ -28,26 +29,22 @@ public class DAOQLKHO {
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="Them 1 san pham va cau hinh no">
-    public boolean Insert(ArrayList masp,ArrayList toida,ArrayList muctran, ArrayList sl) {
+    // <editor-fold defaultstate="collapsed" desc="Them 1 san pham">
+    public boolean Insert(int masp,int toida,int muctran, int sl) {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return false;
             } else {      
-                // <editor-fold defaultstate="collapsed" desc=" Them 1 sp vao kho ">
                 String sql = "insert into kho values(?,?,?,?)";
                 PreparedStatement pstm = c.prepareStatement(sql);
-                for(int i=0;i<masp.size();i++){
-                pstm.setInt(1,(int)masp.get(i));
-                pstm.setInt(2, (int)toida.get(i));
-                pstm.setInt(3,(int)muctran.get(i));
-                pstm.setInt(4, (int)sl.get(i));
+                pstm.setInt(1, masp);
+                pstm.setInt(2, toida);
+                pstm.setInt(3, muctran);
+                pstm.setInt(4, sl);
                 int roweffect = pstm.executeUpdate();
-                // </editor-fold>  
-                }
-                //Tra ve so dong sp vua them vao kho- 1(succeed) hoac 0(failure)
+                
                 return true;
             }
         } catch (Exception e) {
@@ -56,24 +53,20 @@ public class DAOQLKHO {
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="Cap nhat toida va muctran cua 1 san pham ">
-     public boolean Update(int masp,int toida,int muctran, int sl) {
+    // <editor-fold defaultstate="collapsed" desc="Cap nhat SP">
+     public boolean Update(int masp,int muctran, int sl) {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return false;
             } else {      
-                // <editor-fold defaultstate="collapsed" desc=" Cap nhat 1 sp trong kho ">
-                String sql = "Update kho set TOIDA=?, MUCTRAN=?, SOLUONGHIENTAI=? where MASP=?";
+                String sql = "Update kho set MUCTRAN=?, SOLUONGHIENTAI=? where MASP=?";
                 PreparedStatement pstm = c.prepareStatement(sql);
-                pstm.setInt(1,toida);
-                pstm.setInt(2, muctran);
-                pstm.setInt(3, sl);
-                pstm.setInt(4,masp);
+                pstm.setInt(1, muctran);
+                pstm.setInt(2, sl);
+                pstm.setInt(3,masp);
                 int roweffect = pstm.executeUpdate();
-                // </editor-fold>  
-                //Tra ve so dong sp vua capnhat- 1(succeed) hoac 0(failure)
                 return true;
             }
         } catch (Exception e) {
@@ -105,47 +98,21 @@ public class DAOQLKHO {
     }
      // </editor-fold>
      
-    // <editor-fold defaultstate="collapsed" desc="Kiem tra ton kho">
-    public ResultSet Check() {
+    // <editor-fold defaultstate="collapsed" desc="View all Kho">
+    public ResultSet Search() {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return null;
             } else {    
-                String sql="select MASP from kho where SOLUONGHIENTAI < MUCTRAN";
+                String sql="select sp.MASP,sp.TENSP,k.TOIDA,k.MUCTRAN,k.SOLUONGHIENTAI from kho k inner join sanpham sp on k.MASP = sp.MASP";
                 PreparedStatement pstm = c.prepareStatement(sql);
                 ResultSet rs = pstm.executeQuery();
                 return rs;
             }
         } catch (Exception e) {
             return null;
-        }
-    }
-    // </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc="Thay doi so luong hien tai khi nho hon muc tran">
-    public boolean MultiUpdate(ArrayList masp, ArrayList sl) {
-        try {
-            Connection c = getConnection();
-            if (c == null) {
-                //Connect database failure
-                return false;
-            } else {      
-                // <editor-fold defaultstate="collapsed" desc=" Them 1 sp vao kho ">
-                String sql = "Update kho set SOLUONGHIENTAI=? where MASP=?";
-                PreparedStatement pstm = c.prepareStatement(sql);
-                for(int i=0;i<masp.size();i++){
-                pstm.setInt(1,(int)sl.get(i)); 
-                pstm.setInt(2, (int)masp.get(i));
-                int roweffect = pstm.executeUpdate();
-                }
-                // </editor-fold>  
-                //Tra ve so dong sp vua them vao kho- 1(succeed) hoac 0(failure)
-                return true;
-            }
-        } catch (Exception e) {
-            return false;
         }
     }
     // </editor-fold>
@@ -186,25 +153,6 @@ public class DAOQLKHO {
             }
         } catch (Exception e) {
             return 0;
-        }
-    }
-    // </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc="Load ten sp chi co trong kho">
-    public ResultSet LoadTENSP() {
-        try {
-            Connection c = getConnection();
-            if (c == null) {
-                //Connect database failure
-                return null;
-            } else {    
-                String sql="select TENSP from sanpham join kho on sanpham.MASP = kho.MASP";
-                PreparedStatement pstm = c.prepareStatement(sql);
-                ResultSet rs = pstm.executeQuery();
-                return rs;
-            }
-        } catch (Exception e) {
-            return null;
         }
     }
     // </editor-fold>

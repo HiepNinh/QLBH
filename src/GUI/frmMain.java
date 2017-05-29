@@ -647,11 +647,11 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_buttTlbrBanhActionPerformed
 
     private void buttTlbrKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrKhoActionPerformed
-        new QuanLyKho().setVisible(true);
+        new QLKHO().setVisible(true);
     }//GEN-LAST:event_buttTlbrKhoActionPerformed
 
     private void buttKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttKhoActionPerformed
-        new QuanLyKho().setVisible(true);
+        new QLKHO().setVisible(true);
     }//GEN-LAST:event_buttKhoActionPerformed
 
     private void iconBanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconBanhMouseClicked
@@ -659,11 +659,11 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_iconBanhMouseClicked
 
     private void jMenuItemKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemKhoActionPerformed
-       new QuanLyKho().setVisible(true);
+       new QLKHO().setVisible(true);
     }//GEN-LAST:event_jMenuItemKhoActionPerformed
 
     private void jMenuItemKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemKeActionPerformed
-        new QuanLyKe().setVisible(true);
+        new QLKE().setVisible(true);
     }//GEN-LAST:event_jMenuItemKeActionPerformed
 
     private void jMenuItemPhieuNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPhieuNhapActionPerformed
@@ -671,7 +671,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemPhieuNhapActionPerformed
 
     private void jMenuItemQLXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemQLXuatActionPerformed
-        new QuanLyXuat().setVisible(true);
+        new QuanLyPhieuXuat().setVisible(true);
     }//GEN-LAST:event_jMenuItemQLXuatActionPerformed
 
     private void jMenuItemThemBanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemThemBanhActionPerformed
@@ -687,7 +687,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemXuatBanhActionPerformed
 
     private void jMenuItemKiemKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemKiemKhoActionPerformed
-        new KiemKho().setVisible(true);
+        new QLKHO().setVisible(true);
     }//GEN-LAST:event_jMenuItemKiemKhoActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
@@ -699,7 +699,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemHuongDanActionPerformed
 
     private void buttTlbrKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrKeActionPerformed
-        new QuanLyKe().setVisible(true);
+        new QLKE().setVisible(true);
     }//GEN-LAST:event_buttTlbrKeActionPerformed
 
     private void buttTlbrTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrTKActionPerformed
@@ -719,11 +719,11 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_iconKHMouseClicked
 
     private void iconKhoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconKhoMouseClicked
-        new QuanLyKho().setVisible(true);
+        new QLKHO().setVisible(true);
     }//GEN-LAST:event_iconKhoMouseClicked
 
     private void iconKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconKeMouseClicked
-        new QuanLyKe().setVisible(true);
+        new QLKE().setVisible(true);
     }//GEN-LAST:event_iconKeMouseClicked
 
     private void iconNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconNVMouseClicked
@@ -747,7 +747,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_buttThKeActionPerformed
 
     private void buttKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttKeActionPerformed
-        new QuanLyKe().setVisible(true);
+        new QLKE().setVisible(true);
     }//GEN-LAST:event_buttKeActionPerformed
 
     /**

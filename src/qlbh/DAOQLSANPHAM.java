@@ -5,11 +5,11 @@
  */
 package qlbh;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import static qlbh.DataConnection.getConnection;
+
 /**
  *
  * @author Golden Darkness
@@ -36,7 +36,7 @@ public class DAOQLSANPHAM {
                 //Connect database failure
                 return false;
             } else {
-                String sql = "insert into SANPHAM values(?,?)";
+                String sql = "insert into sanpham(TENSP,DONGIA) values(?,?)";
                 PreparedStatement pstm = c.prepareStatement(sql);
                 pstm.setString(1, tensp);
                 pstm.setFloat(2, dongia);
@@ -57,12 +57,32 @@ public class DAOQLSANPHAM {
                 //Connect database failure
                 return false;
             } else {
-                String sql = "update SANPHAM set TENSP = ?, DONGIA = ? where MASP = ?";
+                //Kiem tra xem sp da co trong chi tiet phieu nhap hay chua
+                String sql = "select * from ctphieunhap where MASP = ?";
                 PreparedStatement pstm = c.prepareStatement(sql);
-                pstm.setString(1, tensp);
-                pstm.setFloat(2, dongia);
-                pstm.setInt(3, masp);
-                int roweffect = pstm.executeUpdate();
+                pstm.setInt(1, masp);
+                ResultSet rs1 = pstm.executeQuery();
+
+                //Kiem tra xem sp da co trong chi tiet hoa don hay chua
+                sql = "select * from cthd where MASP = ?";
+                pstm = c.prepareStatement(sql);
+                pstm.setInt(1, masp);
+                ResultSet rs2 = pstm.executeQuery();
+
+                if (rs1.next() || rs2.next()) {
+                    sql = "update sanpham set TENSP = ? where MASP = ?";
+                    pstm = c.prepareStatement(sql);
+                    pstm.setString(1, tensp);
+                    pstm.setInt(2, masp);
+                    int roweffect = pstm.executeUpdate();
+                } else {
+                    sql = "update sanpham set TENSP = ?, DONGIA = ? where MASP = ?";
+                    pstm = c.prepareStatement(sql);
+                    pstm.setString(1, tensp);
+                    pstm.setFloat(2, dongia);
+                    pstm.setInt(3, masp);
+                    int roweffect = pstm.executeUpdate();
+                }
                 return true;
             }
         } catch (Exception e) {
@@ -71,7 +91,6 @@ public class DAOQLSANPHAM {
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc=" Delete 1 record into SANPHAM - xoa san pham ">
     public boolean Delete(int masp) {
         try {
@@ -81,28 +100,44 @@ public class DAOQLSANPHAM {
                 return false;
             } else {
                 //Kiem tra xem sp da co trong chi tiet phieu nhap hay chua
-                String sql = "select count(MAPN) from ctphieunhap where MASP = ?";
+                String sql = "select * from ctphieunhap where MASP = ?";
                 PreparedStatement pstm = c.prepareStatement(sql);
                 pstm.setInt(1, masp);
                 ResultSet rs = pstm.executeQuery();
-                if (rs.getInt(1) > 0) {
+                if (rs.next()) {
                     return false;
-                } else {
-                    //Neu sp khong co trong chi tiet phieu nhap -- co the delete
-                    sql = "delete from SANPHAM where MASP = ?";
-                    pstm = c.prepareStatement(sql);
-                    pstm.setInt(1, masp);
-                    int roweffect = pstm.executeUpdate();
-                    return true;
                 }
+                //Kiem tra xem sp da co trong chi tiet phieu xuất hay chua
+                sql = "select * from ctphieuxuat where MASP = ?";
+                pstm = c.prepareStatement(sql);
+                pstm.setInt(1, masp);
+                rs = pstm.executeQuery();
+                if (rs.next()) {
+                    return false;
+                }
+                //Kiem tra xem sp da co trong chi tiet hoa don hay chua
+                sql = "select * from cthd where MASP = ?";
+                pstm = c.prepareStatement(sql);
+                pstm.setInt(1, masp);
+                rs = pstm.executeQuery();
+                if (rs.next()) {
+                    return false;
+                }
+                //Neu sp khong co trong chi tiet phieu nhap -- co the delete
+                sql = "delete from SANPHAM where MASP = ?";
+                pstm = c.prepareStatement(sql);
+                pstm.setInt(1, masp);
+                int roweffect = pstm.executeUpdate();
+                return true;
+
             }
         } catch (Exception e) {
             return false;
         }
     }
     // </editor-fold>
-    
-     // <editor-fold defaultstate="collapsed" desc="Get DG in a SANPAHM">
+
+    // <editor-fold defaultstate="collapsed" desc="Get DG in a SANPAHM">
     public float GetDG(int masp) {
         try {
             Connection c = getConnection();
@@ -114,8 +149,9 @@ public class DAOQLSANPHAM {
                 PreparedStatement pstm = c.prepareStatement(sql);
                 pstm.setInt(1, masp);
                 ResultSet rs = pstm.executeQuery();
-                if(rs.next())
+                if (rs.next()) {
                     return rs.getFloat(1);
+                }
             }
             return 0;
         } catch (Exception e) {
@@ -123,8 +159,8 @@ public class DAOQLSANPHAM {
         }
     }
     // </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc=" View all CHUCVU ">
+
+    // <editor-fold defaultstate="collapsed" desc=" View all SANPHAM ">
     public ResultSet GetAllSP() {
         try {
             Connection c = getConnection();

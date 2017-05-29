@@ -20,6 +20,7 @@ public class ThemKH extends javax.swing.JFrame {
     public ThemKH() {
         initComponents();
         this.setLocationRelativeTo(null);
+        LoadData();
     }
     
     public void LoadData()

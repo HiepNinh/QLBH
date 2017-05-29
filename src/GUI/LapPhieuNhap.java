@@ -41,14 +41,8 @@ public class LapPhieuNhap extends javax.swing.JFrame {
         jPanel22 = new javax.swing.JPanel();
         lblTong = new javax.swing.JLabel();
         TongGiaTri = new javax.swing.JLabel();
-        AddCTPN = new javax.swing.JLabel();
-        EditCTPN = new javax.swing.JLabel();
-        DelCTPN = new javax.swing.JLabel();
         buttOK = new javax.swing.JButton();
         buttClose = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Lập phiếu nhập");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/file_import.png"))); // NOI18N
@@ -110,27 +104,6 @@ public class LapPhieuNhap extends javax.swing.JFrame {
                 .addComponent(TongGiaTri))
         );
 
-        AddCTPN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/file_add.png"))); // NOI18N
-        AddCTPN.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AddCTPNMouseClicked(evt);
-            }
-        });
-
-        EditCTPN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/file_edit.png"))); // NOI18N
-        EditCTPN.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                EditCTPNMouseClicked(evt);
-            }
-        });
-
-        DelCTPN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/file_del.png"))); // NOI18N
-        DelCTPN.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DelCTPNMouseClicked(evt);
-            }
-        });
-
         buttOK.setText("Xác nhận");
         buttOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,18 +122,22 @@ public class LapPhieuNhap extends javax.swing.JFrame {
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addContainerGap(15, Short.MAX_VALUE)
-                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(EditCTPN, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(AddCTPN, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(DelCTPN, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel21Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
+                                .addComponent(buttOK)
+                                .addGap(18, 18, 18)
+                                .addComponent(buttClose))))
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel21Layout.createSequentialGroup()
+                                .addGap(0, 58, Short.MAX_VALUE)
                                 .addComponent(lblNgayNhap)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(NgayNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,16 +150,7 @@ public class LapPhieuNhap extends javax.swing.JFrame {
                                         .addComponent(lblTenNV)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(TenNV, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
-                                    .addComponent(NCC, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
-                                .addComponent(buttOK)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttClose)))))
+                                    .addComponent(NCC, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addGap(12, 12, 12))
         );
         jPanel21Layout.setVerticalGroup(
@@ -199,21 +167,11 @@ public class LapPhieuNhap extends javax.swing.JFrame {
                         .addComponent(NCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(NgayNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNgayNhap))
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(AddCTPN)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(EditCTPN)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(DelCTPN)
-                        .addGap(178, 178, 178))
-                    .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                        .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGap(102, 102, 102)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttOK)
                     .addComponent(buttClose)))
@@ -244,28 +202,14 @@ public class LapPhieuNhap extends javax.swing.JFrame {
                 .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void AddCTPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddCTPNMouseClicked
-        
-    }//GEN-LAST:event_AddCTPNMouseClicked
-
-    private void EditCTPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditCTPNMouseClicked
-       //sửa chi tiết
-    }//GEN-LAST:event_EditCTPNMouseClicked
-
-    private void DelCTPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DelCTPNMouseClicked
-        //xóa chi tiết
-    }//GEN-LAST:event_DelCTPNMouseClicked
 
     private void buttOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttOKActionPerformed
         //lưu phiếu
     }//GEN-LAST:event_buttOKActionPerformed
 
     private void buttCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttCloseActionPerformed
-        this.dispose();
+       
     }//GEN-LAST:event_buttCloseActionPerformed
 
     /**
@@ -305,10 +249,7 @@ public class LapPhieuNhap extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AddCTPN;
     private javax.swing.JTable BangCTHD;
-    private javax.swing.JLabel DelCTPN;
-    private javax.swing.JLabel EditCTPN;
     private javax.swing.JComboBox<String> NCC;
     private com.toedter.calendar.JDateChooser NgayNhap;
     private javax.swing.JTextField TenNV;

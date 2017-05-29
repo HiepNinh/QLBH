@@ -52,7 +52,7 @@ public class BUSQLKHACHHANG {
     
     
     
-    // <editor-fold defaultstate="collapsed" desc=" View  nhan vien ">
+    // <editor-fold defaultstate="collapsed" desc=" View khách hàng ">
     public ArrayList<String[]> SearchNV(String hint)
     {
         ResultSet src = DAOQLKHACHHANG.getInstance().Search();

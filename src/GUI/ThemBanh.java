@@ -5,8 +5,10 @@
  */
 package GUI;
 
+import BUS.BUSQLSANPHAM;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,9 +20,14 @@ public class ThemBanh extends javax.swing.JFrame {
      */
     public ThemBanh() {
         initComponents();
-        this.TenBanh.setText("");
-        this.DonGia.setText("");
         this.setLocationRelativeTo(null);
+        LoadData();
+    }
+    
+    public void LoadData()
+    {
+        this.txbTen.setText("");
+        this.txbDG.setText("");
     }
 
     /**
@@ -37,12 +44,12 @@ public class ThemBanh extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblDonGia = new javax.swing.JLabel();
         lblTenBanh = new javax.swing.JLabel();
-        TenBanh = new javax.swing.JTextField();
-        DonGia = new javax.swing.JTextField();
+        txbTen = new javax.swing.JTextField();
+        txbDG = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         lblThemBanhMoi = new javax.swing.JLabel();
-        buttThem = new javax.swing.JButton();
-        buttHuy = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnHuy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Thêm bánh");
@@ -69,7 +76,7 @@ public class ThemBanh extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 0);
         jPanel1.add(lblTenBanh, gridBagConstraints);
 
-        TenBanh.setText("Bánh Bông Lan");
+        txbTen.setText("Bánh Bông Lan");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -77,9 +84,9 @@ public class ThemBanh extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 100;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(TenBanh, gridBagConstraints);
+        jPanel1.add(txbTen, gridBagConstraints);
 
-        DonGia.setText("50000");
+        txbDG.setText("50000");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
@@ -88,7 +95,7 @@ public class ThemBanh extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(DonGia, gridBagConstraints);
+        jPanel1.add(txbDG, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -121,10 +128,10 @@ public class ThemBanh extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel2.add(lblThemBanhMoi, gridBagConstraints);
 
-        buttThem.setText("Thêm");
-        buttThem.addActionListener(new java.awt.event.ActionListener() {
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttThemActionPerformed(evt);
+                btnThemActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -133,12 +140,12 @@ public class ThemBanh extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 30;
-        jPanel2.add(buttThem, gridBagConstraints);
+        jPanel2.add(btnThem, gridBagConstraints);
 
-        buttHuy.setText("Hủy");
-        buttHuy.addActionListener(new java.awt.event.ActionListener() {
+        btnHuy.setText("Hủy");
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttHuyActionPerformed(evt);
+                btnHuyActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -146,7 +153,7 @@ public class ThemBanh extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel2.add(buttHuy, gridBagConstraints);
+        jPanel2.add(btnHuy, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,13 +175,28 @@ public class ThemBanh extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttHuyActionPerformed
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
         this.dispose();
-    }//GEN-LAST:event_buttHuyActionPerformed
+    }//GEN-LAST:event_btnHuyActionPerformed
 
-    private void buttThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttThemActionPerformed
-      
-    }//GEN-LAST:event_buttThemActionPerformed
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+       // TODO add your handling code here:
+        if (txbTen.getText().equals("") || txbDG.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn thêm mặt hàng này?", "Thêm mặt hàng", JOptionPane.WARNING_MESSAGE);
+            if (reply == JOptionPane.YES_OPTION) {
+                //Thêm sản phẩm
+                float dg = Float.parseFloat(txbDG.getText());
+                if (BUSQLSANPHAM.getInstance().Insert(txbTen.getText(), dg)) {
+                    JOptionPane.showMessageDialog(null, "Thêm thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    LoadData();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Thêm thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnThemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,15 +234,15 @@ public class ThemBanh extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField DonGia;
-    private javax.swing.JTextField TenBanh;
-    private javax.swing.JButton buttHuy;
-    private javax.swing.JButton buttThem;
+    private javax.swing.JButton btnHuy;
+    private javax.swing.JButton btnThem;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblDonGia;
     private javax.swing.JLabel lblTenBanh;
     private javax.swing.JLabel lblThemBanhMoi;
+    private javax.swing.JTextField txbDG;
+    private javax.swing.JTextField txbTen;
     // End of variables declaration//GEN-END:variables
 }

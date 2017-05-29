@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import BUS.BUSQLSANPHAM;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class DanhMucBanh extends javax.swing.JFrame {
 
     boolean isShowing = false;
     private DefaultTableModel tableModel;
-    private String[] colsName = {};
+    private String[] colsName = {"STT","Mã SP","Tên SP", "Đơn giá"};
     /**
      * Creates new form DanhMucBanh
      */
@@ -27,13 +28,13 @@ public class DanhMucBanh extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(colsName);
-        JtableKH.setModel(tableModel);
+        JtableSP.setModel(tableModel);
         
         
     }
     
     public void ClearComponent(){
-        this.lbMa.setText("");
+        this.lbMa.setText("NA");
         this.txbTen.setText("");
         this.txbDG.setText("");
     }
@@ -63,6 +64,7 @@ public class DanhMucBanh extends javax.swing.JFrame {
         lbMa = new javax.swing.JLabel();
         txbDG = new javax.swing.JTextField();
         txbTen = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jPanelTK = new javax.swing.JPanel();
         btnSearch = new javax.swing.JButton();
         txbSearch = new javax.swing.JTextField();
@@ -106,10 +108,13 @@ public class DanhMucBanh extends javax.swing.JFrame {
 
             }
         ));
-        JtableSP.setColumnSelectionAllowed(true);
         JtableSP.getTableHeader().setReorderingAllowed(false);
+        JtableSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JtableSPMouseClicked(evt);
+            }
+        });
         jScrollPaneDSB.setViewportView(JtableSP);
-        JtableSP.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -174,7 +179,7 @@ public class DanhMucBanh extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 11;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.insets = new java.awt.Insets(21, 30, 0, 0);
@@ -188,7 +193,7 @@ public class DanhMucBanh extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 11;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 2;
@@ -220,6 +225,17 @@ public class DanhMucBanh extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(21, 36, 0, 0);
         jPanelCTB.add(txbTen, gridBagConstraints);
+
+        jButton1.setText("Thoát");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 12;
+        jPanelCTB.add(jButton1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -318,38 +334,78 @@ public class DanhMucBanh extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        int reply = JOptionPane.showConfirmDialog(null,"Bạn có chắc muốn xóa bánh này?","Xóa bánh",JOptionPane.WARNING_MESSAGE);
-        if(reply == JOptionPane.YES_OPTION){
-            //xóa bánh
+        if (JtableSP.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm muốn xóa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa sản phẩm này?", "Xóa sản phẩm", JOptionPane.WARNING_MESSAGE);
+            if (reply == JOptionPane.YES_OPTION) {
+                //xóa sản phẩm           
+                int masp = Integer.parseInt(lbMa.getText());
+                if (BUSQLSANPHAM.getInstance().Delete(masp)) {
+                    JOptionPane.showMessageDialog(null, "Xóa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    btnSearchActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Xóa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        //sửa bánh
+        //sửa tt
+        if (JtableSP.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn mặt hàng muốn sửa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn sửa mặt hàng này?", "Sửa mặt hàng", JOptionPane.WARNING_MESSAGE);
+            if (reply == JOptionPane.YES_OPTION) {
+                //Sửa nhân viên            
+                int masp = Integer.parseInt(lbMa.getText());
+                float dg = Float.parseFloat(txbDG.getText());
+                if (BUSQLSANPHAM.getInstance().Update(masp, txbTen.getText(), dg)) {
+                    JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    btnSearchActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sửa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         //tìm kiếm
       tableModel.setRowCount(0);
 
-        ArrayList<String[]> al1 = BUSQLKHACHHANG.getInstance().SearchNV(txbSearch.getText());
+        ArrayList<String[]> al1 = BUSQLSANPHAM.getInstance().GetAllSP(txbSearch.getText());
         if (al1 != null) {
             Object count = 1;
             for (int i = 0; i < al1.size(); i++) {
-                String rows[] = new String[7];
+                String rows[] = new String[4];
                 rows[0] = count.toString();                  //STT
-                rows[1] = al1.get(i)[0];                     //MaKH
-                rows[2] = al1.get(i)[1];                     //TenKH
-                rows[3] = al1.get(i)[2];                     //DIACHI
-                rows[4] = al1.get(i)[3];                     //Email
-                rows[5] = al1.get(i)[4];                     //Phone
-                rows[6] = al1.get(i)[5];                     //Loai
+                rows[1] = al1.get(i)[0];                     //MaSP
+                rows[2] = al1.get(i)[1];                     //TenSP
+                rows[3] = al1.get(i)[2];                     //DONGIA
+
                 tableModel.addRow(rows);
                 //mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
                 count = (int) count + 1;
             }
         }
+        
+        ClearComponent();
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void JtableSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtableSPMouseClicked
+        // TODO add your handling code here:
+        int row = JtableSP.getSelectedRow();
+        lbMa.setText(JtableSP.getModel().getValueAt(row, 1).toString());
+        txbTen.setText(JtableSP.getModel().getValueAt(row, 2).toString());
+        txbDG.setText(JtableSP.getModel().getValueAt(row, 3).toString());
+    }//GEN-LAST:event_JtableSPMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -393,6 +449,7 @@ public class DanhMucBanh extends javax.swing.JFrame {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanelCTB;
     private javax.swing.JPanel jPanelTK;

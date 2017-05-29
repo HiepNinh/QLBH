@@ -28,26 +28,22 @@ public class DAOQLKEBANH {
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="Them 1 san pham va cau hinh no">
-    public boolean Insert(ArrayList masp,ArrayList toida,ArrayList muctran, ArrayList sl) {
+    // <editor-fold defaultstate="collapsed" desc="Them 1 san pham">
+    public boolean Insert(int masp,int toida,int muctran, int sl) {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return false;
             } else {      
-                // <editor-fold defaultstate="collapsed" desc=" Them 1 sp vao kho ">
                 String sql = "insert into kebanh values(?,?,?,?)";
                 PreparedStatement pstm = c.prepareStatement(sql);
-                for(int i=0;i<masp.size();i++){
-                pstm.setInt(1,(int)masp.get(i));
-                pstm.setInt(2, (int)toida.get(i));
-                pstm.setInt(3,(int)muctran.get(i));
-                pstm.setInt(4, (int)sl.get(i));
+                pstm.setInt(1, masp);
+                pstm.setInt(2, toida);
+                pstm.setInt(3, muctran);
+                pstm.setInt(4, sl);
                 int roweffect = pstm.executeUpdate();
-                // </editor-fold>  
-                }
-                //Tra ve so dong sp vua them vao kho- 1(succeed) hoac 0(failure)
+                
                 return true;
             }
         } catch (Exception e) {
@@ -56,24 +52,20 @@ public class DAOQLKEBANH {
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="Cap nhat toida va muctran cua 1 san pham ">
-     public boolean Update(int masp,int toida,int muctran, int sl) {
+    // <editor-fold defaultstate="collapsed" desc="Cap nhat SP">
+     public boolean Update(int masp,int muctran, int sl) {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return false;
             } else {      
-                // <editor-fold defaultstate="collapsed" desc=" Cap nhat 1 sp trong kebanh ">
-                String sql = "Update kebanh set TOIDA=?, MUCTRAN=?, SOLUONGHIENTAI=? where MASP=?";
+                String sql = "Update kebanh set MUCTRAN=?, SOLUONGHIENTAI=? where MASP=?";
                 PreparedStatement pstm = c.prepareStatement(sql);
-                pstm.setInt(1,toida);
-                pstm.setInt(2, muctran);
-                pstm.setInt(3, sl);
-                pstm.setInt(4,masp);
+                pstm.setInt(1, muctran);
+                pstm.setInt(2, sl);
+                pstm.setInt(3,masp);
                 int roweffect = pstm.executeUpdate();
-                // </editor-fold>  
-                //Tra ve so dong sp vua capnhat- 1(succeed) hoac 0(failure)
                 return true;
             }
         } catch (Exception e) {
@@ -90,13 +82,13 @@ public class DAOQLKEBANH {
                 //Connect database failure
                 return false;
             } else {      
-                // <editor-fold defaultstate="collapsed" desc=" Xoa 1 sp tu kebanh ">
+                // <editor-fold defaultstate="collapsed" desc=" Xoa 1 sp tu kho ">
                 String sql = "delete from kebanh where MASP=?";
                 PreparedStatement pstm = c.prepareStatement(sql);
                 pstm.setInt(1,masp);
                 int roweffect = pstm.executeUpdate();
                 // </editor-fold>  
-                //Tra ve so dong sp vua xoa tu kebanh- 1(succeed) hoac 0(failure)
+                //Tra ve so dong sp vua xoa tu kho- 1(succeed) hoac 0(failure)
                 return true;
             }
         } catch (Exception e) {
@@ -105,47 +97,21 @@ public class DAOQLKEBANH {
     }
      // </editor-fold>
      
-    // <editor-fold defaultstate="collapsed" desc="Kiem tra ton kebanh">
-    public ResultSet Check() {
+    // <editor-fold defaultstate="collapsed" desc="View all Kho">
+    public ResultSet Search() {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return null;
             } else {    
-                String sql="select MASP from kho where SOLUONGHIENTAI < MUCTRAN";
+                String sql="select sp.MASP,sp.TENSP,k.TOIDA,k.MUCTRAN,k.SOLUONGHIENTAI from kebanh k inner join sanpham sp on k.MASP = sp.MASP";
                 PreparedStatement pstm = c.prepareStatement(sql);
                 ResultSet rs = pstm.executeQuery();
                 return rs;
             }
         } catch (Exception e) {
             return null;
-        }
-    }
-    // </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc="Thay doi so luong hien tai khi nho hon muc tran">
-    public boolean MultiUpdate(ArrayList masp, ArrayList sl) {
-        try {
-            Connection c = getConnection();
-            if (c == null) {
-                //Connect database failure
-                return false;
-            } else {      
-                // <editor-fold defaultstate="collapsed" desc=" Them 1 sp vao kho ">
-                String sql = "Update kebanh set SOLUONGHIENTAI=? where MASP=?";
-                PreparedStatement pstm = c.prepareStatement(sql);
-                for(int i=0;i<masp.size();i++){
-                pstm.setInt(1,(int)sl.get(i)); 
-                pstm.setInt(2, (int)masp.get(i));
-                int roweffect = pstm.executeUpdate();
-                }
-                // </editor-fold>  
-                //Tra ve so dong sp vua them vao kho- 1(succeed) hoac 0(failure)
-                return true;
-            }
-        } catch (Exception e) {
-            return false;
         }
     }
     // </editor-fold>
