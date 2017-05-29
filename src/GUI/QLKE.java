@@ -9,6 +9,7 @@ package GUI;
  *
  * @author Admin
  */
+import BUS.BUSQLKEBANH;
 import BUS.BUSQLKHO;
 import BUS.BUSQLNHANVIEN;
 import java.awt.event.WindowAdapter;
@@ -30,7 +31,6 @@ public class QLKE extends javax.swing.JFrame {
     private boolean isShowing = false;
     private DefaultTableModel tableModel;
     private String[] colsName = {"STT", "Mã SP", "Tên SP", "Tối đa", "Mức trần", "Số lượng hiện tại"};
-    ArrayList<CHUCVU> al;
 
     public QLKE() {
         initComponents();
@@ -364,7 +364,7 @@ public class QLKE extends javax.swing.JFrame {
                int toida = Integer.parseInt(lbTD.getText());
                int muctran = Integer.parseInt(txbMT.getText());
                int sl = Integer.parseInt(txbSLHT.getText());
-                if (BUSQLKHO.getInstance().UpdateKho(masp,toida,muctran,sl)) {
+                if (BUSQLKEBANH.getInstance().UpdateKe(masp,toida,muctran,sl)) {
                     JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     btnSearchActionPerformed(evt);
                 } else {
@@ -418,7 +418,7 @@ public class QLKE extends javax.swing.JFrame {
             if (reply == JOptionPane.YES_OPTION) {
                 //xóa mặt hàng         
                 int masp = Integer.parseInt(lbMaSP.getText());
-                if (BUSQLKHO.getInstance().DeleteKho(masp)) {
+                if (BUSQLKEBANH.getInstance().DeleteKe(masp)) {
                     JOptionPane.showMessageDialog(null, "Xóa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     btnSearchActionPerformed(evt);
                 } else {
@@ -434,7 +434,7 @@ public class QLKE extends javax.swing.JFrame {
 
         tableModel.setRowCount(0);
 
-        ArrayList<String[]> al1 = BUSQLKHO.getInstance().Search(txbSearch.getText());
+        ArrayList<String[]> al1 = BUSQLKEBANH.getInstance().Search(txbSearch.getText());
         if (al1 != null) {
             Object count = 1;
             for (int i = 0; i < al1.size(); i++) {

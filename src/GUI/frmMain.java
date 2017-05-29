@@ -703,7 +703,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_buttTlbrKeActionPerformed
 
     private void buttTlbrTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrTKActionPerformed
-        new TimKiem().setVisible(true);
+     
     }//GEN-LAST:event_buttTlbrTKActionPerformed
 
     private void buttTlbrThKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrThKeActionPerformed
@@ -735,11 +735,11 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_iconThKeMouseClicked
 
     private void iconTKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconTKMouseClicked
-        new TimKiem().setVisible(true);
+        
     }//GEN-LAST:event_iconTKMouseClicked
 
     private void buttTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTKActionPerformed
-        new TimKiem().setVisible(true);
+        
     }//GEN-LAST:event_buttTKActionPerformed
 
     private void buttThKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttThKeActionPerformed

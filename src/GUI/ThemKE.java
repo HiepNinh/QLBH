@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import BUS.BUSQLKEBANH;
 import BUS.BUSQLKHO;
 import BUS.BUSQLSANPHAM;
 import java.awt.event.WindowAdapter;
@@ -241,7 +242,7 @@ public class ThemKE extends javax.swing.JFrame {
                 int toida = Integer.parseInt(txbTD.getText());
                 int muctran = Integer.parseInt(txbMT.getText());
                 int sl = Integer.parseInt(txbSLHT.getText());
-                if (BUSQLKHO.getInstance().InsertKho(masp, toida, muctran, sl)) {
+                if (BUSQLKEBANH.getInstance().InsertKe(masp, toida, muctran, sl)) {
                     JOptionPane.showMessageDialog(null, "Thêm thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     LoadData();
                 } else {

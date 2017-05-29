@@ -30,7 +30,6 @@ public class QLKHO extends javax.swing.JFrame {
     private boolean isShowing = false;
     private DefaultTableModel tableModel;
     private String[] colsName = {"STT", "Mã SP", "Tên SP", "Tối đa", "Mức trần", "Số lượng hiện tại"};
-    ArrayList<CHUCVU> al;
 
     public QLKHO() {
         initComponents();
