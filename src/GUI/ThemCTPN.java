@@ -6,6 +6,7 @@
 package GUI;
 
 import BUS.BUSQLHOADON;
+import BUS.BUSQLPHIEUNHAP;
 import BUS.BUSQLSANPHAM;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -160,7 +161,7 @@ public class ThemCTPN extends javax.swing.JFrame {
 
         lblThemCTHD.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblThemCTHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/blog_add.png"))); // NOI18N
-        lblThemCTHD.setText("Thêm CTHD");
+        lblThemCTHD.setText("Thêm CTPN");
         lblThemCTHD.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -228,7 +229,7 @@ public class ThemCTPN extends javax.swing.JFrame {
         else{
             int sl = Integer.parseInt(txbSL.getText());
             int x = cbTenSP.getSelectedIndex();
-        if(BUSQLHOADON.getInstance().InsertCTHD(QuanLyHoaDon.mahd, al.get(x).getMasp(), sl))
+        if(BUSQLPHIEUNHAP.getInstance().InsertCTPN(QuanLyPhieuNhap.mapn, al.get(x).getMasp(), sl))
         {
             JOptionPane.showMessageDialog(null, "Thêm thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             Clear();

@@ -30,46 +30,45 @@ public class DAOQLPHIEUNHAP {
         return instance;
     }
     // </editor-fold>
-/*
-    // <editor-fold defaultstate="collapsed" desc=" Them PN ">
-    public boolean InsertHD(Date ngay,String NCC, float tongtien, ArrayList masp, ArrayList soluong) {
+    
+    // <editor-fold defaultstate="collapsed" desc=" Them PhieuNhap ">
+    public boolean Insert(Date ngay,String ncc, float tongtien, ArrayList masp, ArrayList soluong) {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return false;
             } else {
-                // <editor-fold defaultstate="collapsed" desc=" Them 1 hoadon ">
-                String sql = "insert into hoadon(MAKH,MANV,NGAYHD,TONGTIEN) values(?,?,?,?)";
+                // <editor-fold defaultstate="collapsed" desc=" Them 1 phieunhap ">
+                String sql = "insert into phieunhap(MANV,NGAYNHAP,NCC,TONGTIEN) values(?,?,?,?)";
                 PreparedStatement pstm = c.prepareStatement(sql);
-                pstm.setInt(1, makh);
-                pstm.setInt(2, User.getInstance().getManv());
-                pstm.setDate(3, ngay);
+                pstm.setInt(1, User.getInstance().getManv());
+                pstm.setDate(2, ngay);
+                pstm.setString(3, ncc);
                 pstm.setFloat(4, tongtien);
                 int roweffect = pstm.executeUpdate();
                 // </editor-fold>
 
-                // <editor-fold defaultstate="collapsed" desc=" Lay ra id cua hoadon vua nhap ">
-                sql = "select MAHD from hoadon where MANV = ? and MAKH = ? and NGAYHD = ? and TONGTIEN =?";
+                // <editor-fold defaultstate="collapsed" desc=" Lay ra id cua phieunhap vua nhap ">
+                sql = "select MAPN from phieunhap where MANV = ? and NGAYNHAP = ? and TONGTIEN =?";
                 pstm = c.prepareStatement(sql);
                 pstm.setInt(1, User.getInstance().getManv());
-                pstm.setInt(2, makh);
-                pstm.setDate(3, ngay);
-                pstm.setFloat(4, tongtien);
+                pstm.setDate(2, ngay);
+                pstm.setFloat(3, tongtien);
                 ResultSet rs = pstm.executeQuery();
-                int mahd = -1;
+                int mapn = -1;
                 if (rs.next()) {
-                    mahd = rs.getInt(1);
+                    mapn = rs.getInt(1);
                 }
                 // </editor-fold>
-
-                // <editor-fold defaultstate="collapsed" desc=" Them vao cac ctsp cua phieu thu nhap vua them ">
+                
+                // <editor-fold defaultstate="collapsed" desc=" Them vao cac ctpn cua phieu thu nhap vua them ">
                 for (int i = 0; i < masp.size(); i++) {
                     int ma = (int) masp.get(i);
                     int sl = (int) soluong.get(i);
-                    String query = "insert into cthd value(?,?,?)";
+                    String query = "insert into ctphieunhap value(?,?,?)";
                     PreparedStatement pstmex = c.prepareStatement(query);
-                    pstmex.setInt(1, mahd);
+                    pstmex.setInt(1, mapn);
                     pstmex.setInt(2, ma);
                     pstmex.setInt(3, sl);
                     pstmex.executeUpdate();
@@ -84,19 +83,20 @@ public class DAOQLPHIEUNHAP {
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc=" Cap nhat HOADON ">
-    public boolean UpdateHD(int mahd, Date ngay) {
+    // <editor-fold defaultstate="collapsed" desc=" Cap nhat PHIEUNHAP ">
+    public boolean Update(int mapn, Date ngay, String NCC) {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return false;
             } else {
-                // <editor-fold defaultstate="collapsed" desc=" Update trong hoadon ">
-                String query = "Update hoadon set NGAYHD=? where MAHD=?";
+                // <editor-fold defaultstate="collapsed" desc=" Update trong phieunhap ">
+                String query = "Update phieunhap set NGAYNHAP = ?, NCC = ? where MAPN = ?";
                 PreparedStatement pstm = c.prepareStatement(query);
                 pstm.setDate(1, ngay);
-                pstm.setInt(2, mahd);
+                pstm.setString(2, NCC);
+                pstm.setInt(3, mapn);
                 int roweffect = pstm.executeUpdate();
                 return true;
                 // </editor-fold>
@@ -107,28 +107,28 @@ public class DAOQLPHIEUNHAP {
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc=" Xoa HOADON ">
-    public boolean DeleteHD(int mahd) {
+    // <editor-fold defaultstate="collapsed" desc=" Xoa PHIEUNHAP ">
+    public boolean Delete(int mapn) {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return false;
             } else {
-                //Kiem tra xem hoadon da co cthd chua
-                String query = "select * from cthd where MAHD = ?";
+                //Kiem tra xem phieunhap da co ctpn chua
+                String query = "select * from ctphieunhap where MAPN = ?";
                 PreparedStatement pstm = c.prepareStatement(query);
-                pstm.setInt(1, mahd);
+                pstm.setInt(1, mapn);
                 ResultSet rs = pstm.executeQuery();
                 if (rs.next()) {
-                    String sql = "delete from cthd where MAHD = ?";
+                    String sql = "delete from ctphieunhap where MAPN = ?";
                     pstm = c.prepareStatement(sql);
-                    pstm.setInt(1, mahd);
+                    pstm.setInt(1, mapn);
                     int rows = pstm.executeUpdate();
                 }
-                query = "delete from hoadon where MAHD =?";
+                query = "delete from phieunhap where MAPN =?";
                 pstm = c.prepareStatement(query);
-                pstm.setInt(1, mahd);
+                pstm.setInt(1, mapn);
                 int rows2 = pstm.executeUpdate();
                 //Delete succees
                 return true;
@@ -140,18 +140,18 @@ public class DAOQLPHIEUNHAP {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc=" Cap nhat TONGTIEN trong HOADON">
-    public boolean UpdateTT(int mahd, float tongtien) {
+    public boolean UpdateTT(int mapn, float tongtien) {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return false;
             } else {
-                // <editor-fold defaultstate="collapsed" desc=" Update trong hoadon ">
-                String query = "Update hoadon set TONGTIEN=? where MAHD=?";
+                // <editor-fold defaultstate="collapsed" desc=" Update trong phieunhap ">
+                String query = "Update phieunhap set TONGTIEN=? where MAPN=?";
                 PreparedStatement pstm = c.prepareStatement(query);
                 pstm.setFloat(1, tongtien);
-                pstm.setInt(2, mahd);
+                pstm.setInt(2, mapn);
                 int roweffect = pstm.executeUpdate();
                 return true;
                 // </editor-fold>
@@ -162,18 +162,18 @@ public class DAOQLPHIEUNHAP {
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc=" Sửa CHITIETHOADON ">
-    public boolean UpdateCTHD(int mahd, int masp, int sl) {
+    // <editor-fold defaultstate="collapsed" desc=" Sửa ctpn ">
+    public boolean UpdateCTPN(int mapn, int masp, int sl) {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return false;
             } else {
-                String query = "update cthd set SLMUA = ? where MAHD = ? and MASP = ?";
+                String query = "update ctphieunhap set SLNHAP = ? where MAPN = ? and MASP = ?";
                 PreparedStatement pstmex = c.prepareStatement(query);
                 pstmex.setInt(1, sl);
-                pstmex.setInt(2, mahd);
+                pstmex.setInt(2, mapn);
                 pstmex.setInt(3, masp);
                 pstmex.executeUpdate();
                 //Tra ve so dong sp vua them vao kho- 1(succeed) hoac 0(failure)
@@ -185,17 +185,17 @@ public class DAOQLPHIEUNHAP {
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc=" Xóa CHITIETHOADON ">
-    public boolean DeleteCTHD(int mahd, int masp) {
+    // <editor-fold defaultstate="collapsed" desc=" Xóa ctpn ">
+    public boolean DeleteCTPN(int mapn, int masp) {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return false;
             } else {
-                String query = "delete from cthd where MAHD = ? and MASP = ?";
+                String query = "delete from ctphieunhap where MAPN = ? and MASP = ?";
                 PreparedStatement pstmex = c.prepareStatement(query);
-                pstmex.setInt(1, mahd);
+                pstmex.setInt(1, mapn);
                 pstmex.setInt(2, masp);
                 pstmex.executeUpdate();
                 //Tra ve so dong sp vua them vao kho- 1(succeed) hoac 0(failure)
@@ -207,17 +207,17 @@ public class DAOQLPHIEUNHAP {
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc=" Them CHITIETHOADON ">
-    public boolean InsertCTHD(int mahd, int masp, int sl) {
+    // <editor-fold defaultstate="collapsed" desc=" Them ctpn ">
+    public boolean InsertCTPN(int mapn, int masp, int sl) {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return false;
             } else {
-                String query = "insert into cthd value(?,?,?)";
+                String query = "insert into ctphieunhap value(?,?,?)";
                 PreparedStatement pstmex = c.prepareStatement(query);
-                pstmex.setInt(1, mahd);
+                pstmex.setInt(1, mapn);
                 pstmex.setInt(2, masp);
                 pstmex.setInt(3, sl);
                 pstmex.executeUpdate();
@@ -238,7 +238,7 @@ public class DAOQLPHIEUNHAP {
                 //Connect database failure
                 return null;
             } else {
-                String sql = "select v.MAHD,v.TENKH,v.TENNV,V.NGAYHD,v.TONGTIEN,v.MAKH,v.MANV from vwhoadon v";
+                String sql = "select v.MAPN, v.MANV, v.TENNV,v.NGAYNHAP, v.NCC,v.TONGTIEN from vwphieunhap v";
                 PreparedStatement pstm = c.prepareStatement(sql);
                 ResultSet rs = pstm.executeQuery();
                 return rs;
@@ -249,17 +249,17 @@ public class DAOQLPHIEUNHAP {
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc=" View all CTHD">
-    public ResultSet SearchCT(int mahd) {
+    // <editor-fold defaultstate="collapsed" desc=" View all ctpn">
+    public ResultSet SearchCT(int mapn) {
         try {
             Connection c = getConnection();
             if (c == null) {
                 //Connect database failure
                 return null;
             } else {
-                String sql = "select v.MASP,v.TENSP,v.SLMUA,v.DONGIA from vwcthd v where MAHD = ?";
+                String sql = "select v.MASP, v.TENSP, v.SLNHAP, v.DONGIA from vwctpn v where MAPN = ?";
                 PreparedStatement pstm = c.prepareStatement(sql);
-                pstm.setInt(1, mahd);
+                pstm.setInt(1, mapn);
                 ResultSet rs = pstm.executeQuery();
                 return rs;
             }
@@ -268,5 +268,4 @@ public class DAOQLPHIEUNHAP {
         }
     }
     // </editor-fold>
-*/
 }

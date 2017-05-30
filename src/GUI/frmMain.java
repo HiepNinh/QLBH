@@ -39,14 +39,15 @@ public class frmMain extends javax.swing.JFrame {
         iconThKe = new javax.swing.JLabel();
         buttNV = new javax.swing.JButton();
         iconHD = new javax.swing.JLabel();
-        buttThKe = new javax.swing.JButton();
+        btnThongKe = new javax.swing.JButton();
         iconBanh = new javax.swing.JLabel();
         buttHD = new javax.swing.JButton();
         buttKho = new javax.swing.JButton();
-        buttTK = new javax.swing.JButton();
+        btnNhap = new javax.swing.JButton();
         buttKe = new javax.swing.JButton();
         iconKho = new javax.swing.JLabel();
         iconKe = new javax.swing.JLabel();
+        btnXuat = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuDanhMuc = new javax.swing.JMenu();
         jMenuItemBanh = new javax.swing.JMenuItem();
@@ -314,10 +315,10 @@ public class frmMain extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(11, 51, 0, 0);
         jPanelKhungChucNang.add(iconHD, gridBagConstraints);
 
-        buttThKe.setText("Thống kê");
-        buttThKe.addActionListener(new java.awt.event.ActionListener() {
+        btnThongKe.setText("Thống kê");
+        btnThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttThKeActionPerformed(evt);
+                btnThongKeActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -325,7 +326,7 @@ public class frmMain extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 12;
         gridBagConstraints.insets = new java.awt.Insets(6, 41, 11, 0);
-        jPanelKhungChucNang.add(buttThKe, gridBagConstraints);
+        jPanelKhungChucNang.add(btnThongKe, gridBagConstraints);
 
         iconBanh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/Box-03-Cake-Cherry-icon.png"))); // NOI18N
         iconBanh.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -365,10 +366,10 @@ public class frmMain extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 42, 0, 0);
         jPanelKhungChucNang.add(buttKho, gridBagConstraints);
 
-        buttTK.setText("Tìm kiếm");
-        buttTK.addActionListener(new java.awt.event.ActionListener() {
+        btnNhap.setText("Phiếu Nhập");
+        btnNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttTKActionPerformed(evt);
+                btnNhapActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -376,7 +377,7 @@ public class frmMain extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 16;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 11, 0);
-        jPanelKhungChucNang.add(buttTK, gridBagConstraints);
+        jPanelKhungChucNang.add(btnNhap, gridBagConstraints);
 
         buttKe.setText("Kệ bánh");
         buttKe.addActionListener(new java.awt.event.ActionListener() {
@@ -414,6 +415,17 @@ public class frmMain extends javax.swing.JFrame {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(31, 50, 0, 0);
         jPanelKhungChucNang.add(iconKe, gridBagConstraints);
+
+        btnXuat.setText("Phiếu Xuất");
+        btnXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        jPanelKhungChucNang.add(btnXuat, gridBagConstraints);
 
         jMenuDanhMuc.setText("Danh mục");
 
@@ -569,7 +581,7 @@ public class frmMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -671,7 +683,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemPhieuNhapActionPerformed
 
     private void jMenuItemQLXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemQLXuatActionPerformed
-        new QuanLyPhieuXuat().setVisible(true);
+        
     }//GEN-LAST:event_jMenuItemQLXuatActionPerformed
 
     private void jMenuItemThemBanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemThemBanhActionPerformed
@@ -679,11 +691,11 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemThemBanhActionPerformed
 
     private void jMenuItemNhapBanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNhapBanhActionPerformed
-        new LapPhieuNhap().setVisible(true);
+        new ThemPhieuNhap().setVisible(true);
     }//GEN-LAST:event_jMenuItemNhapBanhActionPerformed
 
     private void jMenuItemXuatBanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemXuatBanhActionPerformed
-        new XuatBanh().setVisible(true);
+       
     }//GEN-LAST:event_jMenuItemXuatBanhActionPerformed
 
     private void jMenuItemKiemKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemKiemKhoActionPerformed
@@ -735,20 +747,24 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_iconThKeMouseClicked
 
     private void iconTKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconTKMouseClicked
-        
+        new ThongKe().setVisible(true);
     }//GEN-LAST:event_iconTKMouseClicked
 
-    private void buttTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTKActionPerformed
-        
-    }//GEN-LAST:event_buttTKActionPerformed
+    private void btnNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapActionPerformed
+         new QuanLyPhieuNhap().setVisible(true);
+    }//GEN-LAST:event_btnNhapActionPerformed
 
-    private void buttThKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttThKeActionPerformed
-         new ThongKe().setVisible(true);
-    }//GEN-LAST:event_buttThKeActionPerformed
+    private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
+          new ThongKe().setVisible(true);
+    }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void buttKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttKeActionPerformed
         new QLKE().setVisible(true);
     }//GEN-LAST:event_buttKeActionPerformed
+
+    private void btnXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatActionPerformed
+        new QuanLyPhieuXuat().setVisible(true);
+    }//GEN-LAST:event_btnXuatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -787,14 +803,15 @@ public class frmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNhap;
+    private javax.swing.JButton btnThongKe;
+    private javax.swing.JButton btnXuat;
     private javax.swing.JButton buttBanh;
     private javax.swing.JButton buttHD;
     private javax.swing.JButton buttKH;
     private javax.swing.JButton buttKe;
     private javax.swing.JButton buttKho;
     private javax.swing.JButton buttNV;
-    private javax.swing.JButton buttTK;
-    private javax.swing.JButton buttThKe;
     private javax.swing.JButton buttTlbrBanh;
     private javax.swing.JButton buttTlbrGD;
     private javax.swing.JButton buttTlbrHD;

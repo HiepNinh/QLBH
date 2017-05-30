@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package GUI;
+import BUS.BUSQLPHIEUNHAP;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -20,9 +23,9 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
     private  float Tongtien;
     
     private DefaultTableModel tableModelPN;
-    private String[] colsName = {};
+    private String[] colsName = {"STT","Mã PN", "Mã NV", "Tên NV", "Ngày nhập","Nhà cung cấp", "Tổng tiền"};
     private DefaultTableModel tableModelCT;
-    private String[] colsNameCT = {};
+    private String[] colsNameCT = {"STT","Mã SP", "Tên SP", "SL Nhập", "Thành tiền"};
     
     ArrayList<SANPHAM> al;
     ArrayList<String[]> alrow;
@@ -48,10 +51,17 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
    
     public void ClearPN(){
         this.lbMa.setText("NA");
-        this.txbMaNV.setText("");
+        this.txbMaNV.setText("NA");
         this.txbTenNV.setText("");
         this.dpNgayNhap.setDate(new Date());
         this.lbTong.setText("");
+    }
+    
+    public void tableCT()
+    {
+        tableModelCT = new DefaultTableModel();
+        tableModelCT.setColumnIdentifiers(colsNameCT);
+        JtableCTPN.setModel(tableModelCT);
     }
     
     public void ClearCTPN(){
@@ -117,7 +127,7 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
         btnHuy = new javax.swing.JButton();
         txbDG = new javax.swing.JTextField();
         txbSL = new javax.swing.JTextField();
-        txbSearch1 = new javax.swing.JTextField();
+        txbTenSP = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         lblMaPN = new javax.swing.JLabel();
         lblNgayNhap = new javax.swing.JLabel();
@@ -130,10 +140,10 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
         txbTenNV = new javax.swing.JTextField();
         btnXoa = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
-        dpNgayNhap = new com.toedter.calendar.JDateChooser();
         lbTong = new javax.swing.JLabel();
         lbMa = new javax.swing.JLabel();
         cbNCC = new javax.swing.JComboBox<>();
+        dpNgayNhap = new com.toedter.calendar.JDateChooser();
         jPanel5 = new javax.swing.JPanel();
         btnLapPN = new javax.swing.JButton();
         lblQuanLyPN = new javax.swing.JLabel();
@@ -148,7 +158,6 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
         setResizable(false);
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách phiếu nhập"));
-        jScrollPane1.setMinimumSize(null);
 
         JtablePN.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,13 +167,16 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
 
             }
         ));
-        JtablePN.setPreferredSize(new java.awt.Dimension(100, 0));
         JtablePN.getTableHeader().setReorderingAllowed(false);
+        JtablePN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                JtablePNMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(JtablePN);
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Chi tiết phiếu nhập"));
         jScrollPane2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
-        jScrollPane2.setMinimumSize(null);
 
         JtableCTPN.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -175,6 +187,11 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
             }
         ));
         JtableCTPN.getTableHeader().setReorderingAllowed(false);
+        JtableCTPN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JtableCTPNMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(JtableCTPN);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
@@ -291,15 +308,16 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(11, 18, 0, 196);
         jPanel1.add(txbSL, gridBagConstraints);
 
-        txbSearch1.setMinimumSize(new java.awt.Dimension(300, 20));
-        txbSearch1.setPreferredSize(new java.awt.Dimension(300, 20));
+        txbTenSP.setEnabled(false);
+        txbTenSP.setMinimumSize(new java.awt.Dimension(300, 20));
+        txbTenSP.setPreferredSize(new java.awt.Dimension(300, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
-        jPanel1.add(txbSearch1, gridBagConstraints);
+        jPanel1.add(txbTenSP, gridBagConstraints);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Phiếu nhập"));
         jPanel2.setAutoscrolls(true);
@@ -423,18 +441,6 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(24, 18, 6, 0);
         jPanel2.add(btnSua, gridBagConstraints);
 
-        dpNgayNhap.setDateFormatString("dd-mm-yyyy");
-        dpNgayNhap.setEnabled(false);
-        dpNgayNhap.setFocusTraversalPolicyProvider(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 60;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 15, 0, 10);
-        jPanel2.add(dpNgayNhap, gridBagConstraints);
-
         lbTong.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbTong.setText("5000000");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -452,7 +458,7 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(11, 15, 0, 0);
         jPanel2.add(lbMa, gridBagConstraints);
 
-        cbNCC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D" }));
+        cbNCC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ABC", "XYZ", "BCS", "TTT" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 4;
@@ -460,6 +466,10 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(27, 15, 0, 10);
         jPanel2.add(cbNCC, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 0;
+        jPanel2.add(dpNgayNhap, gridBagConstraints);
 
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
@@ -530,19 +540,19 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 230, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 1563, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addContainerGap())))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -551,7 +561,7 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -570,7 +580,19 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHuyMouseClicked
 
     private void btnLapPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLapPNActionPerformed
-        new LapPhieuNhap().setVisible(true);
+        isShowing = true;
+       ThemPhieuNhap formThemPN = new ThemPhieuNhap();
+       formThemPN.addWindowListener( new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent we) {
+                        btnSearchActionPerformed(evt);
+                        ClearCTPN();
+                        isShowing = false;
+                        LoadButton();
+                    }
+                } );
+       LoadButton();
+       formThemPN.show();
     }//GEN-LAST:event_btnLapPNActionPerformed
 
     private void btnInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInActionPerformed
@@ -579,48 +601,199 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
        //sửa PN
+       //sửa hóa đơn
+       if(JtablePN.getSelectedRow() == -1)
+       {
+           JOptionPane.showMessageDialog(null, "Vui lòng chọn thông tin muốn sửa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+       }
+       else
+       {
+           Date date = this.dpNgayNhap.getDate();
+           java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+           if(BUSQLPHIEUNHAP.getInstance().Update(mapn, sqlDate, cbNCC.getSelectedItem().toString()))
+           {
+               JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+               btnSearchActionPerformed(evt);
+           }
+           else{
+               JOptionPane.showMessageDialog(null, "Sửa thất bại!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+           }
+       }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-      
+      // xóa hóa đơn
+       if(JtablePN.getSelectedRow() == -1)
+       {
+           JOptionPane.showMessageDialog(null, "Vui lòng chọn thông tin muốn xóa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+       }
+       else
+       {
+           int reply = JOptionPane.showConfirmDialog(null,"Bạn có chắc muốn xóa phiếu này?","Xóa phiếu nhập",JOptionPane.WARNING_MESSAGE);
+           if(reply == JOptionPane.YES_OPTION){
+            //xóa pn     
+            if(BUSQLPHIEUNHAP.getInstance().Delete(mapn))
+           {
+               JOptionPane.showMessageDialog(null, "Xóa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+               btnSearchActionPerformed(evt);
+           }
+           else{
+               JOptionPane.showMessageDialog(null, "Xóa thất bại!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+           }  
+        }
+       }
     }//GEN-LAST:event_btnXoaActionPerformed
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    public void LoadCTPN(int mapn)
+    {
+        Tongtien = 0;
+        tableModelCT.setRowCount(0);
        
+        alrowCT = BUSQLPHIEUNHAP.getInstance().SearchCT(mapn);
+      
+        if (alrowCT != null) {
+            Object count = 1;
+            for (int i = 0; i < alrowCT.size(); i++) {
+                String rows[] = new String[5];
+                rows[0] = count.toString();                      //STT
+                rows[1] = alrowCT.get(i)[0];                     //MaSP
+                rows[2] = alrowCT.get(i)[1];                     //TenSP
+                rows[3] = alrowCT.get(i)[2];                     //SLNHAP
+                int sl = Integer.parseInt(alrowCT.get(i)[2]);
+                float dg = Float.parseFloat(alrowCT.get(i)[3]);
+                Object tt = sl * dg;
+                rows[4] = tt.toString();                         //Tổng tiền
+                tableModelCT.addRow(rows);
+                //mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
+                count = (int)count + 1;
+                Tongtien += (float)tt;
+            }
+        }
+    }
+    
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+                //thêm cthd
+        isShowing = true;
+       ThemCTPN formThemCTPN = new ThemCTPN();
+       formThemCTPN.addWindowListener( new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent we) {
+                        LoadCTPN(mapn);
+                        isShowing = false;
+                        if(BUSQLPHIEUNHAP.getInstance().UpdateTT(mapn,Tongtien))
+                        {
+                            JOptionPane.showMessageDialog(null, "Load thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        LoadButton();
+                        btnSearchActionPerformed(evt);
+                    }
+                } );
+       LoadButton();
+       formThemCTPN.show();
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-        
+        if (JtableCTPN.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn thông tin muốn xóa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa?", "Xóa chi tiết phiếu nhập", JOptionPane.WARNING_MESSAGE);
+            if (reply == JOptionPane.YES_OPTION) {
+                //xóa cthd    
+                int row = JtableCTPN.getSelectedRow();
+                int masp = Integer.parseInt(JtableCTPN.getModel().getValueAt(row, 1).toString());
+                if (BUSQLPHIEUNHAP.getInstance().DeleteCTPN(mapn, masp)) {
+                    JOptionPane.showMessageDialog(null, "Xóa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    LoadCTPN(mapn);
+                    if(BUSQLPHIEUNHAP.getInstance().UpdateTT(mapn, Tongtien))
+                        {
+                            JOptionPane.showMessageDialog(null, "Load thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        LoadButton();
+                    btnSearchActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Xóa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_btnDelActionPerformed
 
     private void btnUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpActionPerformed
         // sửa pn
+        // sửa hóa đơn
+        if (JtableCTPN.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn thông tin muốn sửa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn sửa?", "Sửa chi tiết hóa đơn", JOptionPane.WARNING_MESSAGE);
+            if (reply == JOptionPane.YES_OPTION) {
+                //xóa cthd    
+                int row = JtableCTPN.getSelectedRow();
+                int masp = Integer.parseInt(JtableCTPN.getModel().getValueAt(row, 1).toString());
+                int sl = Integer.parseInt(txbSL.getText());
+                if (BUSQLPHIEUNHAP.getInstance().UpdateCTPN(mapn, masp, sl)) {
+                    JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    LoadCTPN(mapn);
+                    if(BUSQLPHIEUNHAP.getInstance().UpdateTT(mapn, Tongtien))
+                        {
+                            JOptionPane.showMessageDialog(null, "Load thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        LoadButton();
+                    btnSearchActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sửa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_btnUpActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-            //tìm kiếm
+               //tìm kiếm
         tableModelPN.setRowCount(0);
-
-        //alrow = BUSQLHOADON.getInstance().SearchSP(txbSearch.getText());
+ 
+        alrow = BUSQLPHIEUNHAP.getInstance().Search(txbSearch.getText());
+        
         if (alrow != null) {
             Object count = 1;
             for (int i = 0; i < alrow.size(); i++) {
-                String rows[] = new String[8];
+                String rows[] = new String[7];
                 rows[0] = count.toString();                    //STT
-                rows[1] = alrow.get(i)[0];                     //MaHD
-                rows[2] = alrow.get(i)[1];                     //TenKH
+                rows[1] = alrow.get(i)[0];                     //MaPN
+                rows[2] = alrow.get(i)[1];                     //MANV
                 rows[3] = alrow.get(i)[2];                     //TENNV
-                rows[4] = alrow.get(i)[3];                     //NgayHD
-                rows[5] = alrow.get(i)[4];                     //Tổng tiền
+                rows[4] = alrow.get(i)[3];                     //Ngaylap
+                rows[5] = alrow.get(i)[4];                     //NCC
+                rows[6] = alrow.get(i)[5];                     //Tổng tiền
                 tableModelPN.addRow(rows);
                 //mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
                 count = (int)count + 1;
             }
         }
          DisableComponent();
-         ClearPN();
+         tableCT();
          ClearCTPN();
+         ClearPN();
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void JtablePNMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtablePNMousePressed
+        // TODO add your handling code here:
+        int row = JtablePN.getSelectedRow();
+        lbMa.setText(JtablePN.getModel().getValueAt(row, 1).toString());
+        txbMaNV.setText(JtablePN.getModel().getValueAt(row, 2).toString());
+        txbTenNV.setText(JtablePN.getModel().getValueAt(row, 3).toString());
+        //dpNgayHD.setDateFormatString(JtableHD.getModel().getValueAt(row, 4).toString());
+        cbNCC.setSelectedItem(JtablePN.getModel().getValueAt(row, 5).toString());
+        lbTong.setText(JtablePN.getModel().getValueAt(row, 6).toString());
+
+        mapn = Integer.parseInt(alrow.get(row)[0]);
+        EnableComponent();
+        LoadCTPN(mapn);
+    }//GEN-LAST:event_JtablePNMousePressed
+
+    private void JtableCTPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtableCTPNMouseClicked
+        int row = JtableCTPN.getSelectedRow();
+        this.txbTenSP.setText(JtableCTPN.getModel().getValueAt(row, 2).toString());
+        this.txbSL.setText(JtableCTPN.getModel().getValueAt(row, 3).toString());
+        this.txbDG.setText(alrowCT.get(row)[3]);
+    }//GEN-LAST:event_JtableCTPNMouseClicked
 
     /**
      * @param args the command line arguments
@@ -697,7 +870,7 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
     private javax.swing.JTextField txbMaNV;
     private javax.swing.JTextField txbSL;
     private javax.swing.JTextField txbSearch;
-    private javax.swing.JTextField txbSearch1;
     private javax.swing.JTextField txbTenNV;
+    private javax.swing.JTextField txbTenSP;
     // End of variables declaration//GEN-END:variables
 }

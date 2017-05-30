@@ -6,7 +6,11 @@
 package BUS;
 
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import qlbh.DAOQLPHIEUNHAP;
 import qlbh.DAOQLSANPHAM;
 import qlbh.DAOQLKHO;
@@ -27,101 +31,100 @@ public class BUSQLPHIEUNHAP {
         return instance;
     }
     // </editor-fold>
-    /*
-    // <editor-fold defaultstate="collapsed" desc=" Them 1 hoadon ">
-    public boolean Insert(int makh,Date ngay,float tt, ArrayList masp, ArrayList sl)
+    
+    // <editor-fold defaultstate="collapsed" desc=" Them 1 pn ">
+    public boolean Insert(Date ngay, String ncc,float tt, ArrayList masp, ArrayList sl)
     {
-        return DAOQLHOADON.getInstance().InsertHD(makh, ngay, tt, masp, sl);
+        return DAOQLPHIEUNHAP.getInstance().Insert(ngay,ncc, tt, masp, sl);
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Sua 1 hoadon ">
-    public boolean Update(int mahd,Date ngay)
+    // <editor-fold defaultstate="collapsed" desc=" Sua 1 pn ">
+    public boolean Update(int mapn,Date ngay,String ncc)
     {
-        return DAOQLHOADON.getInstance().UpdateHD(mahd,ngay);      
+        return DAOQLPHIEUNHAP.getInstance().Update(mapn,ngay,ncc);      
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Xoa 1 hd ">
-    public boolean Delete(int mahd)
+    // <editor-fold defaultstate="collapsed" desc=" Xoa 1 pn ">
+    public boolean Delete(int mapn)
     {
-       return DAOQLHOADON.getInstance().DeleteHD(mahd);
+       return DAOQLPHIEUNHAP.getInstance().Delete(mapn);
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Update tong tien trong hd ">
-    public boolean UpdateTT(int mahd, float tt)
+    // <editor-fold defaultstate="collapsed" desc=" Update tong tien trong pn ">
+    public boolean UpdateTT(int mapn, float tt)
     { 
-            return DAOQLHOADON.getInstance().UpdateTT(mahd, tt);
+            return DAOQLPHIEUNHAP.getInstance().UpdateTT(mapn, tt);
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Sửa 1 cthd ">
-    public boolean UpdateCTHD(int mahd, int masp, int sl)
+    // <editor-fold defaultstate="collapsed" desc=" Sửa 1 ctpn ">
+    public boolean UpdateCTPN(int mapn, int masp, int sl)
     {
-            return DAOQLHOADON.getInstance().UpdateCTHD(mahd, masp, sl);
+            return DAOQLPHIEUNHAP.getInstance().UpdateCTPN(mapn, masp, sl);
     }
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Xoa 1 cthd ">
-    public boolean DeleteCTHD(int mahd, int masp)
+    public boolean DeleteCTPN(int mapn, int masp)
     {
-            return DAOQLHOADON.getInstance().DeleteCTHD(mahd, masp);
+            return DAOQLPHIEUNHAP.getInstance().DeleteCTPN(mapn, masp);
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" Them 1 cthd ">
-    public boolean InsertCTHD(int mahd, int masp,int sl)
+    // <editor-fold defaultstate="collapsed" desc=" Them 1 ctpn ">
+    public boolean InsertCTPN(int mapn, int masp,int sl)
     {
-            return DAOQLHOADON.getInstance().InsertCTHD(mahd, masp, sl);
+            return DAOQLPHIEUNHAP.getInstance().InsertCTPN(mapn, masp, sl);
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" View  hoadon ">
-    public ArrayList<String[]> SearchSP(String hint)
+    // <editor-fold defaultstate="collapsed" desc=" View  pn ">
+    public ArrayList<String[]> Search(String hint)
     {
-        ResultSet src = DAOQLHOADON.getInstance().Search();
+        ResultSet src = DAOQLPHIEUNHAP.getInstance().Search();
         
         ArrayList<String[]> al = new ArrayList<String[]>();
+        
         try {
             while(src.next())
             {
-                String[] s = new String[7];
-                if(src.getString(2).contains(hint) || src.getString(3).contains(hint))
+                String[] s = new String[6];
+                if(src.getString(3).contains(hint) || src.getString(5).contains(hint))
                 {
-                    //MAHD
+                    //MAPN
                     Object ob1 = src.getInt(1);
                     s[0]=ob1.toString();
-                    //TENKH
-                    s[1]=src.getString(2);
+                    //MANV
+                    Object ob2 = src.getInt(2);
+                    s[1]=ob2.toString();
                     //TENNV
                     s[2]=src.getString(3);
-                    //NGAYHD
-                    Object ob2 = src.getDate(4);
-                    s[3]=ob2.toString();
+                    //NGAYNHAP
+                    Object ob3 = src.getDate(4);
+                    s[3]=ob3.toString();
+                    //NCC
+                    s[4] = src.getString(5);
                     //TONGTIEN
-                    Object ob3 = src.getFloat(5);
-                    s[4]=ob3.toString();
-                    //MAKH
-                    Object ob4 = src.getInt(6);
-                    s[5]=ob4.toString(); 
-                    //MANV
-                    Object ob5 = src.getInt(7);
-                    s[6]=ob5.toString();
+                    Object ob4 = src.getFloat(6);
+                    s[5]=ob4.toString();
+                  
                     al.add(s);
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(BUSQLHOADON.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BUSQLPHIEUNHAP.class.getName()).log(Level.SEVERE, null, ex);
         }
         return al;
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc=" View  chi tiet hoadon ">
-    public ArrayList<String[]> SearchCT(int mahd)
+    // <editor-fold defaultstate="collapsed" desc=" View  chi tiet pn ">
+    public ArrayList<String[]> SearchCT(int mapn)
     {
-        ResultSet src = DAOQLHOADON.getInstance().SearchCT(mahd);
+        ResultSet src = DAOQLPHIEUNHAP.getInstance().SearchCT(mapn);
         
         ArrayList<String[]> al = new ArrayList<String[]>();
        
@@ -148,5 +151,4 @@ public class BUSQLPHIEUNHAP {
         return al;
     }
     // </editor-fold>
-*/
 }

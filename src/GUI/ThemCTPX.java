@@ -6,12 +6,16 @@
 package GUI;
 
 import BUS.BUSQLHOADON;
+import BUS.BUSQLKHO;
+import BUS.BUSQLPHIEUNHAP;
+import BUS.BUSQLPHIEUXUAT;
 import BUS.BUSQLSANPHAM;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import qlbh.KHO;
 import qlbh.SANPHAM;
 
 /**
@@ -20,8 +24,8 @@ import qlbh.SANPHAM;
  */
 public class ThemCTPX extends javax.swing.JFrame {
 
-    ArrayList<SANPHAM> al;
-    int mahd;
+    ArrayList<KHO> al;
+    int mapx;
     /**
      * Creates new form ThemBanh
      */
@@ -40,9 +44,9 @@ public class ThemCTPX extends javax.swing.JFrame {
     
     public void LoadComponent() {
         try {
-            al = BUSQLSANPHAM.getInstance().GetAllSP();
+            al = BUSQLKHO.getInstance().GetAllSPKHO();
             for (int i = 0; i < al.size(); i++) {
-                 this.cbTenSP.addItem(al.get(i).getTensp());
+                this.cbTenSP.addItem(al.get(i).getTen());
             }
         } catch (SQLException ex) {
             Logger.getLogger(ThemCTPX.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,10 +65,8 @@ public class ThemCTPX extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        lblDonGia = new javax.swing.JLabel();
         lblSoLuong = new javax.swing.JLabel();
         lblTenBanh = new javax.swing.JLabel();
-        txbDG = new javax.swing.JTextField();
         txbSL = new javax.swing.JTextField();
         cbTenSP = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
@@ -81,14 +83,6 @@ public class ThemCTPX extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        lblDonGia.setText("Đơn giá:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 0);
-        jPanel1.add(lblDonGia, gridBagConstraints);
-
         lblSoLuong.setText("Số lượng:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -104,17 +98,6 @@ public class ThemCTPX extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 0);
         jPanel1.add(lblTenBanh, gridBagConstraints);
-
-        txbDG.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 100;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(txbDG, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
@@ -125,11 +108,6 @@ public class ThemCTPX extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbSL, gridBagConstraints);
 
-        cbTenSP.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbTenSPItemStateChanged(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -160,7 +138,7 @@ public class ThemCTPX extends javax.swing.JFrame {
 
         lblThemCTHD.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblThemCTHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/blog_add.png"))); // NOI18N
-        lblThemCTHD.setText("Thêm CTHD");
+        lblThemCTHD.setText("Thêm CTPN");
         lblThemCTHD.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -221,14 +199,19 @@ public class ThemCTPX extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if(cbTenSP.getSelectedItem() == null || txbSL.getText().equals("") || mahd == -1)
+        if(cbTenSP.getSelectedItem() == null || txbSL.getText().equals("") || mapx == -1)
         {
             JOptionPane.showMessageDialog(null, "Không thể để trống giá trị", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
             int sl = Integer.parseInt(txbSL.getText());
             int x = cbTenSP.getSelectedIndex();
-        if(BUSQLHOADON.getInstance().InsertCTHD(QuanLyHoaDon.mahd, al.get(x).getMasp(), sl))
+        if(sl > al.get(x).getSlht())
+           {
+               JOptionPane.showMessageDialog(null, "Số lượng tối đa là: " + al.get(x).getSlht(), "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+           }
+        else{
+        if(BUSQLPHIEUXUAT.getInstance().InsertCTPX(QuanLyPhieuXuat.mapx, al.get(x).getMasp(), sl))
         {
             JOptionPane.showMessageDialog(null, "Thêm thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             Clear();
@@ -237,13 +220,8 @@ public class ThemCTPX extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Thêm thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         }
         }
+        }
     }//GEN-LAST:event_btnThemActionPerformed
-
-    private void cbTenSPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTenSPItemStateChanged
-        // TODO add your handling code here:
-         Object dg = al.get(this.cbTenSP.getSelectedIndex()).getDg();
-        this.txbDG.setText(dg.toString());
-    }//GEN-LAST:event_cbTenSPItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -274,6 +252,10 @@ public class ThemCTPX extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -290,11 +272,9 @@ public class ThemCTPX extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblDonGia;
     private javax.swing.JLabel lblSoLuong;
     private javax.swing.JLabel lblTenBanh;
     private javax.swing.JLabel lblThemCTHD;
-    private javax.swing.JTextField txbDG;
     private javax.swing.JTextField txbSL;
     // End of variables declaration//GEN-END:variables
 }

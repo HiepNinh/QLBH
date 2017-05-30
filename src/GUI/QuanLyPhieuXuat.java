@@ -4,51 +4,102 @@
  * and open the template in the editor.
  */
 package GUI;
+import BUS.BUSQLPHIEUNHAP;
+import BUS.BUSQLPHIEUXUAT;
+import static GUI.QuanLyPhieuNhap.mapn;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.*;
+import qlbh.SANPHAM;
 /**
  *
  * @author Admin
  */
 public class QuanLyPhieuXuat extends javax.swing.JFrame {
 
-    /**
-     * Creates new form QuanLyHoaDon
-     */
+    boolean isShowing = false;
+    private  float Tongtien;
     
-    boolean isAdding = false;
+    private DefaultTableModel tableModelPX;
+    private String[] colsName = {"STT","Mã PX", "Mã NV", "Tên NV", "Ngày xuất"};
+    private DefaultTableModel tableModelCT;
+    private String[] colsNameCT = {"STT","Mã SP", "Tên SP", "SL Xuất"};
     
+    ArrayList<SANPHAM> al;
+    ArrayList<String[]> alrow;
+    ArrayList<String[]> alrowCT;
+    DateFormat dateFormat;
+    
+    public static int mapx =-1;
     public QuanLyPhieuXuat() {
         initComponents();
-        LamMoi();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         this.setLocationRelativeTo(null);
+        ClearCom();
+        tableModelPX = new DefaultTableModel();
+        tableModelPX.setColumnIdentifiers(colsName);
+        JtablePX.setModel(tableModelPX);
+        
+        tableModelCT = new DefaultTableModel();
+        tableModelCT.setColumnIdentifiers(colsNameCT);
+        JtableCTPX.setModel(tableModelCT);
+        
+        DisableComponent();
     }
-
-    public void LamMoiTTPN(String mapn, String manv, String tennv, String ncc, Date ngnh, String tgt, String gc){
-        MaPN.setText(mapn);
-        MaNV.setText(manv);
-        TenNV.setText(tennv);
-        NCC.setSelectedItem(ncc);
-        NgayNhap.setDate(ngnh);
-        TongGiaTri.setText(tgt);
-        GhiChu.setText(gc);
+   
+    public void ClearPX(){
+        this.lbMa.setText("NA");
+        this.txbMaNV.setText("NA");
+        this.txbTenNV.setText("");
+        this.dpNgayNhap.setDate(new Date());
     }
     
-    public void LamMoiCTPN(String mabn, String ten, String dg, String sl){
-        MaBanh.setSelectedItem(mabn);
-        TenBanh.setText(ten);
-        DonGia.setText(dg);
-        SoLuong.setText(sl);
+    public void tableCT()
+    {
+        tableModelCT = new DefaultTableModel();
+        tableModelCT.setColumnIdentifiers(colsNameCT);
+        JtableCTPX.setModel(tableModelCT);
     }
     
-    public void LamMoi(){
-        LamMoiTTPN("-","","","",new Date(), "", "");
-        LamMoiCTPN("-","","","");
-        this.NoiDungTK.setText("");
-    ///////how to insert row
-    //    DefaultTableModel model = (DefaultTableModel)BangHD.getModel();
-    //   model.addRow(new Object[]{"HD006", "KH001", "NV0008",50000});
+    public void ClearCTPX(){
+        txbDG.setText("");
+        txbSL.setText("");
+    }
+    
+    public void ClearCom(){
+        
+        ClearPX();
+        ClearCTPX();
+        this.txbSearch.setText("");
+    }
+    
+    public void DisableComponent()
+    {
+        this.btnAdd.setEnabled(false);
+        this.btnDel.setEnabled(false);
+        this.btnUp.setEnabled(false);
+    }
+    
+    public void EnableComponent()
+    {
+        this.btnAdd.setEnabled(true);
+        this.btnDel.setEnabled(true);
+        this.btnUp.setEnabled(true);
+    }
+    
+    public void LoadButton()
+    {
+            this.btnIn.setEnabled(!isShowing);
+            this.btnLapPN.setEnabled(!isShowing);
+            this.btnSua.setEnabled(!isShowing);
+            this.btnXoa.setEnabled(!isShowing);
+            this.btnAdd.setEnabled(!isShowing);
+            this.btnDel.setEnabled(!isShowing);
+            this.btnUp.setEnabled(!isShowing);
     }
     
     
@@ -64,135 +115,93 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        BangPN = new javax.swing.JTable();
+        JtablePX = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        BangCTPN = new javax.swing.JTable();
+        JtableCTPX = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        lblMaSP = new javax.swing.JLabel();
         lblTenSP = new javax.swing.JLabel();
         lblDonGia = new javax.swing.JLabel();
         lblSoLuong = new javax.swing.JLabel();
-        buttThem = new javax.swing.JButton();
-        buttXoa = new javax.swing.JButton();
-        buttSua = new javax.swing.JButton();
-        buttHuy = new javax.swing.JButton();
-        TenBanh = new javax.swing.JTextField();
-        DonGia = new javax.swing.JTextField();
-        SoLuong = new javax.swing.JTextField();
-        MaBanh = new javax.swing.JComboBox<>();
+        btnAdd = new javax.swing.JButton();
+        btnDel = new javax.swing.JButton();
+        btnUp = new javax.swing.JButton();
+        btnHuy = new javax.swing.JButton();
+        txbDG = new javax.swing.JTextField();
+        txbSL = new javax.swing.JTextField();
+        txbTenSP = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         lblMaPN = new javax.swing.JLabel();
         lblNgayNhap = new javax.swing.JLabel();
-        lblNCC = new javax.swing.JLabel();
         lblMaNV = new javax.swing.JLabel();
         lblTenNV = new javax.swing.JLabel();
-        lblGhiChu = new javax.swing.JLabel();
-        buttInPN = new javax.swing.JButton();
-        lblTong = new javax.swing.JLabel();
-        MaNV = new javax.swing.JTextField();
-        TenNV = new javax.swing.JTextField();
-        buttXoaPN = new javax.swing.JButton();
-        buttSuaPN = new javax.swing.JButton();
-        NgayNhap = new com.toedter.calendar.JDateChooser();
-        TongGiaTri = new javax.swing.JLabel();
-        GhiChu = new javax.swing.JTextField();
-        MaPN = new javax.swing.JLabel();
-        NCC = new javax.swing.JComboBox<>();
+        btnIn = new javax.swing.JButton();
+        txbMaNV = new javax.swing.JTextField();
+        txbTenNV = new javax.swing.JTextField();
+        btnXoa = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        lbMa = new javax.swing.JLabel();
+        dpNgayNhap = new com.toedter.calendar.JDateChooser();
         jPanel5 = new javax.swing.JPanel();
-        buttLapPN = new javax.swing.JButton();
+        btnLapPN = new javax.swing.JButton();
         lblQuanLyPN = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jPanel4 = new javax.swing.JPanel();
-        buttTK = new javax.swing.JButton();
-        NoiDungTK = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        txbSearch = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý phiếu nhập");
         setAutoRequestFocus(false);
         setResizable(false);
-        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-                formWindowLostFocus(evt);
-            }
-        });
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách phiếu nhập"));
-        jScrollPane1.setMinimumSize(null);
 
-        BangPN.setModel(new javax.swing.table.DefaultTableModel(
+        JtablePX.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "STT", "Mã phiếu", "Ngày nhập", "Mã NV", "NCC", "Tổng"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        ));
+        JtablePX.getTableHeader().setReorderingAllowed(false);
+        JtablePX.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                JtablePXMousePressed(evt);
             }
         });
-        BangPN.setColumnSelectionAllowed(true);
-        BangPN.setPreferredSize(new java.awt.Dimension(100, 0));
-        jScrollPane1.setViewportView(BangPN);
-        BangPN.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(JtablePX);
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Chi tiết phiếu nhập"));
         jScrollPane2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
-        jScrollPane2.setMinimumSize(null);
 
-        BangCTPN.setModel(new javax.swing.table.DefaultTableModel(
+        JtableCTPX.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã bánh", "Tên", "Đơn giá", "Số lượng", "Thành tiền"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+            }
+        ));
+        JtableCTPX.getTableHeader().setReorderingAllowed(false);
+        JtableCTPX.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JtableCTPXMouseClicked(evt);
             }
         });
-        BangCTPN.setColumnSelectionAllowed(true);
-        jScrollPane2.setViewportView(BangCTPN);
-        BangCTPN.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(JtableCTPX);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
         jPanel1.setAutoscrolls(true);
         jPanel1.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        lblMaSP.setText("Mã sản phẩm:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(188, 237, 0, 0);
-        jPanel1.add(lblMaSP, gridBagConstraints);
-
         lblTenSP.setText("Tên sản phẩm:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_END;
         gridBagConstraints.insets = new java.awt.Insets(14, 231, 0, 0);
         jPanel1.add(lblTenSP, gridBagConstraints);
 
@@ -214,41 +223,41 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(14, 110, 0, 0);
         jPanel1.add(lblSoLuong, gridBagConstraints);
 
-        buttThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/file_add.png"))); // NOI18N
-        buttThem.setText("Thêm");
-        buttThem.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/file_add.png"))); // NOI18N
+        btnAdd.setText("Thêm");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttThemActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(13, 196, 163, 0);
-        jPanel1.add(buttThem, gridBagConstraints);
+        jPanel1.add(btnAdd, gridBagConstraints);
 
-        buttXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/file_del.png"))); // NOI18N
-        buttXoa.setText("Xóa");
-        buttXoa.addActionListener(new java.awt.event.ActionListener() {
+        btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/file_del.png"))); // NOI18N
+        btnDel.setText("Xóa");
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttXoaActionPerformed(evt);
+                btnDelActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(13, 10, 163, 0);
-        jPanel1.add(buttXoa, gridBagConstraints);
+        jPanel1.add(btnDel, gridBagConstraints);
 
-        buttSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/file_edit.png"))); // NOI18N
-        buttSua.setText("Sửa");
-        buttSua.addActionListener(new java.awt.event.ActionListener() {
+        btnUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/file_edit.png"))); // NOI18N
+        btnUp.setText("Sửa");
+        btnUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttSuaActionPerformed(evt);
+                btnUpActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -256,18 +265,13 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(13, 25, 163, 0);
-        jPanel1.add(buttSua, gridBagConstraints);
+        jPanel1.add(btnUp, gridBagConstraints);
 
-        buttHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/crossout.png"))); // NOI18N
-        buttHuy.setText("Hủy bỏ");
-        buttHuy.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/crossout.png"))); // NOI18N
+        btnHuy.setText("Hủy bỏ");
+        btnHuy.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttHuyMouseClicked(evt);
-            }
-        });
-        buttHuy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttHuyActionPerformed(evt);
+                btnHuyMouseClicked(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -275,23 +279,11 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(13, 20, 163, 0);
-        jPanel1.add(buttHuy, gridBagConstraints);
+        jPanel1.add(btnHuy, gridBagConstraints);
 
-        TenBanh.setEditable(false);
-        TenBanh.setText("Bánh Flan");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 106;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 13, 0, 0);
-        jPanel1.add(TenBanh, gridBagConstraints);
-
-        DonGia.setEditable(false);
-        DonGia.setText("50000");
-        DonGia.setToolTipText("");
+        txbDG.setEditable(false);
+        txbDG.setText("50000");
+        txbDG.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 0;
@@ -300,9 +292,9 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 75;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(185, 18, 0, 196);
-        jPanel1.add(DonGia, gridBagConstraints);
+        jPanel1.add(txbDG, gridBagConstraints);
 
-        SoLuong.setText("100");
+        txbSL.setText("100");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 3;
@@ -311,24 +303,25 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 75;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(11, 18, 0, 196);
-        jPanel1.add(SoLuong, gridBagConstraints);
+        jPanel1.add(txbSL, gridBagConstraints);
 
-        MaBanh.setEnabled(false);
+        txbTenSP.setEnabled(false);
+        txbTenSP.setMinimumSize(new java.awt.Dimension(300, 20));
+        txbTenSP.setPreferredSize(new java.awt.Dimension(300, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 34;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(185, 13, 0, 0);
-        jPanel1.add(MaBanh, gridBagConstraints);
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
+        jPanel1.add(txbTenSP, gridBagConstraints);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Phiếu nhập"));
         jPanel2.setAutoscrolls(true);
         jPanel2.setMinimumSize(new java.awt.Dimension(471, 322));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        lblMaPN.setText("Mã phiếu nhập:");
+        lblMaPN.setText("Mã phiếu xuất:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -336,7 +329,7 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(11, 16, 0, 0);
         jPanel2.add(lblMaPN, gridBagConstraints);
 
-        lblNgayNhap.setText("Ngày nhập:");
+        lblNgayNhap.setText("Ngày xuất:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -344,15 +337,6 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(11, 58, 0, 0);
         jPanel2.add(lblNgayNhap, gridBagConstraints);
-
-        lblNCC.setText("Nhà cung cấp:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 16, 0, 0);
-        jPanel2.add(lblNCC, gridBagConstraints);
 
         lblMaNV.setText("Mã nhân viên:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -371,19 +355,11 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(30, 16, 0, 0);
         jPanel2.add(lblTenNV, gridBagConstraints);
 
-        lblGhiChu.setText("Ghi chú:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 16, 0, 0);
-        jPanel2.add(lblGhiChu, gridBagConstraints);
-
-        buttInPN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/printButton.png"))); // NOI18N
-        buttInPN.setText("In");
-        buttInPN.addActionListener(new java.awt.event.ActionListener() {
+        btnIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/printButton.png"))); // NOI18N
+        btnIn.setText("In");
+        btnIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttInPNActionPerformed(evt);
+                btnInActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -393,42 +369,33 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(24, 18, 6, 0);
-        jPanel2.add(buttInPN, gridBagConstraints);
+        jPanel2.add(btnIn, gridBagConstraints);
 
-        lblTong.setText("Tổng:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(29, 48, 0, 0);
-        jPanel2.add(lblTong, gridBagConstraints);
-
-        MaNV.setEditable(false);
-        MaNV.setText("NV004");
+        txbMaNV.setEditable(false);
+        txbMaNV.setText("NV004");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.ipadx = 37;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(27, 15, 0, 0);
-        jPanel2.add(MaNV, gridBagConstraints);
+        jPanel2.add(txbMaNV, gridBagConstraints);
 
-        TenNV.setEditable(false);
-        TenNV.setText("Thảo lé aaa aaaloha ahihi");
+        txbTenNV.setEditable(false);
+        txbTenNV.setText("Thảo lé aaa aaaloha ahihi");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(27, 15, 0, 10);
-        jPanel2.add(TenNV, gridBagConstraints);
+        jPanel2.add(txbTenNV, gridBagConstraints);
 
-        buttXoaPN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/del.png"))); // NOI18N
-        buttXoaPN.setText("Xóa");
-        buttXoaPN.addActionListener(new java.awt.event.ActionListener() {
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/del.png"))); // NOI18N
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttXoaPNActionPerformed(evt);
+                btnXoaActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -436,13 +403,13 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.gridy = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(24, 18, 6, 0);
-        jPanel2.add(buttXoaPN, gridBagConstraints);
+        jPanel2.add(btnXoa, gridBagConstraints);
 
-        buttSuaPN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/edit_16.gif"))); // NOI18N
-        buttSuaPN.setText("Cập nhật");
-        buttSuaPN.addActionListener(new java.awt.event.ActionListener() {
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/edit_16.gif"))); // NOI18N
+        btnSua.setText("Cập nhật");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttSuaPNActionPerformed(evt);
+                btnSuaActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -451,67 +418,26 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(24, 18, 6, 0);
-        jPanel2.add(buttSuaPN, gridBagConstraints);
+        jPanel2.add(btnSua, gridBagConstraints);
 
-        NgayNhap.setDateFormatString("dd-mm-yyyy");
-        NgayNhap.setEnabled(false);
-        NgayNhap.setFocusTraversalPolicyProvider(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 60;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 15, 0, 10);
-        jPanel2.add(NgayNhap, gridBagConstraints);
-
-        TongGiaTri.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        TongGiaTri.setText("5000000");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(29, 18, 0, 0);
-        jPanel2.add(TongGiaTri, gridBagConstraints);
-
-        GhiChu.setColumns(5);
-        GhiChu.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 8;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipady = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(26, 18, 0, 10);
-        jPanel2.add(GhiChu, gridBagConstraints);
-
-        MaPN.setText("-");
+        lbMa.setText("NA");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(11, 15, 0, 0);
-        jPanel2.add(MaPN, gridBagConstraints);
-
-        NCC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(lbMa, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(27, 15, 0, 10);
-        jPanel2.add(NCC, gridBagConstraints);
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 0;
+        jPanel2.add(dpNgayNhap, gridBagConstraints);
 
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
-        buttLapPN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/forum_add.png"))); // NOI18N
-        buttLapPN.setText("Lập phiếu nhập");
-        buttLapPN.addActionListener(new java.awt.event.ActionListener() {
+        btnLapPN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/forum_add.png"))); // NOI18N
+        btnLapPN.setText("Lập phiếu xuất");
+        btnLapPN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttLapPNActionPerformed(evt);
+                btnLapPNActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -519,11 +445,11 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(6, -50, 0, 30);
-        jPanel5.add(buttLapPN, gridBagConstraints);
+        jPanel5.add(btnLapPN, gridBagConstraints);
 
         lblQuanLyPN.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblQuanLyPN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/forum.png"))); // NOI18N
-        lblQuanLyPN.setText("QUẢN LÝ PHIẾU NHẬP");
+        lblQuanLyPN.setText("QUẢN LÝ PHIẾU XUẤT");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -542,11 +468,11 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm phiếu nhập"));
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
-        buttTK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/search.png"))); // NOI18N
-        buttTK.setText("Tìm kiếm");
-        buttTK.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/search.png"))); // NOI18N
+        btnSearch.setText("Tìm kiếm");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttTKActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -555,16 +481,17 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 6, 0);
-        jPanel4.add(buttTK, gridBagConstraints);
+        jPanel4.add(btnSearch, gridBagConstraints);
 
-        NoiDungTK.setText("-------------------------------------------------------------------------------------------------------------");
+        txbSearch.setMinimumSize(new java.awt.Dimension(300, 20));
+        txbSearch.setPreferredSize(new java.awt.Dimension(300, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
-        jPanel4.add(NoiDungTK, gridBagConstraints);
+        jPanel4.add(txbSearch, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -572,18 +499,20 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 1563, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -592,7 +521,7 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -603,75 +532,211 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jScrollPane1.getAccessibleContext().setAccessibleName("Danh sách phiếu xuất");
+        jScrollPane2.getAccessibleContext().setAccessibleName("Chi tiết phiếu xuất");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttHuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttHuyMouseClicked
-        LamMoiCTPN("-","","","");
-    }//GEN-LAST:event_buttHuyMouseClicked
-
-    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+    private void btnHuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHuyMouseClicked
         this.dispose();
-    }//GEN-LAST:event_formWindowLostFocus
+    }//GEN-LAST:event_btnHuyMouseClicked
 
-    private void buttLapPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttLapPNActionPerformed
-        new LapPhieuNhap().setVisible(true);
-    }//GEN-LAST:event_buttLapPNActionPerformed
+    private void btnLapPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLapPNActionPerformed
+        isShowing = true;
+       ThemPhieuXuat formThemPX = new ThemPhieuXuat();
+       formThemPX.addWindowListener( new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent we) {
+                        btnSearchActionPerformed(evt);
+                        ClearCTPX();
+                        isShowing = false;
+                        LoadButton();
+                    }
+                } );
+       LoadButton();
+       formThemPX.show();
+    }//GEN-LAST:event_btnLapPNActionPerformed
 
-    private void buttInPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttInPNActionPerformed
+    private void btnInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInActionPerformed
         // in PN
-    }//GEN-LAST:event_buttInPNActionPerformed
+    }//GEN-LAST:event_btnInActionPerformed
 
-    private void buttSuaPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttSuaPNActionPerformed
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
        //sửa PN
-    }//GEN-LAST:event_buttSuaPNActionPerformed
+       //sửa hóa đơn
+       if(JtablePX.getSelectedRow() == -1)
+       {
+           JOptionPane.showMessageDialog(null, "Vui lòng chọn thông tin muốn sửa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+       }
+       else
+       {
+           Date date = this.dpNgayNhap.getDate();
+           java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+           if(BUSQLPHIEUXUAT.getInstance().Update(mapx, sqlDate))
+           {
+               JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+               btnSearchActionPerformed(evt);
+           }
+           else{
+               JOptionPane.showMessageDialog(null, "Sửa thất bại!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+           }
+       }
+    }//GEN-LAST:event_btnSuaActionPerformed
 
-    private void buttXoaPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttXoaPNActionPerformed
-       // xóa hóa đơn
-       int reply = JOptionPane.showConfirmDialog(null,"Bạn có chắc muốn xóa phiếu nhập này?","Xóa phiếu nhập",JOptionPane.WARNING_MESSAGE);
-        if(reply == JOptionPane.YES_OPTION){
-            //xóa pn
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+      // xóa hóa đơn
+       if(JtablePX.getSelectedRow() == -1)
+       {
+           JOptionPane.showMessageDialog(null, "Vui lòng chọn thông tin muốn xóa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+       }
+       else
+       {
+           int reply = JOptionPane.showConfirmDialog(null,"Bạn có chắc muốn xóa phiếu này?","Xóa phiếu xuất",JOptionPane.WARNING_MESSAGE);
+           if(reply == JOptionPane.YES_OPTION){
+            //xóa pn     
+            if(BUSQLPHIEUXUAT.getInstance().Delete(mapx))
+           {
+               JOptionPane.showMessageDialog(null, "Xóa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+               btnSearchActionPerformed(evt);
+           }
+           else{
+               JOptionPane.showMessageDialog(null, "Xóa thất bại!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+           }  
         }
-    }//GEN-LAST:event_buttXoaPNActionPerformed
+       }
+    }//GEN-LAST:event_btnXoaActionPerformed
 
-    private void buttThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttThemActionPerformed
-        //thêm ctpn
-       if(isAdding == false)
-        {
-            isAdding = true;
-            this.SoLuong.setText("0");
-            this.MaBanh.setEnabled(false);
-            this.buttSua.setEnabled(false);
-            this.buttXoa.setEnabled(false);
+    public void LoadCTPX(int mapx)
+    {
+        tableModelCT.setRowCount(0);
+       
+        alrowCT = BUSQLPHIEUXUAT.getInstance().SearchCT(mapx);
+      
+        if (alrowCT != null) {
+            Object count = 1;
+            for (int i = 0; i < alrowCT.size(); i++) {
+                String rows[] = new String[5];
+                rows[0] = count.toString();                      //STT
+                rows[1] = alrowCT.get(i)[0];                     //MaSP
+                rows[2] = alrowCT.get(i)[1];                     //TenSP
+                rows[3] = alrowCT.get(i)[2];                     //SLXUAT
+        
+                tableModelCT.addRow(rows);
+                //mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
+                count = (int)count + 1;
+            }
         }
-        else
-        {
-            //thêm ctpn
-            this.MaBanh.setEnabled(true);
-            this.buttXoa.setEnabled(true);
-            this.buttSua.setEnabled(true);
-        }
-    }//GEN-LAST:event_buttThemActionPerformed
+    }
+    
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+                //thêm cthd
+        isShowing = true;
+       ThemCTPX formThemCTPX = new ThemCTPX();
+       formThemCTPX.addWindowListener( new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent we) {
+                        LoadCTPX(mapx);
+                        isShowing = false;
+                        LoadButton();
+                        btnSearchActionPerformed(evt);
+                    }
+                } );
+       LoadButton();
+       formThemCTPX.show();
+    }//GEN-LAST:event_btnAddActionPerformed
 
-    private void buttXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttXoaActionPerformed
-        int reply = JOptionPane.showConfirmDialog(null,"Bạn có chắc muốn xóa chi tiết nhập này?","Xóa chi tiết nhập",JOptionPane.WARNING_MESSAGE);
-        if(reply == JOptionPane.YES_OPTION){
-            //xóa ctpn
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        if (JtableCTPX.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn thông tin muốn xóa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa?", "Xóa chi tiết phiếu xuất", JOptionPane.WARNING_MESSAGE);
+            if (reply == JOptionPane.YES_OPTION) {
+                //xóa cthd    
+                int row = JtableCTPX.getSelectedRow();
+                int masp = Integer.parseInt(JtableCTPX.getModel().getValueAt(row, 1).toString());
+                if (BUSQLPHIEUXUAT.getInstance().DeleteCTPX(mapx, masp)) {
+                    JOptionPane.showMessageDialog(null, "Xóa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    LoadCTPX(mapx);
+                    LoadButton();
+                    btnSearchActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Xóa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
         }
-    }//GEN-LAST:event_buttXoaActionPerformed
+    }//GEN-LAST:event_btnDelActionPerformed
 
-    private void buttSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttSuaActionPerformed
+    private void btnUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpActionPerformed
         // sửa pn
-    }//GEN-LAST:event_buttSuaActionPerformed
+        // sửa hóa đơn
+        if (JtableCTPX.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn thông tin muốn sửa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn sửa?", "Sửa chi tiết phiếu xuất", JOptionPane.WARNING_MESSAGE);
+            if (reply == JOptionPane.YES_OPTION) {
+                //xóa cthd    
+                int row = JtableCTPX.getSelectedRow();
+                int masp = Integer.parseInt(JtableCTPX.getModel().getValueAt(row, 1).toString());
+                int sl = Integer.parseInt(txbSL.getText());
+                if (BUSQLPHIEUXUAT.getInstance().UpdateCTPX(mapx, masp, sl)) {
+                    JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    LoadCTPX(mapx);
+                    LoadButton();
+                    btnSearchActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sửa thất bại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnUpActionPerformed
 
-    private void buttHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttHuyActionPerformed
-            LamMoiCTPN("-","","","");
-    }//GEN-LAST:event_buttHuyActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+               //tìm kiếm
+        tableModelPX.setRowCount(0);
+ 
+        alrow = BUSQLPHIEUXUAT.getInstance().Search(txbSearch.getText());
+        
+        if (alrow != null) {
+            Object count = 1;
+            for (int i = 0; i < alrow.size(); i++) {
+                String rows[] = new String[5];
+                rows[0] = count.toString();                    //STT
+                rows[1] = alrow.get(i)[0];                     //MaPN
+                rows[2] = alrow.get(i)[1];                     //MANV
+                rows[3] = alrow.get(i)[2];                     //TENNV
+                rows[4] = alrow.get(i)[3];                     //Ngaylap
 
-    private void buttTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTKActionPerformed
-        String tukhoa = this.NoiDungTK.getText();
-        //tìm kiếm
-    }//GEN-LAST:event_buttTKActionPerformed
+                tableModelPX.addRow(rows);
+                //mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
+                count = (int)count + 1;
+            }
+        }
+         DisableComponent();
+         tableCT();
+         ClearCTPX();
+         ClearPX();
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void JtablePXMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtablePXMousePressed
+        // TODO add your handling code here:
+        int row = JtablePX.getSelectedRow();
+        lbMa.setText(JtablePX.getModel().getValueAt(row, 1).toString());
+        txbMaNV.setText(JtablePX.getModel().getValueAt(row, 2).toString());
+        txbTenNV.setText(JtablePX.getModel().getValueAt(row, 3).toString());
+        //dpNgayHD.setDateFormatString(JtableHD.getModel().getValueAt(row, 4).toString());
+
+        mapx = Integer.parseInt(alrow.get(row)[0]);
+        EnableComponent();
+        LoadCTPX(mapx);
+    }//GEN-LAST:event_JtablePXMousePressed
+
+    private void JtableCTPXMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtableCTPXMouseClicked
+        int row = JtableCTPX.getSelectedRow();
+        this.txbTenSP.setText(JtableCTPX.getModel().getValueAt(row, 2).toString());
+        this.txbSL.setText(JtableCTPX.getModel().getValueAt(row, 3).toString());
+        this.txbDG.setText(alrowCT.get(row)[3]);
+    }//GEN-LAST:event_JtableCTPXMouseClicked
 
     /**
      * @param args the command line arguments
@@ -716,29 +781,18 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable BangCTPN;
-    private javax.swing.JTable BangPN;
-    private javax.swing.JTextField DonGia;
-    private javax.swing.JTextField GhiChu;
-    private javax.swing.JComboBox<String> MaBanh;
-    private javax.swing.JTextField MaNV;
-    private javax.swing.JLabel MaPN;
-    private javax.swing.JComboBox<String> NCC;
-    private com.toedter.calendar.JDateChooser NgayNhap;
-    private javax.swing.JTextField NoiDungTK;
-    private javax.swing.JTextField SoLuong;
-    private javax.swing.JTextField TenBanh;
-    private javax.swing.JTextField TenNV;
-    private javax.swing.JLabel TongGiaTri;
-    private javax.swing.JButton buttHuy;
-    private javax.swing.JButton buttInPN;
-    private javax.swing.JButton buttLapPN;
-    private javax.swing.JButton buttSua;
-    private javax.swing.JButton buttSuaPN;
-    private javax.swing.JButton buttTK;
-    private javax.swing.JButton buttThem;
-    private javax.swing.JButton buttXoa;
-    private javax.swing.JButton buttXoaPN;
+    private javax.swing.JTable JtableCTPX;
+    private javax.swing.JTable JtablePX;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDel;
+    private javax.swing.JButton btnHuy;
+    private javax.swing.JButton btnIn;
+    private javax.swing.JButton btnLapPN;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnUp;
+    private javax.swing.JButton btnXoa;
+    private com.toedter.calendar.JDateChooser dpNgayNhap;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -746,17 +800,20 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lbMa;
     private javax.swing.JLabel lblDonGia;
-    private javax.swing.JLabel lblGhiChu;
     private javax.swing.JLabel lblMaNV;
     private javax.swing.JLabel lblMaPN;
-    private javax.swing.JLabel lblMaSP;
-    private javax.swing.JLabel lblNCC;
     private javax.swing.JLabel lblNgayNhap;
     private javax.swing.JLabel lblQuanLyPN;
     private javax.swing.JLabel lblSoLuong;
     private javax.swing.JLabel lblTenNV;
     private javax.swing.JLabel lblTenSP;
-    private javax.swing.JLabel lblTong;
+    private javax.swing.JTextField txbDG;
+    private javax.swing.JTextField txbMaNV;
+    private javax.swing.JTextField txbSL;
+    private javax.swing.JTextField txbSearch;
+    private javax.swing.JTextField txbTenNV;
+    private javax.swing.JTextField txbTenSP;
     // End of variables declaration//GEN-END:variables
 }
