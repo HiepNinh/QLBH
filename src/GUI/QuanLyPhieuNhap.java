@@ -5,11 +5,16 @@
  */
 package GUI;
 import BUS.BUSQLPHIEUNHAP;
+import BUS.ExportPDF;
+import com.itextpdf.text.BadElementException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.*;
 import qlbh.SANPHAM;
@@ -596,7 +601,20 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLapPNActionPerformed
 
     private void btnInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInActionPerformed
-        // in PN
+        try {          
+            if(alrow!=null && ExportPDF.getInstance().ExportPN(alrow))
+            {
+                JOptionPane.showMessageDialog(null, "Xuất file thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Thất bại!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (BadElementException ex) {
+            Logger.getLogger(QuanLyPhieuNhap.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(QuanLyPhieuNhap.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnInActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed

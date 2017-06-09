@@ -6,8 +6,11 @@
 package GUI;
 import BUS.BUSQLHOADON;
 import BUS.BUSQLSANPHAM;
+import BUS.ExportPDF;
+import com.itextpdf.text.BadElementException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -623,7 +626,20 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLapHDActionPerformed
 
     private void btnInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInActionPerformed
-        // in hóa đơn
+        try {
+            if(alrow!=null && ExportPDF.getInstance().ExportHD(alrow))
+            {
+                JOptionPane.showMessageDialog(null, "Xuất file thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Thất bại!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (BadElementException ex) {
+            Logger.getLogger(QuanLyHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(QuanLyHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnInActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed

@@ -10,6 +10,7 @@ package qlbh;
  * @author Golden Darkness
  */
 import java.io.*;
+import java.util.ArrayList;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -30,12 +31,15 @@ public class THONGKE {
     }
     // </editor-fold>
 
-    public void DrawTK() throws Exception {
+    public void DrawTK(ArrayList<String[]> al, float tong) throws Exception {
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("IPhone 5s", new Double(25));
-        dataset.setValue("SamSung Grand", new Double(5));
-        dataset.setValue("MotoG", new Double(50));
-        dataset.setValue("Nokia Lumia", new Double(20));
+        
+        for(int i=0;i<al.size();i++)
+        {
+            String name = al.get(i)[1];
+            float tt = Float.parseFloat(al.get(i)[3])/tong;
+            dataset.setValue(name, new Double(tt));
+        }
 
         JFreeChart chart = ChartFactory.createPieChart3D(
                 "Maria", // chart title                   
@@ -48,11 +52,11 @@ public class THONGKE {
         plot.setStartAngle(270);
         plot.setForegroundAlpha(0.60f);
         plot.setInteriorGap(0.02);
-        int width = 640;
+        int width = 700;
         /* Width of the image */
-        int height = 480;
+        int height = 500;
         /* Height of the image */
-        File pieChart3D = new File("pie_Chart3D.jpeg");
+        File pieChart3D = new File("src/Library/pie_Chart3D.jpeg");
         ChartUtilities.saveChartAsJPEG(pieChart3D, chart, width, height);
     }
 }
