@@ -33,7 +33,6 @@ public class frmMain extends javax.swing.JFrame {
         buttTlbrNV = new javax.swing.JButton();
         buttTlbrKho = new javax.swing.JButton();
         buttTlbrKe = new javax.swing.JButton();
-        buttTlbrTK = new javax.swing.JButton();
         buttTlbrThKe = new javax.swing.JButton();
         buttTlbrGD = new javax.swing.JButton();
         jPanelKhungDangNhap = new javax.swing.JPanel();
@@ -56,6 +55,7 @@ public class frmMain extends javax.swing.JFrame {
         iconKho = new javax.swing.JLabel();
         iconKe = new javax.swing.JLabel();
         btnXuat = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuDanhMuc = new javax.swing.JMenu();
         jMenuItemBanh = new javax.swing.JMenuItem();
@@ -178,20 +178,6 @@ public class frmMain extends javax.swing.JFrame {
         });
         jToolBar.add(buttTlbrKe);
 
-        buttTlbrTK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/magnifying-glass-icon.png"))); // NOI18N
-        buttTlbrTK.setText("Tìm kiếm");
-        buttTlbrTK.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        buttTlbrTK.setBorderPainted(false);
-        buttTlbrTK.setFocusable(false);
-        buttTlbrTK.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        buttTlbrTK.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        buttTlbrTK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttTlbrTKActionPerformed(evt);
-            }
-        });
-        jToolBar.add(buttTlbrTK);
-
         buttTlbrThKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/barchart-icon.png"))); // NOI18N
         buttTlbrThKe.setText("Thống kê");
         buttTlbrThKe.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -235,24 +221,28 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(31, 53, 0, 3);
         jPanelKhungChucNang.add(iconNV, gridBagConstraints);
 
-        iconTK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/Zoom-icon (1).png"))); // NOI18N
+        iconTK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/image_gallery.png"))); // NOI18N
+        iconTK.setMaximumSize(new java.awt.Dimension(72, 72));
+        iconTK.setMinimumSize(new java.awt.Dimension(72, 72));
+        iconTK.setPreferredSize(new java.awt.Dimension(72, 72));
         iconTK.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iconTKMouseClicked(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.ipady = 8;
-        gridBagConstraints.insets = new java.awt.Insets(23, 8, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(28, 31, 0, 3);
         jPanelKhungChucNang.add(iconTK, gridBagConstraints);
 
         buttBanh.setText("Bánh");
@@ -262,8 +252,8 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 32;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         jPanelKhungChucNang.add(buttBanh, gridBagConstraints);
@@ -275,8 +265,9 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(11, 26, 0, 11);
         jPanelKhungChucNang.add(iconKH, gridBagConstraints);
@@ -288,8 +279,8 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(6, 36, 1, 1);
         jPanelKhungChucNang.add(buttKH, gridBagConstraints);
 
@@ -300,8 +291,9 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.insets = new java.awt.Insets(23, 58, 0, 0);
         jPanelKhungChucNang.add(iconThKe, gridBagConstraints);
@@ -313,8 +305,8 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.ipadx = 8;
         gridBagConstraints.insets = new java.awt.Insets(6, 39, 11, 0);
         jPanelKhungChucNang.add(buttNV, gridBagConstraints);
@@ -326,8 +318,9 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.insets = new java.awt.Insets(11, 51, 0, 0);
         jPanelKhungChucNang.add(iconHD, gridBagConstraints);
 
@@ -338,8 +331,9 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 12;
         gridBagConstraints.insets = new java.awt.Insets(6, 41, 11, 0);
         jPanelKhungChucNang.add(btnThongKe, gridBagConstraints);
@@ -351,8 +345,9 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.insets = new java.awt.Insets(11, 9, 0, 0);
         jPanelKhungChucNang.add(iconBanh, gridBagConstraints);
 
@@ -363,8 +358,8 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 16;
         gridBagConstraints.insets = new java.awt.Insets(6, 43, 0, 0);
         jPanelKhungChucNang.add(buttHD, gridBagConstraints);
@@ -376,8 +371,8 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 12;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 38;
         gridBagConstraints.insets = new java.awt.Insets(6, 42, 0, 0);
         jPanelKhungChucNang.add(buttKho, gridBagConstraints);
@@ -389,8 +384,8 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.ipadx = 16;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 11, 0);
         jPanelKhungChucNang.add(btnNhap, gridBagConstraints);
@@ -402,8 +397,8 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 12;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.ipadx = 18;
         gridBagConstraints.insets = new java.awt.Insets(6, 53, 11, 0);
         jPanelKhungChucNang.add(buttKe, gridBagConstraints);
@@ -415,8 +410,9 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 12;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.insets = new java.awt.Insets(11, 48, 0, 0);
         jPanelKhungChucNang.add(iconKho, gridBagConstraints);
 
@@ -427,8 +423,8 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 12;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.insets = new java.awt.Insets(31, 50, 0, 0);
         jPanelKhungChucNang.add(iconKe, gridBagConstraints);
 
@@ -439,9 +435,21 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.ipadx = 16;
+        gridBagConstraints.insets = new java.awt.Insets(6, 39, 0, 0);
         jPanelKhungChucNang.add(btnXuat, gridBagConstraints);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/invio-email-da-internet.png"))); // NOI18N
+        jLabel1.setMaximumSize(new java.awt.Dimension(72, 72));
+        jLabel1.setMinimumSize(new java.awt.Dimension(72, 72));
+        jLabel1.setPreferredSize(new java.awt.Dimension(72, 72));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.insets = new java.awt.Insets(31, 53, 0, 3);
+        jPanelKhungChucNang.add(jLabel1, gridBagConstraints);
 
         jMenuDanhMuc.setText("Danh mục");
 
@@ -569,6 +577,11 @@ public class frmMain extends javax.swing.JFrame {
         jMenuBar.add(jMenuChucNang);
 
         jMenuAbout.setText("Giúp đỡ");
+        jMenuAbout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuAboutMouseClicked(evt);
+            }
+        });
 
         jMenuItemAbout.setText("About");
         jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
@@ -594,15 +607,14 @@ public class frmMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(250, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelKhungDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelKhungChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanelKhungChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelKhungDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -610,9 +622,9 @@ public class frmMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelKhungDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelKhungDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelKhungChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanelKhungChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -627,8 +639,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_buttTlbrHDActionPerformed
 
     private void buttTlbrGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrGDActionPerformed
-        new Help().setVisible(true);
-        
+        new Help().setVisible(true);    
     }//GEN-LAST:event_buttTlbrGDActionPerformed
 
     private void buttBanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttBanhActionPerformed
@@ -638,10 +649,6 @@ public class frmMain extends javax.swing.JFrame {
     private void buttKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttKHActionPerformed
         new QuanLyKH().setVisible(true);
     }//GEN-LAST:event_buttKHActionPerformed
-
-    private void buttNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttNVActionPerformed
-        new QuanLyNV().setVisible(true);
-    }//GEN-LAST:event_buttNVActionPerformed
 
     private void buttTlbrNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrNVActionPerformed
         new QuanLyNV().setVisible(true);
@@ -700,7 +707,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemPhieuNhapActionPerformed
 
     private void jMenuItemQLXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemQLXuatActionPerformed
-        
+        new QuanLyPhieuXuat().setVisible(true);
     }//GEN-LAST:event_jMenuItemQLXuatActionPerformed
 
     private void jMenuItemThemBanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemThemBanhActionPerformed
@@ -712,7 +719,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemNhapBanhActionPerformed
 
     private void jMenuItemXuatBanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemXuatBanhActionPerformed
-       
+       new ThemPhieuXuat().setVisible(true);
     }//GEN-LAST:event_jMenuItemXuatBanhActionPerformed
 
     private void jMenuItemKiemKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemKiemKhoActionPerformed
@@ -724,16 +731,12 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jMenuItemHuongDanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHuongDanActionPerformed
-       // new Help().setVisible(true);
+        new Help().setVisible(true);
     }//GEN-LAST:event_jMenuItemHuongDanActionPerformed
 
     private void buttTlbrKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrKeActionPerformed
         new QLKE().setVisible(true);
     }//GEN-LAST:event_buttTlbrKeActionPerformed
-
-    private void buttTlbrTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrTKActionPerformed
-     
-    }//GEN-LAST:event_buttTlbrTKActionPerformed
 
     private void buttTlbrThKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrThKeActionPerformed
         new ThongKe().setVisible(true);
@@ -767,21 +770,9 @@ public class frmMain extends javax.swing.JFrame {
         new ThongKe().setVisible(true);
     }//GEN-LAST:event_iconTKMouseClicked
 
-    private void btnNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapActionPerformed
-         new QuanLyPhieuNhap().setVisible(true);
-    }//GEN-LAST:event_btnNhapActionPerformed
-
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
           new ThongKe().setVisible(true);
     }//GEN-LAST:event_btnThongKeActionPerformed
-
-    private void buttKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttKeActionPerformed
-        new QLKE().setVisible(true);
-    }//GEN-LAST:event_buttKeActionPerformed
-
-    private void btnXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatActionPerformed
-        new QuanLyPhieuXuat().setVisible(true);
-    }//GEN-LAST:event_btnXuatActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         if(evt.getKeyCode() == F1)
@@ -804,6 +795,27 @@ public class frmMain extends javax.swing.JFrame {
         }
         }
     }//GEN-LAST:event_formKeyTyped
+
+    private void btnXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatActionPerformed
+        new QuanLyPhieuXuat().setVisible(true);
+    }//GEN-LAST:event_btnXuatActionPerformed
+
+    private void buttKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttKeActionPerformed
+        new QLKE().setVisible(true);
+    }//GEN-LAST:event_buttKeActionPerformed
+
+    private void btnNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapActionPerformed
+        new QuanLyPhieuNhap().setVisible(true);
+    }//GEN-LAST:event_btnNhapActionPerformed
+
+    private void buttNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttNVActionPerformed
+        new QuanLyNV().setVisible(true);
+    }//GEN-LAST:event_buttNVActionPerformed
+
+    private void jMenuAboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAboutMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenuAboutMouseClicked
 
     /**
      * @param args the command line arguments
@@ -858,7 +870,6 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JButton buttTlbrKe;
     private javax.swing.JButton buttTlbrKho;
     private javax.swing.JButton buttTlbrNV;
-    private javax.swing.JButton buttTlbrTK;
     private javax.swing.JButton buttTlbrThKe;
     private javax.swing.JLabel iconBanh;
     private javax.swing.JLabel iconHD;
@@ -868,6 +879,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JLabel iconNV;
     private javax.swing.JLabel iconTK;
     private javax.swing.JLabel iconThKe;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenuAbout;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuChucNang;

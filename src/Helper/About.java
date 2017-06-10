@@ -5,19 +5,63 @@
  */
 package Helper;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
+
 /**
  *
  * @author Admin
  */
 public class About extends javax.swing.JFrame {
 
+    private static URL aboutURL;
     /**
      * Creates new form About
      */
     public About() {
         initComponents();
         this.setLocationRelativeTo(null);
+        editorpane.setEditable(false);
+        
+        //Khởi tạo đường dẫn khi vào helper_Trang chủ
+        try {
+          aboutURL =new File("src\\Helper\\About.html").toURI().toURL();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Help.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //Hiên thị trang chủ lên editorpane
+        DisplayFile();
+        
+        //anonymous inner listener
+        editorpane.addHyperlinkListener(new HyperlinkListener() {
+            public void hyperlinkUpdate(HyperlinkEvent ev) {
+                try {
+                    if (ev.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                        editorpane.setPage(ev.getURL());
+                    }
+                } catch (IOException ex) {
+                    //put message in window
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
+    
+    public void DisplayFile()
+{
+        try {
+            editorpane.setPage(aboutURL);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,27 +72,28 @@ public class About extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        editorpane = new javax.swing.JEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("?????????????????????????");
+        jScrollPane1.setViewportView(editorpane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(119, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(106, 106, 106))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(151, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(133, 133, 133))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -90,6 +135,7 @@ public class About extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JEditorPane editorpane;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
