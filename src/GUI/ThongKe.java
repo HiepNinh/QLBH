@@ -8,6 +8,7 @@ package GUI;
 import BUS.BUSTHONGKE;
 import BUS.ExportPDF;
 import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.DocumentException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -68,8 +69,8 @@ public class ThongKe extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnInSP = new javax.swing.JButton();
+        btnInDT = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -109,17 +110,17 @@ public class ThongKe extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("In");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnInSP.setText("In");
+        btnInSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnInSPActionPerformed(evt);
             }
         });
 
-        jButton5.setText("In");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnInDT.setText("In");
+        btnInDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnInDTActionPerformed(evt);
             }
         });
 
@@ -140,10 +141,10 @@ public class ThongKe extends javax.swing.JFrame {
                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(78, 78, 78)
-                        .addComponent(jButton5))
+                        .addComponent(btnInDT))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(77, 77, 77)
-                        .addComponent(jButton4)))
+                        .addComponent(btnInSP)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -156,11 +157,11 @@ public class ThongKe extends javax.swing.JFrame {
                 .addGap(57, 57, 57)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(btnInSP)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addComponent(btnInDT)
                 .addGap(78, 78, 78))
         );
 
@@ -230,6 +231,8 @@ public class ThongKe extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        btnInDT.setEnabled(false);
+        btnInSP.setEnabled(true);
         JtableTK.setModel(tableModelSP);
         int year = Integer.parseInt(txbNam.getText());
         tableModelSP.setRowCount(0);
@@ -262,6 +265,8 @@ public class ThongKe extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        btnInSP.setEnabled(false);
+        btnInDT.setEnabled(true);
         try {
             JtableTK.setModel(tableModelDS);
             int year = Integer.parseInt(txbNam.getText());
@@ -290,39 +295,43 @@ public class ThongKe extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnInSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInSPActionPerformed
         try {
-            if(alrow!=null && ExportPDF.getInstance().ExportTKSP(alrow,txbNam.getText()))
-            {
-                JOptionPane.showMessageDialog(null, "Xuất file thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+            try {
+                if(alrow!=null && ExportPDF.getInstance().ExportTKSP(alrow,txbNam.getText()))
+                {
+                    JOptionPane.showMessageDialog(null, "Xuất file thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Thất bại!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (DocumentException ex) {
+                Logger.getLogger(ThongKe.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Thất bại!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } catch (BadElementException ex) {
-            Logger.getLogger(ThongKe.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ThongKe.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnInSPActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnInDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInDTActionPerformed
        try {
-            if(alrow!=null && ExportPDF.getInstance().ExportTKDT(alrow,txbNam.getText()))
-            {
-                JOptionPane.showMessageDialog(null, "Xuất file thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Thất bại!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } catch (BadElementException ex) {
-            Logger.getLogger(ThongKe.class.getName()).log(Level.SEVERE, null, ex);
+           try {
+               if(alrow!=null && ExportPDF.getInstance().ExportTKDT(alrow,txbNam.getText()))
+               {
+                   JOptionPane.showMessageDialog(null, "Xuất file thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+               }
+               else
+               {
+                   JOptionPane.showMessageDialog(null, "Thất bại!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+               }
+           } catch (DocumentException ex) {
+               Logger.getLogger(ThongKe.class.getName()).log(Level.SEVERE, null, ex);
+           }
         } catch (IOException ex) {
             Logger.getLogger(ThongKe.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnInDTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -362,11 +371,11 @@ public class ThongKe extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanelImage;
     private javax.swing.JTable JtableTK;
+    private javax.swing.JButton btnInDT;
+    private javax.swing.JButton btnInSP;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;

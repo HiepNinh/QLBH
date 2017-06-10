@@ -14,16 +14,22 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.CMYKColor;
+import com.itextpdf.text.pdf.FontSelector;
+import static com.itextpdf.text.pdf.PdfDictionary.FONT;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import org.omg.CORBA.Environment;
 
 /**
  *
@@ -43,11 +49,15 @@ public class ExportPDF {
     // </editor-fold>
       
     // <editor-fold defaultstate="collapsed" desc="ExportPDF PhieuNhap">
-    public boolean ExportPN(ArrayList<String[]> al) throws BadElementException, IOException {
+    public boolean ExportPN(ArrayList<String[]> al) throws BadElementException, IOException, DocumentException {
 
         // Tạo đối tượng tài liệu
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
-
+        
+        File fontFile = new File("src\\Helper\\arialuni.ttf");
+        BaseFont unicode = BaseFont.createFont(fontFile.getAbsolutePath(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        Font f = new Font(unicode, 12);
+       
         try {
             // Tạo đối tượng PdfWriter
             Date d = new Date();
@@ -65,7 +75,7 @@ public class ExportPDF {
             document.add(title1);
             
             //Logo Group
-            Image image1 = Image.getInstance("D:\\Document\\study\\Java\\Example\\test\\pie_Chart3D.jpeg");
+            Image image1 = Image.getInstance("src\\Library\\cao.png");
             document.add(new Paragraph());
             document.add(image1);
             
@@ -75,20 +85,21 @@ public class ExportPDF {
             PdfPTable t = new PdfPTable(7);
             t.setSpacingBefore(25);
             t.setSpacingAfter(25);
+ 
 
             PdfPCell c1 = new PdfPCell(new Phrase("STT"));
             t.addCell(c1);
-            PdfPCell c2 = new PdfPCell(new Phrase("Mã phiếu nhập"));
+            PdfPCell c2 = new PdfPCell(new Phrase("Mã phiếu nhập",f));
             t.addCell(c2);
-            PdfPCell c3 = new PdfPCell(new Phrase("Mã Nhân Viên"));
+            PdfPCell c3 = new PdfPCell(new Phrase("Mã Nhân Viên",f));
             t.addCell(c3);
-            PdfPCell c4 = new PdfPCell(new Phrase("Tên Nhân Viên"));
+            PdfPCell c4 = new PdfPCell(new Phrase("Tên Nhân Viên",f));
             t.addCell(c4);
-            PdfPCell c5 = new PdfPCell(new Phrase("Ngày lập"));
+            PdfPCell c5 = new PdfPCell(new Phrase("Ngày lập",f));
             t.addCell(c5);
-            PdfPCell c6 = new PdfPCell(new Phrase("Nhà cung cấp"));
+            PdfPCell c6 = new PdfPCell(new Phrase("Nhà cung cấp",f));
             t.addCell(c6);
-            PdfPCell c7 = new PdfPCell(new Phrase("Tổng tiền"));
+            PdfPCell c7 = new PdfPCell(new Phrase("Tổng tiền",f));
             t.addCell(c7);
 
             for(int i = 0; i< al.size(); i++)
@@ -97,9 +108,9 @@ public class ExportPDF {
                 t.addCell(ob.toString());
                 t.addCell(al.get(i)[0]);
                 t.addCell(al.get(i)[1]);
-                t.addCell(al.get(i)[2]);
+                t.addCell(new Phrase(al.get(i)[2],f));
                 t.addCell(al.get(i)[3]);
-                t.addCell(al.get(i)[4]);
+                t.addCell(new Phrase(al.get(i)[4],f));
                 t.addCell(al.get(i)[5]);     
             }
             document.add(t);
@@ -113,10 +124,14 @@ public class ExportPDF {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="ExportPDF PhieuXuat">
-    public boolean ExportPX(ArrayList<String[]> al) throws BadElementException, IOException {
+    public boolean ExportPX(ArrayList<String[]> al) throws BadElementException, IOException, DocumentException {
 
         // Tạo đối tượng tài liệu
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+        
+        File fontFile = new File("src\\Helper\\arialuni.ttf");
+        BaseFont unicode = BaseFont.createFont(fontFile.getAbsolutePath(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        Font f = new Font(unicode, 12);
 
         try {
             // Tạo đối tượng PdfWriter
@@ -135,7 +150,7 @@ public class ExportPDF {
             document.add(title1);
             
             //Logo Group
-            Image image1 = Image.getInstance("D:\\Document\\study\\Java\\Example\\test\\pie_Chart3D.jpeg");
+            Image image1 = Image.getInstance("src\\Library\\cao.png");
             document.add(new Paragraph());
             document.add(image1);
             
@@ -146,13 +161,13 @@ public class ExportPDF {
 
             PdfPCell c1 = new PdfPCell(new Phrase("STT"));
             t.addCell(c1);
-            PdfPCell c2 = new PdfPCell(new Phrase("Mã phiếu xuất"));
+            PdfPCell c2 = new PdfPCell(new Phrase("Mã phiếu xuất",f));
             t.addCell(c2);
-            PdfPCell c3 = new PdfPCell(new Phrase("Mã Nhân Viên"));
+            PdfPCell c3 = new PdfPCell(new Phrase("Mã Nhân Viên",f));
             t.addCell(c3);
-            PdfPCell c4 = new PdfPCell(new Phrase("Tên Nhân Viên"));
+            PdfPCell c4 = new PdfPCell(new Phrase("Tên Nhân Viên",f));
             t.addCell(c4);
-            PdfPCell c5 = new PdfPCell(new Phrase("Ngày lập"));
+            PdfPCell c5 = new PdfPCell(new Phrase("Ngày lập",f));
             t.addCell(c5);
 
             for(int i = 0; i< al.size(); i++)
@@ -161,7 +176,7 @@ public class ExportPDF {
                 t.addCell(ob.toString());
                 t.addCell(al.get(i)[0]);
                 t.addCell(al.get(i)[1]);
-                t.addCell(al.get(i)[2]);
+                t.addCell(new Phrase(al.get(i)[2],f));
                 t.addCell(al.get(i)[3]);  
             }
             document.add(t);
@@ -176,10 +191,14 @@ public class ExportPDF {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="ExportPDF Hoadon">
-    public boolean ExportHD(ArrayList<String[]> al) throws BadElementException, IOException {
+    public boolean ExportHD(ArrayList<String[]> al) throws BadElementException, IOException, DocumentException {
 
         // Tạo đối tượng tài liệu
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+        
+        File fontFile = new File("src\\Helper\\arialuni.ttf");
+        BaseFont unicode = BaseFont.createFont(fontFile.getAbsolutePath(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        Font f = new Font(unicode, 12);
 
         try {
             // Tạo đối tượng PdfWriter
@@ -198,7 +217,7 @@ public class ExportPDF {
             document.add(title1);
             
             //Logo Group
-            Image image1 = Image.getInstance("D:\\Document\\study\\Java\\Example\\test\\pie_Chart3D.jpeg");
+            Image image1 = Image.getInstance("src\\Library\\cao.png");
             document.add(new Paragraph());
             document.add(image1);
             
@@ -209,15 +228,15 @@ public class ExportPDF {
 
             PdfPCell c1 = new PdfPCell(new Phrase("STT"));
             t.addCell(c1);
-            PdfPCell c2 = new PdfPCell(new Phrase("Mã hóa đơn"));
+            PdfPCell c2 = new PdfPCell(new Phrase("Mã hóa đơn",f));
             t.addCell(c2);
-            PdfPCell c3 = new PdfPCell(new Phrase("Tên khách hàng"));
+            PdfPCell c3 = new PdfPCell(new Phrase("Tên khách hàng",f));
             t.addCell(c3);
-            PdfPCell c4 = new PdfPCell(new Phrase("Tên Nhân Viên"));
+            PdfPCell c4 = new PdfPCell(new Phrase("Tên Nhân Viên",f));
             t.addCell(c4);
-            PdfPCell c5 = new PdfPCell(new Phrase("Ngày lập"));
+            PdfPCell c5 = new PdfPCell(new Phrase("Ngày lập",f));
             t.addCell(c5);
-            PdfPCell c6 = new PdfPCell(new Phrase("Tổng tiền"));
+            PdfPCell c6 = new PdfPCell(new Phrase("Tổng tiền",f));
             t.addCell(c6);
 
             for(int i = 0; i< al.size(); i++)
@@ -225,8 +244,8 @@ public class ExportPDF {
                 Object ob = i + 1;
                 t.addCell(ob.toString());
                 t.addCell(al.get(i)[0]);
-                t.addCell(al.get(i)[1]);
-                t.addCell(al.get(i)[2]);
+                t.addCell(new Phrase(al.get(i)[1],f));
+                t.addCell(new Phrase(al.get(i)[2],f));
                 t.addCell(al.get(i)[3]);
                 t.addCell(al.get(i)[4]);  
             }
@@ -243,10 +262,14 @@ public class ExportPDF {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="ExportPDF Thongke doanhthu">
-    public boolean ExportTKDT(ArrayList<String[]> al, String year) throws BadElementException, IOException {
+    public boolean ExportTKDT(ArrayList<String[]> al, String year) throws BadElementException, IOException, DocumentException {
 
         // Tạo đối tượng tài liệu
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+        
+        File fontFile = new File("src\\Helper\\arialuni.ttf");
+        BaseFont unicode = BaseFont.createFont(fontFile.getAbsolutePath(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        Font f = new Font(unicode, 12);
 
         try {
             // Tạo đối tượng PdfWriter
@@ -265,7 +288,7 @@ public class ExportPDF {
             document.add(title1);
             
             //Logo Group
-            Image image1 = Image.getInstance("D:\\Document\\study\\Java\\Example\\test\\pie_Chart3D.jpeg");
+            Image image1 = Image.getInstance("src\\Library\\cao.png");
             document.add(new Paragraph());
             document.add(image1);
             
@@ -279,13 +302,13 @@ public class ExportPDF {
             t.setSpacingBefore(25);
             t.setSpacingAfter(25);
 
-            PdfPCell c1 = new PdfPCell(new Phrase("Tháng"));
+            PdfPCell c1 = new PdfPCell(new Phrase("Tháng",f));
             t.addCell(c1);
-            PdfPCell c2 = new PdfPCell(new Phrase("Doanh thu"));
+            PdfPCell c2 = new PdfPCell(new Phrase("Doanh thu",f));
             t.addCell(c2);
-            PdfPCell c3 = new PdfPCell(new Phrase("Tiền nợ"));
+            PdfPCell c3 = new PdfPCell(new Phrase("Tiền nợ",f));
             t.addCell(c3);
-            PdfPCell c4 = new PdfPCell(new Phrase("Lãi"));
+            PdfPCell c4 = new PdfPCell(new Phrase("Lãi",f));
             t.addCell(c4);
             
             for(int i = 0; i< al.size(); i++)
@@ -309,10 +332,14 @@ public class ExportPDF {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="ExportPDF ThongKeSanPham">
-    public boolean ExportTKSP(ArrayList<String[]> al,String year) throws BadElementException, IOException {
+    public boolean ExportTKSP(ArrayList<String[]> al,String year) throws BadElementException, IOException, DocumentException {
 
         // Tạo đối tượng tài liệu
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+        
+        File fontFile = new File("src\\Helper\\arialuni.ttf");
+        BaseFont unicode = BaseFont.createFont(fontFile.getAbsolutePath(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        Font f = new Font(unicode, 12);
 
         try {
             // Tạo đối tượng PdfWriter
@@ -331,7 +358,7 @@ public class ExportPDF {
             document.add(title1);
             
             //Logo Group
-            Image image1 = Image.getInstance("D:\\Document\\study\\Java\\Example\\test\\pie_Chart3D.jpeg");
+            Image image1 = Image.getInstance("src\\Library\\cao.png");
             document.add(new Paragraph());
             document.add(image1);
             
@@ -347,13 +374,13 @@ public class ExportPDF {
 
             PdfPCell c1 = new PdfPCell(new Phrase("STT"));
             t.addCell(c1);
-            PdfPCell c2 = new PdfPCell(new Phrase("Mã sản phẩm"));
+            PdfPCell c2 = new PdfPCell(new Phrase("Mã sản phẩm",f));
             t.addCell(c2);
-            PdfPCell c3 = new PdfPCell(new Phrase("Tên sản phẩm"));
+            PdfPCell c3 = new PdfPCell(new Phrase("Tên sản phẩm",f));
             t.addCell(c3);
-            PdfPCell c4 = new PdfPCell(new Phrase("Tổng số lượng"));
+            PdfPCell c4 = new PdfPCell(new Phrase("Tổng số lượng",f));
             t.addCell(c4);
-            PdfPCell c5 = new PdfPCell(new Phrase("Tổng tiền"));
+            PdfPCell c5 = new PdfPCell(new Phrase("Tổng tiền",f));
             t.addCell(c5);
 
             for(int i = 0; i< al.size(); i++)
@@ -361,7 +388,7 @@ public class ExportPDF {
                 Object ob = i + 1;
                 t.addCell(ob.toString());
                 t.addCell(al.get(i)[0]);
-                t.addCell(al.get(i)[1]);
+                t.addCell(new Phrase(al.get(i)[1],f));
                 t.addCell(al.get(i)[2]);
                 t.addCell(al.get(i)[3]); 
             }

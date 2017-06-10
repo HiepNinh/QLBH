@@ -1,5 +1,13 @@
 package GUI;
 
+import Helper.About;
+import Helper.Help;
+import static java.awt.Event.F1;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import sun.applet.Main;
+
 public class frmMain extends javax.swing.JFrame {
     static boolean logged = false;
     
@@ -73,6 +81,14 @@ public class frmMain extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(1000, 1000));
         setName("Main form"); // NOI18N
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
 
         jToolBar.setBorder(null);
         jToolBar.setFloatable(false);
@@ -611,7 +627,8 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_buttTlbrHDActionPerformed
 
     private void buttTlbrGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrGDActionPerformed
-        new About().setVisible(true);
+        new Help().setVisible(true);
+        
     }//GEN-LAST:event_buttTlbrGDActionPerformed
 
     private void buttBanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttBanhActionPerformed
@@ -707,7 +724,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jMenuItemHuongDanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHuongDanActionPerformed
-        new Help().setVisible(true);
+       // new Help().setVisible(true);
     }//GEN-LAST:event_jMenuItemHuongDanActionPerformed
 
     private void buttTlbrKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrKeActionPerformed
@@ -765,6 +782,28 @@ public class frmMain extends javax.swing.JFrame {
     private void btnXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatActionPerformed
         new QuanLyPhieuXuat().setVisible(true);
     }//GEN-LAST:event_btnXuatActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if(evt.getKeyCode() == F1)
+        {
+            try {
+            java.awt.Desktop.getDesktop().open(new java.io.File("src\\Helper"));
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }//GEN-LAST:event_formKeyPressed
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+        if(evt.getKeyCode() == F1)
+        {
+            try {
+            java.awt.Desktop.getDesktop().open(new java.io.File("src\\Helper"));
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }//GEN-LAST:event_formKeyTyped
 
     /**
      * @param args the command line arguments

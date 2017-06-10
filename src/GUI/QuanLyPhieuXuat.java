@@ -9,6 +9,7 @@ import BUS.BUSQLPHIEUXUAT;
 import BUS.ExportPDF;
 import static GUI.QuanLyPhieuNhap.mapn;
 import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.DocumentException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -565,16 +566,18 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
 
     private void btnInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInActionPerformed
         try {
-            if(alrow!=null && ExportPDF.getInstance().ExportPX(alrow))
-            {
-                JOptionPane.showMessageDialog(null, "Xuất file thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+            try {
+                if(alrow!=null && ExportPDF.getInstance().ExportPX(alrow))
+                {
+                    JOptionPane.showMessageDialog(null, "Xuất file thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Thất bại!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (DocumentException ex) {
+                Logger.getLogger(QuanLyPhieuXuat.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Thất bại!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } catch (BadElementException ex) {
-            Logger.getLogger(QuanLyPhieuXuat.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(QuanLyPhieuXuat.class.getName()).log(Level.SEVERE, null, ex);
         }
