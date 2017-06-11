@@ -7,6 +7,7 @@ package GUI;
 
 import javax.swing.JOptionPane;
 import BUS.BUSUser;
+import com.sun.glass.events.KeyEvent;
 
 /**
  *
@@ -48,6 +49,12 @@ public class DangNhap extends javax.swing.JFrame {
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
 
+        txbMatKhau.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txbMatKhauKeyPressed(evt);
+            }
+        });
+
         lblMK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/key.png"))); // NOI18N
         lblMK.setText("Mật khẩu:");
 
@@ -59,6 +66,11 @@ public class DangNhap extends javax.swing.JFrame {
         btnOK.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnOKMouseClicked(evt);
+            }
+        });
+        btnOK.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnOKKeyPressed(evt);
             }
         });
 
@@ -171,6 +183,32 @@ public class DangNhap extends javax.swing.JFrame {
     private void btnCanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCanActionPerformed
+
+    private void btnOKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnOKKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if(BUSUser.getInstance().Dangnhap(txbTaiKhoan.getText(), txbMatKhau.getText()) == true){        
+            this.dispose();
+            new frmMain().setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "Sai tên đăng nhập hoặc mật khẩu","Lỗi đăng nhập", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnOKKeyPressed
+
+    private void txbMatKhauKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txbMatKhauKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if(BUSUser.getInstance().Dangnhap(txbTaiKhoan.getText(), txbMatKhau.getText()) == true){        
+            this.dispose();
+            new frmMain().setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "Sai tên đăng nhập hoặc mật khẩu","Lỗi đăng nhập", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txbMatKhauKeyPressed
 
     /**
      * @param args the command line arguments

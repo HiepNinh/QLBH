@@ -19,13 +19,6 @@ public class QLBH {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-       Connection c = getConnection();
-        if (c == null) {
-            System.out.println("something wrong");
-        } else {
-            System.out.println("ok");
-        }
-        
         GUI.DangNhap Init = new GUI.DangNhap();
         Init.setVisible(true);
     }

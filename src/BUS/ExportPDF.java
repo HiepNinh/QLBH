@@ -297,6 +297,12 @@ public class ExportPDF {
                 FontFactory.getFont(FontFactory.HELVETICA, 10, Font.BOLDITALIC, new CMYKColor(0, 255, 255, 17)));   
             document.add(title2);
             
+            //Chart
+            Image image = Image.getInstance("src\\Library\\barChart3D.jpeg");
+            image.scaleToFit(500, 400);
+            document.add(new Paragraph());
+            document.add(image);
+            
             //Data
             PdfPTable t = new PdfPTable(4);
             t.setSpacingBefore(25);
@@ -366,6 +372,13 @@ public class ExportPDF {
             Paragraph title2 = new Paragraph(year,
                 FontFactory.getFont(FontFactory.HELVETICA, 10, Font.BOLDITALIC, new CMYKColor(0, 255, 255, 17)));   
             document.add(title2);
+            
+            
+            //Chart
+            Image image = Image.getInstance("src\\Library\\pie_Chart3D.jpeg");
+            image.scaleToFit(500, 400);
+            document.add(new Paragraph());
+            document.add(image);
             
             //Data
             PdfPTable t = new PdfPTable(5);

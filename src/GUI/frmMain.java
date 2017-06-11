@@ -2,11 +2,13 @@ package GUI;
 
 import Helper.About;
 import Helper.Help;
+import com.sun.glass.events.KeyEvent;
 import static java.awt.Event.F1;
+import java.awt.event.KeyAdapter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sun.applet.Main;
+//import sun.applet.Main;
 
 public class frmMain extends javax.swing.JFrame {
     static boolean logged = false;
@@ -14,6 +16,8 @@ public class frmMain extends javax.swing.JFrame {
     public frmMain() {
         initComponents();
         this.setLocationRelativeTo(null);
+        jPanelKhungChucNang.setFocusable(true);
+        jPanelKhungChucNang.requestFocus();
     }
 
     /**
@@ -81,14 +85,6 @@ public class frmMain extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(1000, 1000));
         setName("Main form"); // NOI18N
         setResizable(false);
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                formKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                formKeyTyped(evt);
-            }
-        });
 
         jToolBar.setBorder(null);
         jToolBar.setFloatable(false);
@@ -212,6 +208,11 @@ public class frmMain extends javax.swing.JFrame {
         lblMessage.setText("TRANG QUẢN TRỊ HỆ THỐNG");
         jPanelKhungDangNhap.add(lblMessage, new java.awt.GridBagConstraints());
 
+        jPanelKhungChucNang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanelKhungChucNangKeyPressed(evt);
+            }
+        });
         jPanelKhungChucNang.setLayout(new java.awt.GridBagLayout());
 
         iconNV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/Preppy-icon (1).png"))); // NOI18N
@@ -577,11 +578,6 @@ public class frmMain extends javax.swing.JFrame {
         jMenuBar.add(jMenuChucNang);
 
         jMenuAbout.setText("Giúp đỡ");
-        jMenuAbout.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuAboutMouseClicked(evt);
-            }
-        });
 
         jMenuItemAbout.setText("About");
         jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
@@ -607,15 +603,17 @@ public class frmMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelKhungChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanelKhungDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanelKhungChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+                            .addComponent(jPanelKhungDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(155, 155, 155))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -774,28 +772,6 @@ public class frmMain extends javax.swing.JFrame {
           new ThongKe().setVisible(true);
     }//GEN-LAST:event_btnThongKeActionPerformed
 
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        if(evt.getKeyCode() == F1)
-        {
-            try {
-            java.awt.Desktop.getDesktop().open(new java.io.File("src\\Helper"));
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
-    }//GEN-LAST:event_formKeyPressed
-
-    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
-        if(evt.getKeyCode() == F1)
-        {
-            try {
-            java.awt.Desktop.getDesktop().open(new java.io.File("src\\Helper"));
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
-    }//GEN-LAST:event_formKeyTyped
-
     private void btnXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatActionPerformed
         new QuanLyPhieuXuat().setVisible(true);
     }//GEN-LAST:event_btnXuatActionPerformed
@@ -812,10 +788,17 @@ public class frmMain extends javax.swing.JFrame {
         new QuanLyNV().setVisible(true);
     }//GEN-LAST:event_buttNVActionPerformed
 
-    private void jMenuAboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAboutMouseClicked
+    private void jPanelKhungChucNangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanelKhungChucNangKeyPressed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jMenuAboutMouseClicked
+        if(evt.getKeyCode() == KeyEvent.VK_F1)
+        {
+            new Help().setVisible(true);
+        }
+        if(evt.getKeyCode() == KeyEvent.VK_ESCAPE)
+        {
+            this.dispose();
+        }
+    }//GEN-LAST:event_jPanelKhungChucNangKeyPressed
 
     /**
      * @param args the command line arguments
