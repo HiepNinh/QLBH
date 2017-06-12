@@ -26,11 +26,11 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Component id="jPanel1" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Component id="jPanel2" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="742" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="1052" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -94,20 +94,25 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="btnBanh" alignment="1" max="32767" attributes="0"/>
-              <Component id="btnKe" alignment="1" max="32767" attributes="0"/>
-              <Component id="btnKho" alignment="1" max="32767" attributes="0"/>
-              <Component id="btnCustomer" alignment="1" max="32767" attributes="0"/>
-              <Component id="btnStaff" max="32767" attributes="0"/>
-              <Component id="btnHome" alignment="1" max="32767" attributes="0"/>
-              <Component id="btnHoadon" alignment="1" max="32767" attributes="0"/>
-              <Component id="btnPN" alignment="1" max="32767" attributes="0"/>
-              <Component id="btnPX" alignment="1" max="32767" attributes="0"/>
-              <Component id="btnTK" alignment="1" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="btnPX" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnPN" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnHoadon" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnBanh" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnKe" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnKho" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnCustomer" alignment="0" pref="115" max="32767" attributes="0"/>
+                      <Component id="btnStaff" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnHome" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnTK" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="jButton11" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="54" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -134,7 +139,7 @@
                   <Component id="btnPX" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnTK" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="96" max="32767" attributes="0"/>
+                  <EmptySpace pref="162" max="32767" attributes="0"/>
                   <Component id="jButton11" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>

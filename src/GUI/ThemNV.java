@@ -86,7 +86,7 @@ public class ThemNV extends javax.swing.JFrame {
         btnHuy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nhập bánh");
+        setTitle("Thêm nhân viên");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
