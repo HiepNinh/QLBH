@@ -103,6 +103,9 @@ public class ThemKHO extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 0);
         jPanel1.add(lblTenBanh, gridBagConstraints);
+
+        txbTD.setMinimumSize(new java.awt.Dimension(150, 22));
+        txbTD.setPreferredSize(new java.awt.Dimension(150, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
@@ -113,6 +116,8 @@ public class ThemKHO extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbTD, gridBagConstraints);
 
+        cbTenSP.setMinimumSize(new java.awt.Dimension(150, 22));
+        cbTenSP.setPreferredSize(new java.awt.Dimension(150, 22));
         cbTenSP.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbTenSPItemStateChanged(evt);
@@ -141,6 +146,9 @@ public class ThemKHO extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 12;
         jPanel1.add(jLabel3, gridBagConstraints);
+
+        txbMT.setMinimumSize(new java.awt.Dimension(150, 22));
+        txbMT.setPreferredSize(new java.awt.Dimension(150, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 9;
@@ -150,6 +158,9 @@ public class ThemKHO extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbMT, gridBagConstraints);
+
+        txbSLHT.setMinimumSize(new java.awt.Dimension(150, 22));
+        txbSLHT.setPreferredSize(new java.awt.Dimension(150, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 12;
@@ -161,6 +172,8 @@ public class ThemKHO extends javax.swing.JFrame {
         jPanel1.add(txbSLHT, gridBagConstraints);
 
         txbDG.setEnabled(false);
+        txbDG.setMinimumSize(new java.awt.Dimension(150, 22));
+        txbDG.setPreferredSize(new java.awt.Dimension(150, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
@@ -202,6 +215,7 @@ public class ThemKHO extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel2.add(lblThemBanhMoi, gridBagConstraints);
 
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/add.png"))); // NOI18N
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,6 +230,7 @@ public class ThemKHO extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 30;
         jPanel2.add(btnThem, gridBagConstraints);
 
+        btnHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/crossout.png"))); // NOI18N
         btnHuy.setText("Hủy");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,10 +238,10 @@ public class ThemKHO extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
+        gridBagConstraints.ipadx = 49;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 50);
         jPanel2.add(btnHuy, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -235,7 +250,7 @@ public class ThemKHO extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

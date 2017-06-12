@@ -97,7 +97,8 @@ public class QuanLyNV extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý nhân viên");
-        setMinimumSize(new java.awt.Dimension(1300, 400));
+        setMinimumSize(new java.awt.Dimension(1095, 343));
+        setResizable(false);
 
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
@@ -158,7 +159,7 @@ public class QuanLyNV extends javax.swing.JFrame {
         lblDiaChi.setText("Địa chỉ:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
         jPanel4.add(lblDiaChi, gridBagConstraints);
@@ -166,9 +167,9 @@ public class QuanLyNV extends javax.swing.JFrame {
         lblSDT.setText("Số điện thoại:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(8, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 0);
         jPanel4.add(lblSDT, gridBagConstraints);
 
         lblTenKH.setText("Tên NV:");
@@ -190,44 +191,56 @@ public class QuanLyNV extends javax.swing.JFrame {
         lblEmail.setText("E-mail:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
         jPanel4.add(lblEmail, gridBagConstraints);
 
         lblChucVu.setText("Chức vụ:");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
         jPanel4.add(lblChucVu, gridBagConstraints);
 
-        AnhDaiDien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/User-Group-icon.png"))); // NOI18N
+        AnhDaiDien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/Preppy-icon (1).png"))); // NOI18N
         AnhDaiDien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AnhDaiDienMouseClicked(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 5;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 6;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
         jPanel4.add(AnhDaiDien, gridBagConstraints);
 
-        txbTen.setText("Trịnh Thị Hà");
-        txbTen.setMinimumSize(new java.awt.Dimension(400, 20));
+        txbTen.setMinimumSize(new java.awt.Dimension(200, 22));
+        txbTen.setPreferredSize(new java.awt.Dimension(200, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel4.add(txbTen, gridBagConstraints);
 
-        txbDC.setText("60 Nguyễn Đình Chiểu, P2, Quận 1");
+        txbDC.setMinimumSize(new java.awt.Dimension(200, 22));
+        txbDC.setPreferredSize(new java.awt.Dimension(200, 22));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
+        jPanel4.add(txbDC, gridBagConstraints);
+
+        txbDT.setMinimumSize(new java.awt.Dimension(200, 22));
+        txbDT.setPreferredSize(new java.awt.Dimension(200, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
@@ -235,19 +248,9 @@ public class QuanLyNV extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel4.add(txbDC, gridBagConstraints);
-
-        txbDT.setText("01241520113");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel4.add(txbDT, gridBagConstraints);
 
-        lbMa.setText("NV001");
+        lbMa.setText("N/A");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -256,18 +259,21 @@ public class QuanLyNV extends javax.swing.JFrame {
         jPanel4.add(lbMa, gridBagConstraints);
 
         cbCV.setToolTipText("");
+        cbCV.setMinimumSize(new java.awt.Dimension(100, 22));
+        cbCV.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(4, 11, 5, 10);
         jPanel4.add(cbCV, gridBagConstraints);
 
-        txbEmail.setText("bdf@hm.com");
+        txbEmail.setMinimumSize(new java.awt.Dimension(200, 22));
+        txbEmail.setPreferredSize(new java.awt.Dimension(200, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
@@ -281,9 +287,10 @@ public class QuanLyNV extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 12;
-        gridBagConstraints.insets = new java.awt.Insets(8, 8, 5, 0);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(8, 8, 5, 25);
         jPanel4.add(btnThem, gridBagConstraints);
 
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/people_edit.png"))); // NOI18N
@@ -294,7 +301,7 @@ public class QuanLyNV extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 12;
         gridBagConstraints.insets = new java.awt.Insets(8, 8, 5, 10);
         jPanel4.add(btnSua, gridBagConstraints);
@@ -307,12 +314,14 @@ public class QuanLyNV extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 12;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(8, 6, 5, 10);
         jPanel4.add(btnXoa, gridBagConstraints);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/crossout.png"))); // NOI18N
         jButton1.setText("Thoát");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -320,8 +329,9 @@ public class QuanLyNV extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 12;
+        gridBagConstraints.insets = new java.awt.Insets(8, 8, 5, 10);
         jPanel4.add(jButton1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -379,14 +389,14 @@ public class QuanLyNV extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1109, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1071, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

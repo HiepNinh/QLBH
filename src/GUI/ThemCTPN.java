@@ -107,6 +107,8 @@ public class ThemCTPN extends javax.swing.JFrame {
         jPanel1.add(lblTenBanh, gridBagConstraints);
 
         txbDG.setEnabled(false);
+        txbDG.setMinimumSize(new java.awt.Dimension(100, 22));
+        txbDG.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
@@ -116,6 +118,9 @@ public class ThemCTPN extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbDG, gridBagConstraints);
+
+        txbSL.setMinimumSize(new java.awt.Dimension(100, 22));
+        txbSL.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
@@ -126,6 +131,8 @@ public class ThemCTPN extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbSL, gridBagConstraints);
 
+        cbTenSP.setMinimumSize(new java.awt.Dimension(100, 22));
+        cbTenSP.setPreferredSize(new java.awt.Dimension(100, 22));
         cbTenSP.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbTenSPItemStateChanged(evt);

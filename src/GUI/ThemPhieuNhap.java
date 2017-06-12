@@ -188,11 +188,15 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
             }
         });
 
+        cbTen.setMinimumSize(new java.awt.Dimension(100, 22));
+        cbTen.setPreferredSize(new java.awt.Dimension(100, 22));
+
         lbMa.setText("Tên Bánh");
 
         jLabel3.setText("Số lượng:");
 
-        txbSL.setMinimumSize(new java.awt.Dimension(60, 22));
+        txbSL.setMinimumSize(new java.awt.Dimension(100, 22));
+        txbSL.setPreferredSize(new java.awt.Dimension(100, 22));
 
         btnAdd.setText("Thêm");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -264,6 +268,7 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
         );
 
         dpNgayLap.setEnabled(false);
+        dpNgayLap.setMinimumSize(new java.awt.Dimension(100, 22));
 
         lblNgayLap.setText("Ngày lập:");
 
@@ -271,10 +276,14 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
 
         txbTenNV.setAutoscrolls(false);
         txbTenNV.setEnabled(false);
+        txbTenNV.setMinimumSize(new java.awt.Dimension(100, 22));
+        txbTenNV.setPreferredSize(new java.awt.Dimension(100, 22));
 
         jLabel2.setText("Nhà cung cấp");
 
         cbNCC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ABC", "XYZ", "BCS", "TTT" }));
+        cbNCC.setMinimumSize(new java.awt.Dimension(100, 22));
+        cbNCC.setPreferredSize(new java.awt.Dimension(100, 22));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

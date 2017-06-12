@@ -98,6 +98,9 @@ public class ThemCTPX extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 0);
         jPanel1.add(lblTenBanh, gridBagConstraints);
+
+        txbSL.setMinimumSize(new java.awt.Dimension(100, 22));
+        txbSL.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
@@ -108,6 +111,8 @@ public class ThemCTPX extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbSL, gridBagConstraints);
 
+        cbTenSP.setMinimumSize(new java.awt.Dimension(100, 22));
+        cbTenSP.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -138,7 +143,7 @@ public class ThemCTPX extends javax.swing.JFrame {
 
         lblThemCTHD.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblThemCTHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/blog_add.png"))); // NOI18N
-        lblThemCTHD.setText("Thêm CTPN");
+        lblThemCTHD.setText("Thêm CTPX");
         lblThemCTHD.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

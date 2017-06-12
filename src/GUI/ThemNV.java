@@ -33,9 +33,9 @@ public class ThemNV extends javax.swing.JFrame {
 
     public void LoadData()
     {
-        txbTen.setText("Your Name");
-        txbAcc.setText("          ");
-        txbPass.setText("          ");
+        txbTen.setText("");
+        txbAcc.setText("");
+        txbPass.setText("");
         txbDC.setText("");
         txbDT.setText("");
         txbEmail.setText("");
@@ -97,7 +97,7 @@ public class ThemNV extends javax.swing.JFrame {
         jLabel2.setText("Địa chỉ:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
         jPanel1.add(jLabel2, gridBagConstraints);
@@ -105,7 +105,7 @@ public class ThemNV extends javax.swing.JFrame {
         jLabel3.setText("Số điện thoại:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(8, 0, 5, 0);
         jPanel1.add(jLabel3, gridBagConstraints);
@@ -121,7 +121,7 @@ public class ThemNV extends javax.swing.JFrame {
         jLabel6.setText("E-mail:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
         jPanel1.add(jLabel6, gridBagConstraints);
@@ -129,27 +129,28 @@ public class ThemNV extends javax.swing.JFrame {
         jLabel7.setText("Chức vụ:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
         jPanel1.add(jLabel7, gridBagConstraints);
 
-        AnhDaiDien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/User-Group-icon.png"))); // NOI18N
+        AnhDaiDien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/Preppy-icon (1).png"))); // NOI18N
         AnhDaiDien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AnhDaiDienMouseClicked(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.gridheight = 5;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 12;
+        gridBagConstraints.gridheight = 7;
+        gridBagConstraints.insets = new java.awt.Insets(6, 62, 5, 0);
         jPanel1.add(AnhDaiDien, gridBagConstraints);
 
-        txbTen.setText("tam thoi chua co");
-        txbTen.setMinimumSize(new java.awt.Dimension(400, 20));
+        txbTen.setMinimumSize(new java.awt.Dimension(150, 22));
+        txbTen.setName(""); // NOI18N
+        txbTen.setPreferredSize(new java.awt.Dimension(150, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -157,14 +158,10 @@ public class ThemNV extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbTen, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(txbDC, gridBagConstraints);
+
+        txbDC.setMinimumSize(new java.awt.Dimension(150, 22));
+        txbDC.setName(""); // NOI18N
+        txbDC.setPreferredSize(new java.awt.Dimension(150, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
@@ -172,46 +169,76 @@ public class ThemNV extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
-        jPanel1.add(txbDT, gridBagConstraints);
+        jPanel1.add(txbDC, gridBagConstraints);
 
-        cbCV.setToolTipText("");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(4, 11, 5, 10);
-        jPanel1.add(cbCV, gridBagConstraints);
+        txbDT.setMinimumSize(new java.awt.Dimension(150, 22));
+        txbDT.setName(""); // NOI18N
+        txbDT.setPreferredSize(new java.awt.Dimension(150, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
+        jPanel1.add(txbDT, gridBagConstraints);
+
+        cbCV.setToolTipText("");
+        cbCV.setMinimumSize(new java.awt.Dimension(150, 22));
+        cbCV.setName(""); // NOI18N
+        cbCV.setPreferredSize(new java.awt.Dimension(150, 22));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(4, 11, 5, 10);
+        jPanel1.add(cbCV, gridBagConstraints);
+
+        txbEmail.setMinimumSize(new java.awt.Dimension(150, 22));
+        txbEmail.setName(""); // NOI18N
+        txbEmail.setPreferredSize(new java.awt.Dimension(150, 22));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbEmail, gridBagConstraints);
 
-        txbAcc.setText("jTextField1");
+        txbAcc.setMinimumSize(new java.awt.Dimension(150, 22));
+        txbAcc.setName(""); // NOI18N
+        txbAcc.setPreferredSize(new java.awt.Dimension(150, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbAcc, gridBagConstraints);
 
-        jXLabel1.setText("Tên đăng nhập");
+        jXLabel1.setText("Tên đăng nhập:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
         jPanel1.add(jXLabel1, gridBagConstraints);
 
-        jXLabel2.setText("Mật khẩu");
+        jXLabel2.setText("Mật khẩu:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(8, 28, 5, 0);
         jPanel1.add(jXLabel2, gridBagConstraints);
 
-        txbPass.setText("jPasswordField1");
+        txbPass.setMinimumSize(new java.awt.Dimension(150, 22));
+        txbPass.setName(""); // NOI18N
+        txbPass.setPreferredSize(new java.awt.Dimension(150, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbPass, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -244,6 +271,7 @@ public class ThemNV extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel2.add(jLabel1, gridBagConstraints);
 
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/add.png"))); // NOI18N
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,6 +285,7 @@ public class ThemNV extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 30;
         jPanel2.add(btnThem, gridBagConstraints);
 
+        btnHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/crossout.png"))); // NOI18N
         btnHuy.setText("Hủy");
         btnHuy.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -266,8 +295,9 @@ public class ThemNV extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 5;
+        gridBagConstraints.ipadx = 38;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         jPanel2.add(btnHuy, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -276,8 +306,8 @@ public class ThemNV extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 555, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,7 +326,7 @@ public class ThemNV extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
 
-        if (txbTen.getText().equals("Your Name") || txbDC.getText().equals("") || txbAcc.getText().equals("          ") || txbPass.getText().equals("          ")
+        if (txbTen.getText().equals("") || txbDC.getText().equals("") || txbAcc.getText().equals("") || txbPass.getText().equals("")
                 || cbCV.getSelectedItem() == null || txbDT.getText().equals("") || txbEmail.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin nhân viên!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
         } else {

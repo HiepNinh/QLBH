@@ -95,6 +95,9 @@ public class ThemKE extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 0);
         jPanel1.add(lblTenBanh, gridBagConstraints);
+
+        txbTD.setMinimumSize(new java.awt.Dimension(100, 22));
+        txbTD.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
@@ -105,6 +108,8 @@ public class ThemKE extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbTD, gridBagConstraints);
 
+        cbTenSP.setMinimumSize(new java.awt.Dimension(100, 22));
+        cbTenSP.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -128,6 +133,9 @@ public class ThemKE extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 12;
         jPanel1.add(jLabel3, gridBagConstraints);
+
+        txbMT.setMinimumSize(new java.awt.Dimension(100, 22));
+        txbMT.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 9;
@@ -137,6 +145,9 @@ public class ThemKE extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbMT, gridBagConstraints);
+
+        txbSLHT.setMinimumSize(new java.awt.Dimension(100, 22));
+        txbSLHT.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 12;

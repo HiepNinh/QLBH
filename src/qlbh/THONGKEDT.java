@@ -50,9 +50,9 @@ public class THONGKEDT {
             
       
       JFreeChart barChart = ChartFactory.createBarChart3D(
-         "Car Usage Statistics",             
-         "Category",             
-         "Score",             
+         "Thống kê doanh thu",             
+         "Tháng",             
+         "Giá trị",             
          dataset,            
          PlotOrientation.VERTICAL,             
          true, true, false);

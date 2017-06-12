@@ -131,7 +131,6 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnDel = new javax.swing.JButton();
         btnUp = new javax.swing.JButton();
-        btnHuy = new javax.swing.JButton();
         txbDG = new javax.swing.JTextField();
         txbSL = new javax.swing.JTextField();
         txbTenSP = new javax.swing.JTextField();
@@ -154,13 +153,14 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         btnSearch = new javax.swing.JButton();
         txbSearch = new javax.swing.JTextField();
+        btnHuy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Quản lý phiếu nhập");
+        setTitle("Quản lý phiếu xuất");
         setAutoRequestFocus(false);
         setResizable(false);
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách phiếu nhập"));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách phiếu xuất"));
 
         JtablePX.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -178,7 +178,7 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(JtablePX);
 
-        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Chi tiết phiếu nhập"));
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Chi tiết phiếu xuất"));
         jScrollPane2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 
         JtableCTPX.setModel(new javax.swing.table.DefaultTableModel(
@@ -208,25 +208,25 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_END;
-        gridBagConstraints.insets = new java.awt.Insets(14, 231, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
         jPanel1.add(lblTenSP, gridBagConstraints);
 
         lblDonGia.setText("Đơn giá:");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(188, 118, 0, 0);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
         jPanel1.add(lblDonGia, gridBagConstraints);
 
         lblSoLuong.setText("Số lượng:");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 110, 0, 0);
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 14, 10, 143);
         jPanel1.add(lblSoLuong, gridBagConstraints);
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/file_add.png"))); // NOI18N
@@ -237,11 +237,11 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(13, 196, 163, 0);
+        gridBagConstraints.insets = new java.awt.Insets(45, 0, 0, 20);
         jPanel1.add(btnAdd, gridBagConstraints);
 
         btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/file_del.png"))); // NOI18N
@@ -252,11 +252,11 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(13, 10, 163, 0);
+        gridBagConstraints.insets = new java.awt.Insets(45, 0, 0, 0);
         jPanel1.add(btnDel, gridBagConstraints);
 
         btnUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/file_edit.png"))); // NOI18N
@@ -267,62 +267,48 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(13, 25, 163, 0);
+        gridBagConstraints.insets = new java.awt.Insets(45, -15, 0, 0);
         jPanel1.add(btnUp, gridBagConstraints);
 
-        btnHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/crossout.png"))); // NOI18N
-        btnHuy.setText("Hủy bỏ");
-        btnHuy.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnHuyMouseClicked(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(13, 20, 163, 0);
-        jPanel1.add(btnHuy, gridBagConstraints);
-
         txbDG.setEditable(false);
-        txbDG.setText("50000");
+        txbDG.setText("0");
         txbDG.setToolTipText("");
+        txbDG.setMinimumSize(new java.awt.Dimension(60, 22));
+        txbDG.setPreferredSize(new java.awt.Dimension(60, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 75;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(185, 18, 0, 196);
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 10, 0);
         jPanel1.add(txbDG, gridBagConstraints);
 
-        txbSL.setText("100");
+        txbSL.setText("0");
+        txbSL.setMinimumSize(new java.awt.Dimension(60, 22));
+        txbSL.setPreferredSize(new java.awt.Dimension(60, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 75;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 18, 0, 196);
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.ipadx = 70;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 7, 0);
         jPanel1.add(txbSL, gridBagConstraints);
 
         txbTenSP.setEnabled(false);
         txbTenSP.setMinimumSize(new java.awt.Dimension(300, 20));
         txbTenSP.setPreferredSize(new java.awt.Dimension(300, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
         jPanel1.add(txbTenSP, gridBagConstraints);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Phiếu nhập"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Phiếu xuất"));
         jPanel2.setAutoscrolls(true);
         jPanel2.setMinimumSize(new java.awt.Dimension(471, 322));
         jPanel2.setLayout(new java.awt.GridBagLayout());
@@ -378,7 +364,8 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         jPanel2.add(btnIn, gridBagConstraints);
 
         txbMaNV.setEditable(false);
-        txbMaNV.setText("NV004");
+        txbMaNV.setMinimumSize(new java.awt.Dimension(60, 22));
+        txbMaNV.setPreferredSize(new java.awt.Dimension(60, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -388,7 +375,9 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         jPanel2.add(txbMaNV, gridBagConstraints);
 
         txbTenNV.setEditable(false);
-        txbTenNV.setText("Thảo lé aaa aaaloha ahihi");
+        txbTenNV.setToolTipText("");
+        txbTenNV.setMinimumSize(new java.awt.Dimension(150, 22));
+        txbTenNV.setPreferredSize(new java.awt.Dimension(150, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 2;
@@ -432,9 +421,14 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(11, 15, 0, 0);
         jPanel2.add(lbMa, gridBagConstraints);
+
+        dpNgayNhap.setMinimumSize(new java.awt.Dimension(150, 22));
+        dpNgayNhap.setPreferredSize(new java.awt.Dimension(150, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.insets = new java.awt.Insets(11, 15, 0, 10);
         jPanel2.add(dpNgayNhap, gridBagConstraints);
 
         jPanel5.setLayout(new java.awt.GridBagLayout());
@@ -447,10 +441,9 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(6, -50, 0, 30);
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         jPanel5.add(btnLapPN, gridBagConstraints);
 
         lblQuanLyPN.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -471,7 +464,7 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 12, 0, 10);
         jPanel5.add(jSeparator2, gridBagConstraints);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm phiếu nhập"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm phiếu xuất"));
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/search.png"))); // NOI18N
@@ -499,47 +492,59 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
         jPanel4.add(txbSearch, gridBagConstraints);
 
+        btnHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/crossout.png"))); // NOI18N
+        btnHuy.setText("Hủy bỏ");
+        btnHuy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHuyMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 1563, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 1209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         jScrollPane1.getAccessibleContext().setAccessibleName("Danh sách phiếu xuất");
         jScrollPane2.getAccessibleContext().setAccessibleName("Chi tiết phiếu xuất");
+        jPanel4.getAccessibleContext().setAccessibleName("Tìm kiếm phiếu xuất");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -42,7 +42,7 @@ public class THONGKE {
         }
 
         JFreeChart chart = ChartFactory.createPieChart3D(
-                "Maria", // chart title                   
+                "Thống kê tỷ lệ sử dụng sản phẩm", // chart title                   
                 dataset, // data 
                 true, // include legend                   
                 true,

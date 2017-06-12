@@ -76,7 +76,8 @@ public class ThemBanh extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 0);
         jPanel1.add(lblTenBanh, gridBagConstraints);
 
-        txbTen.setText("Bánh Bông Lan");
+        txbTen.setMinimumSize(new java.awt.Dimension(100, 22));
+        txbTen.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -86,7 +87,8 @@ public class ThemBanh extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 5, 0);
         jPanel1.add(txbTen, gridBagConstraints);
 
-        txbDG.setText("50000");
+        txbDG.setMinimumSize(new java.awt.Dimension(100, 22));
+        txbDG.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;

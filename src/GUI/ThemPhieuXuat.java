@@ -129,7 +129,7 @@ public class ThemPhieuXuat extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/forum_add.png"))); // NOI18N
-        jLabel1.setText("Lập phiếu nhập");
+        jLabel1.setText("Lập phiếu xuất ");
         jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         JtableCTPN.setModel(new javax.swing.table.DefaultTableModel(
@@ -157,11 +157,15 @@ public class ThemPhieuXuat extends javax.swing.JFrame {
             }
         });
 
+        cbTen.setMinimumSize(new java.awt.Dimension(100, 22));
+        cbTen.setPreferredSize(new java.awt.Dimension(100, 22));
+
         lbMa.setText("Tên Bánh");
 
         jLabel3.setText("Số lượng:");
 
-        txbSL.setMinimumSize(new java.awt.Dimension(60, 22));
+        txbSL.setMinimumSize(new java.awt.Dimension(100, 22));
+        txbSL.setPreferredSize(new java.awt.Dimension(100, 22));
 
         btnAdd.setText("Thêm");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -229,6 +233,7 @@ public class ThemPhieuXuat extends javax.swing.JFrame {
         );
 
         dpNgayLap.setEnabled(false);
+        dpNgayLap.setMinimumSize(new java.awt.Dimension(100, 22));
 
         lblNgayLap.setText("Ngày lập:");
 
@@ -236,6 +241,8 @@ public class ThemPhieuXuat extends javax.swing.JFrame {
 
         txbTenNV.setAutoscrolls(false);
         txbTenNV.setEnabled(false);
+        txbTenNV.setMinimumSize(new java.awt.Dimension(100, 22));
+        txbTenNV.setPreferredSize(new java.awt.Dimension(100, 22));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
