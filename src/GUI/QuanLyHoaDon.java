@@ -765,6 +765,12 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
         if (JtableCTHD.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn thông tin muốn sửa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
         } else {
+            if(txbSL.getText().equals(""))
+           {
+               JOptionPane.showMessageDialog(null, "Không thể để trống dữ liệu!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+               return;
+           }
+            
             int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn sửa?", "Sửa chi tiết hóa đơn", JOptionPane.WARNING_MESSAGE);
             if (reply == JOptionPane.YES_OPTION) {
                 //xóa cthd    

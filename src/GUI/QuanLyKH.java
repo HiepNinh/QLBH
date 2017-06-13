@@ -31,6 +31,9 @@ public class QuanLyKH extends javax.swing.JFrame {
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(colsName);
         JtableKH.setModel(tableModel);
+        
+        lbwarningKH.setVisible(false);
+        lbwarningDC.setVisible(false);
     }
     
     
@@ -78,6 +81,8 @@ public class QuanLyKH extends javax.swing.JFrame {
         btnXoa = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        lbwarningKH = new javax.swing.JLabel();
+        lbwarningDC = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnSearch = new javax.swing.JButton();
         txbSearch = new javax.swing.JTextField();
@@ -194,6 +199,14 @@ public class QuanLyKH extends javax.swing.JFrame {
 
         txbTen.setMinimumSize(new java.awt.Dimension(150, 22));
         txbTen.setPreferredSize(new java.awt.Dimension(150, 22));
+        txbTen.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txbTenFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txbTenFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
@@ -204,6 +217,14 @@ public class QuanLyKH extends javax.swing.JFrame {
 
         txbDC.setMinimumSize(new java.awt.Dimension(150, 22));
         txbDC.setPreferredSize(new java.awt.Dimension(150, 22));
+        txbDC.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txbDCFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txbDCFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
@@ -235,7 +256,7 @@ public class QuanLyKH extends javax.swing.JFrame {
         cbLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VIP", "Normal" }));
         cbLoai.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -260,9 +281,9 @@ public class QuanLyKH extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 8;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.gridheight = 7;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
         jPanel4.add(AnhDaiDien, gridBagConstraints);
@@ -275,7 +296,7 @@ public class QuanLyKH extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 12;
         gridBagConstraints.insets = new java.awt.Insets(8, 8, 5, 12);
         jPanel4.add(btnThem, gridBagConstraints);
@@ -288,7 +309,7 @@ public class QuanLyKH extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 12;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(8, 6, 5, 10);
@@ -302,7 +323,7 @@ public class QuanLyKH extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 12;
         gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 10);
         jPanel4.add(btnSua, gridBagConstraints);
@@ -315,10 +336,28 @@ public class QuanLyKH extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 12;
         gridBagConstraints.insets = new java.awt.Insets(8, 10, 5, 10);
         jPanel4.add(jButton1, gridBagConstraints);
+
+        lbwarningKH.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lbwarningKH.setForeground(new java.awt.Color(255, 0, 0));
+        lbwarningKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/important.png"))); // NOI18N
+        lbwarningKH.setText("Bắt buộc");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 4;
+        jPanel4.add(lbwarningKH, gridBagConstraints);
+
+        lbwarningDC.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lbwarningDC.setForeground(new java.awt.Color(255, 0, 0));
+        lbwarningDC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/important.png"))); // NOI18N
+        lbwarningDC.setText("Bắt buộc");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 6;
+        jPanel4.add(lbwarningDC, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -400,6 +439,12 @@ public class QuanLyKH extends javax.swing.JFrame {
         if (JtableKH.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn khách hàng muốn sửa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
         } else {
+            if(txbTen.getText().equals("") || txbDC.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "Không thể để trống dữ liệu!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            
             int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn sửa khách hàng này?", "Sửa khách hàng", JOptionPane.WARNING_MESSAGE);
             if (reply == JOptionPane.YES_OPTION) {
                 //Sửa nhân viên            
@@ -496,12 +541,41 @@ public class QuanLyKH extends javax.swing.JFrame {
         txbEmail.setText(JtableKH.getModel().getValueAt(row, 4).toString());
         txbDT.setText(JtableKH.getModel().getValueAt(row, 5).toString());
         this.cbLoai.setSelectedItem(JtableKH.getModel().getValueAt(row, 6).toString());
+        
+        lbwarningKH.setVisible(false);
+        lbwarningDC.setVisible(false);
     }//GEN-LAST:event_JtableKHMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txbTenFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbTenFocusGained
+        // TODO add your handling code here:
+        lbwarningKH.setVisible(false);
+    }//GEN-LAST:event_txbTenFocusGained
+
+    private void txbTenFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbTenFocusLost
+        // TODO add your handling code here:
+        if(txbTen.getText().equals(""))
+        {
+            lbwarningKH.setVisible(true);
+        }
+    }//GEN-LAST:event_txbTenFocusLost
+
+    private void txbDCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbDCFocusGained
+        // TODO add your handling code here:
+        lbwarningDC.setVisible(false);
+    }//GEN-LAST:event_txbDCFocusGained
+
+    private void txbDCFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbDCFocusLost
+        // TODO add your handling code here:
+        if(txbDC.getText().equals(""))
+        {
+            lbwarningDC.setVisible(true);
+        }
+    }//GEN-LAST:event_txbDCFocusLost
 
     /**
      * @param args the command line arguments
@@ -561,6 +635,8 @@ public class QuanLyKH extends javax.swing.JFrame {
     private javax.swing.JLabel lblQuanLyKH;
     private javax.swing.JLabel lblSDT;
     private javax.swing.JLabel lblTenKH;
+    private javax.swing.JLabel lbwarningDC;
+    private javax.swing.JLabel lbwarningKH;
     private javax.swing.JTextField txbDC;
     private javax.swing.JTextField txbDT;
     private javax.swing.JTextField txbEmail;

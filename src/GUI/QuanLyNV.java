@@ -33,13 +33,16 @@ public class QuanLyNV extends javax.swing.JFrame {
 
     public QuanLyNV() {
         initComponents();
-        ChangeText("-", "     ", "     ", "    ", "     ", "      ");
+        ChangeText("", "", "", "", "", "");
         this.setLocationRelativeTo(null);
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(colsName);
         JtableNV.setModel(tableModel);
         LoadComBoBox();
         LoadButton();
+        
+        lbwarningNV.setVisible(false);
+        lbwarningDC.setVisible(false);
     }
 
     public void LoadComBoBox() {
@@ -91,6 +94,8 @@ public class QuanLyNV extends javax.swing.JFrame {
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        lbwarningNV = new javax.swing.JLabel();
+        lbwarningDC = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnSearch = new javax.swing.JButton();
         txbSearch = new javax.swing.JTextField();
@@ -213,13 +218,21 @@ public class QuanLyNV extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 6;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
         jPanel4.add(AnhDaiDien, gridBagConstraints);
 
         txbTen.setMinimumSize(new java.awt.Dimension(200, 22));
         txbTen.setPreferredSize(new java.awt.Dimension(200, 22));
+        txbTen.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txbTenFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txbTenFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -230,6 +243,14 @@ public class QuanLyNV extends javax.swing.JFrame {
 
         txbDC.setMinimumSize(new java.awt.Dimension(200, 22));
         txbDC.setPreferredSize(new java.awt.Dimension(200, 22));
+        txbDC.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txbDCFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txbDCFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
@@ -262,7 +283,7 @@ public class QuanLyNV extends javax.swing.JFrame {
         cbCV.setMinimumSize(new java.awt.Dimension(100, 22));
         cbCV.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -287,10 +308,10 @@ public class QuanLyNV extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 12;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(8, 8, 5, 25);
+        gridBagConstraints.insets = new java.awt.Insets(45, 8, 5, 25);
         jPanel4.add(btnThem, gridBagConstraints);
 
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/people_edit.png"))); // NOI18N
@@ -301,9 +322,9 @@ public class QuanLyNV extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 12;
-        gridBagConstraints.insets = new java.awt.Insets(8, 8, 5, 10);
+        gridBagConstraints.insets = new java.awt.Insets(45, 8, 5, 10);
         jPanel4.add(btnSua, gridBagConstraints);
 
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/people_del.png"))); // NOI18N
@@ -314,11 +335,11 @@ public class QuanLyNV extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 12;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(8, 6, 5, 10);
+        gridBagConstraints.insets = new java.awt.Insets(45, 6, 5, 10);
         jPanel4.add(btnXoa, gridBagConstraints);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/crossout.png"))); // NOI18N
@@ -329,10 +350,28 @@ public class QuanLyNV extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 12;
-        gridBagConstraints.insets = new java.awt.Insets(8, 8, 5, 10);
+        gridBagConstraints.insets = new java.awt.Insets(45, 8, 5, 10);
         jPanel4.add(jButton1, gridBagConstraints);
+
+        lbwarningNV.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lbwarningNV.setForeground(new java.awt.Color(255, 0, 0));
+        lbwarningNV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/important.png"))); // NOI18N
+        lbwarningNV.setText("Bắt buộc");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 2;
+        jPanel4.add(lbwarningNV, gridBagConstraints);
+
+        lbwarningDC.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lbwarningDC.setForeground(new java.awt.Color(255, 0, 0));
+        lbwarningDC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/important.png"))); // NOI18N
+        lbwarningDC.setText("Bắt buộc");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 4;
+        jPanel4.add(lbwarningDC, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -396,7 +435,7 @@ public class QuanLyNV extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -408,6 +447,12 @@ public class QuanLyNV extends javax.swing.JFrame {
         if (JtableNV.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên muốn sửa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
         } else {
+            if(txbTen.getText().equals("") || txbDC.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "Không thể để trống dữ liệu!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            
             int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn sửa nhân viên này?", "Sửa nhân viên", JOptionPane.WARNING_MESSAGE);
             if (reply == JOptionPane.YES_OPTION) {
                 //Sửa nhân viên            
@@ -510,12 +555,41 @@ public class QuanLyNV extends javax.swing.JFrame {
         txbDT.setText(JtableNV.getModel().getValueAt(row, 4).toString());
         txbEmail.setText(JtableNV.getModel().getValueAt(row, 5).toString());
         this.cbCV.setSelectedItem(JtableNV.getModel().getValueAt(row, 6).toString());
+        
+        lbwarningNV.setVisible(false);
+        lbwarningDC.setVisible(false);
     }//GEN-LAST:event_JtableNVMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txbTenFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbTenFocusGained
+        // TODO add your handling code here:
+        lbwarningNV.setVisible(false);
+    }//GEN-LAST:event_txbTenFocusGained
+
+    private void txbTenFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbTenFocusLost
+        // TODO add your handling code here:
+        if(txbTen.getText().equals(""))
+        {
+            lbwarningNV.setVisible(true);
+        }
+    }//GEN-LAST:event_txbTenFocusLost
+
+    private void txbDCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbDCFocusGained
+        // TODO add your handling code here:
+        lbwarningDC.setVisible(false);
+    }//GEN-LAST:event_txbDCFocusGained
+
+    private void txbDCFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbDCFocusLost
+        // TODO add your handling code here:
+        if(txbDC.getText().equals(""))
+        {
+            lbwarningDC.setVisible(true);
+        }
+    }//GEN-LAST:event_txbDCFocusLost
 
     /**
      * @param args the command line arguments
@@ -576,6 +650,8 @@ public class QuanLyNV extends javax.swing.JFrame {
     private javax.swing.JLabel lblQuanLyNV;
     private javax.swing.JLabel lblSDT;
     private javax.swing.JLabel lblTenKH;
+    private javax.swing.JLabel lbwarningDC;
+    private javax.swing.JLabel lbwarningNV;
     private javax.swing.JTextField txbDC;
     private javax.swing.JTextField txbDT;
     private javax.swing.JTextField txbEmail;

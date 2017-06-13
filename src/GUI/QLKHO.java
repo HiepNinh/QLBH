@@ -39,6 +39,9 @@ public class QLKHO extends javax.swing.JFrame {
         tableModel.setColumnIdentifiers(colsName);
         JtableKHO.setModel(tableModel);
         LoadButton();
+        
+        lbMT.setVisible(false);
+        lbSLHT.setVisible(false);
     }
 
 
@@ -77,6 +80,8 @@ public class QLKHO extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lbMaSP = new javax.swing.JLabel();
+        lbMT = new javax.swing.JLabel();
+        lbSLHT = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnSearch = new javax.swing.JButton();
         txbSearch = new javax.swing.JTextField();
@@ -183,7 +188,7 @@ public class QLKHO extends javax.swing.JFrame {
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 8;
-        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.gridheight = 3;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
         jPanel4.add(AnhDaiDien, gridBagConstraints);
 
@@ -201,6 +206,14 @@ public class QLKHO extends javax.swing.JFrame {
 
         txbSLHT.setMinimumSize(new java.awt.Dimension(60, 22));
         txbSLHT.setPreferredSize(new java.awt.Dimension(60, 22));
+        txbSLHT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txbSLHTFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txbSLHTFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 9;
@@ -220,6 +233,14 @@ public class QLKHO extends javax.swing.JFrame {
 
         txbMT.setMinimumSize(new java.awt.Dimension(60, 22));
         txbMT.setPreferredSize(new java.awt.Dimension(60, 22));
+        txbMT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txbMTFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txbMTFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 8;
@@ -284,17 +305,36 @@ public class QLKHO extends javax.swing.JFrame {
 
         jLabel1.setText("Mã sản phẩm");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.insets = new java.awt.Insets(0, 34, 0, 0);
         jPanel4.add(jLabel1, gridBagConstraints);
 
         lbMaSP.setText("NA");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.insets = new java.awt.Insets(0, 24, 0, 14);
         jPanel4.add(lbMaSP, gridBagConstraints);
+
+        lbMT.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lbMT.setForeground(new java.awt.Color(255, 0, 0));
+        lbMT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/important.png"))); // NOI18N
+        lbMT.setText("Bắt buộc");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 8;
+        jPanel4.add(lbMT, gridBagConstraints);
+
+        lbSLHT.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lbSLHT.setForeground(new java.awt.Color(255, 0, 0));
+        lbSLHT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/important.png"))); // NOI18N
+        lbSLHT.setText("Bắt buộc");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 9;
+        jPanel4.add(lbSLHT, gridBagConstraints);
 
         jPanel1.add(jPanel4, new java.awt.GridBagConstraints());
 
@@ -364,6 +404,11 @@ public class QLKHO extends javax.swing.JFrame {
         if (JtableKHO.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn mặt hàng muốn sửa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
         } else {
+            if(txbMT.getText().equals("") || txbSLHT.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "Không thể để trống dữ liệu!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
             int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn sửa mặt hàng này?", "Sửa mặt hàng", JOptionPane.WARNING_MESSAGE);
             if (reply == JOptionPane.YES_OPTION) {               
                int masp = Integer.parseInt(lbMaSP.getText());
@@ -466,12 +511,39 @@ public class QLKHO extends javax.swing.JFrame {
         lbTD.setText(JtableKHO.getModel().getValueAt(row, 3).toString());
         txbMT.setText(JtableKHO.getModel().getValueAt(row, 4).toString());
         txbSLHT.setText(JtableKHO.getModel().getValueAt(row, 5).toString());
+        lbMT.setVisible(false);
+        lbSLHT.setVisible(false);
     }//GEN-LAST:event_JtableKHOMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txbMTFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbMTFocusGained
+        // TODO add your handling code here:
+        lbMT.setVisible(false);
+    }//GEN-LAST:event_txbMTFocusGained
+
+    private void txbMTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbMTFocusLost
+        if(txbMT.getText().equals(""))
+        {
+            lbMT.setVisible(true);
+        }
+    }//GEN-LAST:event_txbMTFocusLost
+
+    private void txbSLHTFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbSLHTFocusGained
+        // TODO add your handling code here:
+        lbSLHT.setVisible(false);
+    }//GEN-LAST:event_txbSLHTFocusGained
+
+    private void txbSLHTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbSLHTFocusLost
+        // TODO add your handling code here:
+        if(txbSLHT.getText().equals(""))
+        {
+            lbSLHT.setVisible(true);
+        }
+    }//GEN-LAST:event_txbSLHTFocusLost
 
     /**
      * @param args the command line arguments
@@ -526,7 +598,9 @@ public class QLKHO extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JScrollPane jspaneNV;
+    private javax.swing.JLabel lbMT;
     private javax.swing.JLabel lbMaSP;
+    private javax.swing.JLabel lbSLHT;
     private javax.swing.JLabel lbTD;
     private javax.swing.JLabel lblDiaChi;
     private javax.swing.JLabel lblEmail;

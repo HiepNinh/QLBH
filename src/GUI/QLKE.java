@@ -40,6 +40,9 @@ public class QLKE extends javax.swing.JFrame {
         tableModel.setColumnIdentifiers(colsName);
         JtableKE.setModel(tableModel);
         LoadButton();
+        
+        lbwarningMT.setVisible(false);
+        lbwarningSLHT.setVisible(false);
     }
 
 
@@ -78,6 +81,8 @@ public class QLKE extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lbMaSP = new javax.swing.JLabel();
+        lbwarningMT = new javax.swing.JLabel();
+        lbwarningSLHT = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnSearch = new javax.swing.JButton();
         txbSearch = new javax.swing.JTextField();
@@ -202,6 +207,14 @@ public class QLKE extends javax.swing.JFrame {
 
         txbSLHT.setMinimumSize(new java.awt.Dimension(60, 22));
         txbSLHT.setPreferredSize(new java.awt.Dimension(60, 22));
+        txbSLHT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txbSLHTFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txbSLHTFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 9;
@@ -221,6 +234,14 @@ public class QLKE extends javax.swing.JFrame {
 
         txbMT.setMinimumSize(new java.awt.Dimension(60, 22));
         txbMT.setPreferredSize(new java.awt.Dimension(60, 22));
+        txbMT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txbMTFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txbMTFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
@@ -283,21 +304,42 @@ public class QLKE extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(45, 8, 5, 10);
         jPanel4.add(jButton1, gridBagConstraints);
 
-        jLabel1.setText("Mã sản phẩm:");
+        jLabel1.setText("Mã sản phẩm");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 25, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 34, 0, 0);
         jPanel4.add(jLabel1, gridBagConstraints);
 
         lbMaSP.setText("NA");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.insets = new java.awt.Insets(0, 7, 0, 0);
         jPanel4.add(lbMaSP, gridBagConstraints);
+
+        lbwarningMT.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lbwarningMT.setForeground(new java.awt.Color(255, 0, 0));
+        lbwarningMT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/important.png"))); // NOI18N
+        lbwarningMT.setText("Bắt buộc");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel4.add(lbwarningMT, gridBagConstraints);
+
+        lbwarningSLHT.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lbwarningSLHT.setForeground(new java.awt.Color(255, 0, 0));
+        lbwarningSLHT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/important.png"))); // NOI18N
+        lbwarningSLHT.setText("Bắt buộc");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel4.add(lbwarningSLHT, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -373,6 +415,11 @@ public class QLKE extends javax.swing.JFrame {
         if (JtableKE.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn mặt hàng muốn sửa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
         } else {
+            if(txbMT.getText().equals("") || txbSLHT.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "Không thể để trống dữ liệu!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
             int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn sửa mặt hàng này?", "Sửa mặt hàng", JOptionPane.WARNING_MESSAGE);
             if (reply == JOptionPane.YES_OPTION) {               
                int masp = Integer.parseInt(lbMaSP.getText());
@@ -427,7 +474,7 @@ public class QLKE extends javax.swing.JFrame {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         if (JtableKE.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân mặt hàng muốn xóa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn mặt hàng muốn xóa!", "Chú ý", JOptionPane.INFORMATION_MESSAGE);
         } else {
             int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn mặt hàng này?", "Xóa mặt hàng", JOptionPane.WARNING_MESSAGE);
             if (reply == JOptionPane.YES_OPTION) {
@@ -475,12 +522,39 @@ public class QLKE extends javax.swing.JFrame {
         lbTD.setText(JtableKE.getModel().getValueAt(row, 3).toString());
         txbMT.setText(JtableKE.getModel().getValueAt(row, 4).toString());
         txbSLHT.setText(JtableKE.getModel().getValueAt(row, 5).toString());
+        lbwarningMT.setVisible(false);
+        lbwarningSLHT.setVisible(false);
     }//GEN-LAST:event_JtableKEMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txbMTFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbMTFocusGained
+        // TODO add your handling code here:
+        lbwarningMT.setVisible(false);
+    }//GEN-LAST:event_txbMTFocusGained
+
+    private void txbMTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbMTFocusLost
+        if(txbMT.getText().equals(""))
+        {
+            lbwarningMT.setVisible(true);
+        }
+    }//GEN-LAST:event_txbMTFocusLost
+
+    private void txbSLHTFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbSLHTFocusGained
+        // TODO add your handling code here:
+        lbwarningSLHT.setVisible(false);
+    }//GEN-LAST:event_txbSLHTFocusGained
+
+    private void txbSLHTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txbSLHTFocusLost
+        // TODO add your handling code here:
+        if(txbSLHT.getText().equals(""))
+        {
+            lbwarningSLHT.setVisible(true);
+        }
+    }//GEN-LAST:event_txbSLHTFocusLost
 
     /**
      * @param args the command line arguments
@@ -546,6 +620,8 @@ public class QLKE extends javax.swing.JFrame {
     private javax.swing.JLabel lblMaNV;
     private javax.swing.JLabel lblQuanLyNV;
     private javax.swing.JLabel lblSDT;
+    private javax.swing.JLabel lbwarningMT;
+    private javax.swing.JLabel lbwarningSLHT;
     private javax.swing.JTextField txbMT;
     private javax.swing.JTextField txbSLHT;
     private javax.swing.JTextField txbSearch;
