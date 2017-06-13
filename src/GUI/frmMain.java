@@ -43,7 +43,7 @@ public class frmMain extends javax.swing.JFrame {
         lblMessage = new javax.swing.JLabel();
         jPanelKhungChucNang = new javax.swing.JPanel();
         iconNV = new javax.swing.JLabel();
-        iconTK = new javax.swing.JLabel();
+        iconPN = new javax.swing.JLabel();
         iconKH = new javax.swing.JLabel();
         buttKH = new javax.swing.JButton();
         iconThKe = new javax.swing.JLabel();
@@ -57,7 +57,7 @@ public class frmMain extends javax.swing.JFrame {
         iconKho = new javax.swing.JLabel();
         iconKe = new javax.swing.JLabel();
         btnXuat = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lbPX = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuDanhMuc = new javax.swing.JMenu();
         jMenuItemBanh = new javax.swing.JMenuItem();
@@ -226,13 +226,13 @@ public class frmMain extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(11, 18, 0, 16);
         jPanelKhungChucNang.add(iconNV, gridBagConstraints);
 
-        iconTK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/image_gallery.png"))); // NOI18N
-        iconTK.setMaximumSize(new java.awt.Dimension(72, 72));
-        iconTK.setMinimumSize(new java.awt.Dimension(72, 72));
-        iconTK.setPreferredSize(new java.awt.Dimension(72, 72));
-        iconTK.addMouseListener(new java.awt.event.MouseAdapter() {
+        iconPN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/image_gallery.png"))); // NOI18N
+        iconPN.setMaximumSize(new java.awt.Dimension(72, 72));
+        iconPN.setMinimumSize(new java.awt.Dimension(72, 72));
+        iconPN.setPreferredSize(new java.awt.Dimension(72, 72));
+        iconPN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                iconTKMouseClicked(evt);
+                iconPNMouseClicked(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -242,7 +242,7 @@ public class frmMain extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.insets = new java.awt.Insets(28, 21, 0, 3);
-        jPanelKhungChucNang.add(iconTK, gridBagConstraints);
+        jPanelKhungChucNang.add(iconPN, gridBagConstraints);
 
         iconKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/cart-icon (1).png"))); // NOI18N
         iconKH.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -409,15 +409,20 @@ public class frmMain extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 39, 11, 0);
         jPanelKhungChucNang.add(btnXuat, gridBagConstraints);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/invio-email-da-internet.png"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(72, 72));
-        jLabel1.setMinimumSize(new java.awt.Dimension(72, 72));
-        jLabel1.setPreferredSize(new java.awt.Dimension(72, 72));
+        lbPX.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/invio-email-da-internet.png"))); // NOI18N
+        lbPX.setMaximumSize(new java.awt.Dimension(72, 72));
+        lbPX.setMinimumSize(new java.awt.Dimension(72, 72));
+        lbPX.setPreferredSize(new java.awt.Dimension(72, 72));
+        lbPX.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbPXMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.insets = new java.awt.Insets(31, 53, 0, 3);
-        jPanelKhungChucNang.add(jLabel1, gridBagConstraints);
+        jPanelKhungChucNang.add(lbPX, gridBagConstraints);
 
         jMenuDanhMuc.setText("Danh mục");
 
@@ -723,9 +728,9 @@ public class frmMain extends javax.swing.JFrame {
         new ThongKe().setVisible(true);
     }//GEN-LAST:event_iconThKeMouseClicked
 
-    private void iconTKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconTKMouseClicked
-        new ThongKe().setVisible(true);
-    }//GEN-LAST:event_iconTKMouseClicked
+    private void iconPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconPNMouseClicked
+           new QuanLyPhieuNhap().setVisible(true);
+    }//GEN-LAST:event_iconPNMouseClicked
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
           new ThongKe().setVisible(true);
@@ -758,6 +763,11 @@ public class frmMain extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jPanelKhungChucNangKeyPressed
+
+    private void lbPXMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPXMouseClicked
+        // TODO add your handling code here:
+        new QuanLyPhieuXuat().setVisible(true);
+    }//GEN-LAST:event_lbPXMouseClicked
 
     /**
      * @param args the command line arguments
@@ -817,9 +827,8 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JLabel iconKe;
     private javax.swing.JLabel iconKho;
     private javax.swing.JLabel iconNV;
-    private javax.swing.JLabel iconTK;
+    private javax.swing.JLabel iconPN;
     private javax.swing.JLabel iconThKe;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenuAbout;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuChucNang;
@@ -842,6 +851,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelKhungChucNang;
     private javax.swing.JPanel jPanelKhungDangNhap;
     private javax.swing.JToolBar jToolBar;
+    private javax.swing.JLabel lbPX;
     private javax.swing.JLabel lblMessage;
     // End of variables declaration//GEN-END:variables
 }
