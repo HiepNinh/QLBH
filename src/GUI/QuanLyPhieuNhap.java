@@ -25,7 +25,7 @@ import qlbh.SANPHAM;
  */
 public class QuanLyPhieuNhap extends javax.swing.JFrame {
 
-    boolean isShowing = false;
+    boolean isShown = false;
     private  float Tongtien;
     
     private DefaultTableModel tableModelPN;
@@ -98,13 +98,13 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
     
     public void LoadButton()
     {
-            this.btnIn.setEnabled(!isShowing);
-            this.btnLapPN.setEnabled(!isShowing);
-            this.btnSua.setEnabled(!isShowing);
-            this.btnXoa.setEnabled(!isShowing);
-            this.btnAdd.setEnabled(!isShowing);
-            this.btnDel.setEnabled(!isShowing);
-            this.btnUp.setEnabled(!isShowing);
+            this.btnIn.setEnabled(!isShown);
+            this.btnLapPN.setEnabled(!isShown);
+            this.btnSua.setEnabled(!isShown);
+            this.btnXoa.setEnabled(!isShown);
+            this.btnAdd.setEnabled(!isShown);
+            this.btnDel.setEnabled(!isShown);
+            this.btnUp.setEnabled(!isShown);
     }
     
     
@@ -593,14 +593,14 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHuyMouseClicked
 
     private void btnLapPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLapPNActionPerformed
-        isShowing = true;
+       isShown = true;
        ThemPhieuNhap formThemPN = new ThemPhieuNhap();
        formThemPN.addWindowListener( new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent we) {
                         btnSearchActionPerformed(evt);
                         ClearCTPN();
-                        isShowing = false;
+                        isShown = false;
                         LoadButton();
                     }
                 } );
@@ -701,13 +701,13 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
     
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
                 //thêm cthd
-        isShowing = true;
+        isShown = true;
        ThemCTPN formThemCTPN = new ThemCTPN();
        formThemCTPN.addWindowListener( new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent we) {
                         LoadCTPN(mapn);
-                        isShowing = false;
+                        isShown = false;
                         if(BUSQLPHIEUNHAP.getInstance().UpdateTT(mapn,Tongtien))
                         {
                             JOptionPane.showMessageDialog(null, "Load thành công", "Chú ý", JOptionPane.INFORMATION_MESSAGE);

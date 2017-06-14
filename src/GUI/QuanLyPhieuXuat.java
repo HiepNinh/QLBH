@@ -27,7 +27,7 @@ import qlbh.SANPHAM;
  */
 public class QuanLyPhieuXuat extends javax.swing.JFrame {
 
-    boolean isShowing = false;
+    boolean isShown = false;
     private  float Tongtien;
     
     private DefaultTableModel tableModelPX;
@@ -99,13 +99,13 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
     
     public void LoadButton()
     {
-            this.btnIn.setEnabled(!isShowing);
-            this.btnLapPN.setEnabled(!isShowing);
-            this.btnSua.setEnabled(!isShowing);
-            this.btnXoa.setEnabled(!isShowing);
-            this.btnAdd.setEnabled(!isShowing);
-            this.btnDel.setEnabled(!isShowing);
-            this.btnUp.setEnabled(!isShowing);
+            this.btnIn.setEnabled(!isShown);
+            this.btnLapPN.setEnabled(!isShown);
+            this.btnSua.setEnabled(!isShown);
+            this.btnXoa.setEnabled(!isShown);
+            this.btnAdd.setEnabled(!isShown);
+            this.btnDel.setEnabled(!isShown);
+            this.btnUp.setEnabled(!isShown);
     }
     
     
@@ -554,14 +554,14 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHuyMouseClicked
 
     private void btnLapPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLapPNActionPerformed
-        isShowing = true;
+        isShown = true;
        ThemPhieuXuat formThemPX = new ThemPhieuXuat();
        formThemPX.addWindowListener( new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent we) {
                         btnSearchActionPerformed(evt);
                         ClearCTPX();
-                        isShowing = false;
+                        isShown = false;
                         LoadButton();
                     }
                 } );
@@ -657,13 +657,13 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
     
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
                 //thêm cthd
-        isShowing = true;
+        isShown = true;
        ThemCTPX formThemCTPX = new ThemCTPX();
        formThemCTPX.addWindowListener( new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent we) {
                         LoadCTPX(mapx);
-                        isShowing = false;
+                        isShown = false;
                         LoadButton();
                         btnSearchActionPerformed(evt);
                     }

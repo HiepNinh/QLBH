@@ -54,7 +54,7 @@ public class ThemPhieuNhap extends javax.swing.JFrame {
     }
 
     public void LoadCombo() {
-
+        cbTen.removeAllItems();
         try {
             al = BUSQLSANPHAM.getInstance().GetAllSP();
             for (int i = 0; i < al.size(); i++) {

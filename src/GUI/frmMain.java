@@ -79,6 +79,7 @@ public class frmMain extends javax.swing.JFrame {
         jMenuItemHuongDan = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(1000, 1000));
         setName("Main form"); // NOI18N

@@ -57,7 +57,7 @@ public class ThemPhieuXuat extends javax.swing.JFrame {
     }
 
     public void LoadCombo() {
-
+        cbTen.removeAllItems();
         try {
             al = BUSQLKHO.getInstance().GetAllSPKHO();
             for (int i = 0; i < al.size(); i++) {
@@ -157,8 +157,8 @@ public class ThemPhieuXuat extends javax.swing.JFrame {
             }
         });
 
-        cbTen.setMinimumSize(new java.awt.Dimension(100, 22));
-        cbTen.setPreferredSize(new java.awt.Dimension(100, 22));
+        cbTen.setMinimumSize(new java.awt.Dimension(120, 22));
+        cbTen.setPreferredSize(new java.awt.Dimension(120, 22));
 
         lbMa.setText("Tên Bánh");
 
@@ -186,13 +186,13 @@ public class ThemPhieuXuat extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
+                        .addContainerGap()
                         .addComponent(lbMa)
                         .addGap(18, 18, 18)
-                        .addComponent(cbTen, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addComponent(cbTen, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(txbSL, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,7 +201,7 @@ public class ThemPhieuXuat extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnXoa)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jSHD, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
