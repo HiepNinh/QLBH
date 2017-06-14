@@ -1,7 +1,7 @@
 package GUI;
 
 import Helper.About;
-import Helper.Help;
+import Helper.HelpFunc;
 import com.sun.glass.events.KeyEvent;
 import static java.awt.Event.F1;
 import java.awt.event.KeyAdapter;
@@ -16,6 +16,7 @@ public class frmMain extends javax.swing.JFrame {
     public frmMain() {
         initComponents();
         this.setLocationRelativeTo(null);
+       
         jPanelKhungChucNang.setFocusable(true);
         jPanelKhungChucNang.requestFocus();
     }
@@ -215,6 +216,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.setLayout(new java.awt.GridBagLayout());
 
         iconNV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/Preppy-icon (1).png"))); // NOI18N
+        iconNV.setRequestFocusEnabled(false);
         iconNV.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iconNVMouseClicked(evt);
@@ -231,6 +233,7 @@ public class frmMain extends javax.swing.JFrame {
         iconPN.setMaximumSize(new java.awt.Dimension(72, 72));
         iconPN.setMinimumSize(new java.awt.Dimension(72, 72));
         iconPN.setPreferredSize(new java.awt.Dimension(72, 72));
+        iconPN.setRequestFocusEnabled(false);
         iconPN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iconPNMouseClicked(evt);
@@ -246,6 +249,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.add(iconPN, gridBagConstraints);
 
         iconKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/cart-icon (1).png"))); // NOI18N
+        iconKH.setRequestFocusEnabled(false);
         iconKH.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iconKHMouseClicked(evt);
@@ -259,6 +263,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.add(iconKH, gridBagConstraints);
 
         buttKH.setText("Khách hàng");
+        buttKH.setRequestFocusEnabled(false);
         buttKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttKHActionPerformed(evt);
@@ -271,6 +276,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.add(buttKH, gridBagConstraints);
 
         iconThKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/SEO-icon (1).png"))); // NOI18N
+        iconThKe.setRequestFocusEnabled(false);
         iconThKe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iconThKeMouseClicked(evt);
@@ -283,6 +289,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.add(iconThKe, gridBagConstraints);
 
         buttNV.setText("Nhân viên");
+        buttNV.setRequestFocusEnabled(false);
         buttNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttNVActionPerformed(evt);
@@ -296,6 +303,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.add(buttNV, gridBagConstraints);
 
         iconHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/Cash-register-icon.png"))); // NOI18N
+        iconHD.setRequestFocusEnabled(false);
         iconHD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iconHDMouseClicked(evt);
@@ -308,6 +316,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.add(iconHD, gridBagConstraints);
 
         btnThongKe.setText("Thống kê");
+        btnThongKe.setRequestFocusEnabled(false);
         btnThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThongKeActionPerformed(evt);
@@ -320,6 +329,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.add(btnThongKe, gridBagConstraints);
 
         buttHD.setText("Hóa đơn");
+        buttHD.setRequestFocusEnabled(false);
         buttHD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttHDActionPerformed(evt);
@@ -333,6 +343,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.add(buttHD, gridBagConstraints);
 
         buttKho.setText("Kho");
+        buttKho.setRequestFocusEnabled(false);
         buttKho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttKhoActionPerformed(evt);
@@ -346,6 +357,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.add(buttKho, gridBagConstraints);
 
         btnNhap.setText("Phiếu Nhập");
+        btnNhap.setRequestFocusEnabled(false);
         btnNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNhapActionPerformed(evt);
@@ -359,6 +371,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.add(btnNhap, gridBagConstraints);
 
         buttKe.setText("Kệ bánh");
+        buttKe.setRequestFocusEnabled(false);
         buttKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttKeActionPerformed(evt);
@@ -372,6 +385,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.add(buttKe, gridBagConstraints);
 
         iconKho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/pallet.png"))); // NOI18N
+        iconKho.setRequestFocusEnabled(false);
         iconKho.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iconKhoMouseClicked(evt);
@@ -385,6 +399,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.add(iconKho, gridBagConstraints);
 
         iconKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library/food-stall.png"))); // NOI18N
+        iconKe.setRequestFocusEnabled(false);
         iconKe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iconKeMouseClicked(evt);
@@ -398,6 +413,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanelKhungChucNang.add(iconKe, gridBagConstraints);
 
         btnXuat.setText("Phiếu Xuất");
+        btnXuat.setRequestFocusEnabled(false);
         btnXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXuatActionPerformed(evt);
@@ -414,6 +430,7 @@ public class frmMain extends javax.swing.JFrame {
         lbPX.setMaximumSize(new java.awt.Dimension(72, 72));
         lbPX.setMinimumSize(new java.awt.Dimension(72, 72));
         lbPX.setPreferredSize(new java.awt.Dimension(72, 72));
+        lbPX.setRequestFocusEnabled(false);
         lbPX.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbPXMouseClicked(evt);
@@ -610,7 +627,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_buttTlbrHDActionPerformed
 
     private void buttTlbrGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrGDActionPerformed
-        new Help().setVisible(true);    
+        new HelpFunc().setVisible(true);    
     }//GEN-LAST:event_buttTlbrGDActionPerformed
 
     private void buttKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttKHActionPerformed
@@ -694,7 +711,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jMenuItemHuongDanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHuongDanActionPerformed
-        new Help().setVisible(true);
+        new HelpFunc().setVisible(true);
     }//GEN-LAST:event_jMenuItemHuongDanActionPerformed
 
     private void buttTlbrKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttTlbrKeActionPerformed
@@ -757,7 +774,7 @@ public class frmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_F1)
         {
-            new Help().setVisible(true);
+            new HelpFunc().setVisible(true);
         }
         if(evt.getKeyCode() == KeyEvent.VK_ESCAPE)
         {

@@ -33,7 +33,7 @@ public class About extends javax.swing.JFrame {
         try {
           aboutURL =new File("src\\Helper\\About.html").toURI().toURL();
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Help.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HelpFunc.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         //Hiên thị trang chủ lên editorpane

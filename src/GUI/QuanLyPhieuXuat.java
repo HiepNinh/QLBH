@@ -49,7 +49,7 @@ public class QuanLyPhieuXuat extends javax.swing.JFrame {
         tableModelPX = new DefaultTableModel();
         tableModelPX.setColumnIdentifiers(colsName);
         JtablePX.setModel(tableModelPX);
-        
+      
         tableModelCT = new DefaultTableModel();
         tableModelCT.setColumnIdentifiers(colsNameCT);
         JtableCTPX.setModel(tableModelCT);

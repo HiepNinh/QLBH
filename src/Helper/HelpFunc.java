@@ -19,7 +19,7 @@ import javax.swing.event.HyperlinkListener;
  *
  * @author Admin
  */
-public class Help extends javax.swing.JFrame {
+public class HelpFunc extends javax.swing.JFrame {
 
     private final int WIDTH = 600;
     private final int HEIGHT = 400;
@@ -27,7 +27,7 @@ public class Help extends javax.swing.JFrame {
     /**
      * Creates new form Help
      */
-    public Help() {
+    public HelpFunc() {
         initComponents();
         this.setLocationRelativeTo(null);
         editorpane.setEditable(false);
@@ -36,7 +36,7 @@ public class Help extends javax.swing.JFrame {
         try {
           helpURL =new File("src\\Helper\\TrangChu.html").toURI().toURL();
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Help.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HelpFunc.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         //Hiên thị trang chủ lên editorpane
@@ -271,7 +271,7 @@ public void DisplayFile()
         try {
              helpURL =new File("src\\Helper\\HoaDon.html").toURI().toURL();
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Help.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HelpFunc.class.getName()).log(Level.SEVERE, null, ex);
         }
         DisplayFile();
     }//GEN-LAST:event_btnHoadonActionPerformed
@@ -280,7 +280,7 @@ public void DisplayFile()
         try {
              helpURL =new File("src\\Helper\\NhanVien.html").toURI().toURL();
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Help.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HelpFunc.class.getName()).log(Level.SEVERE, null, ex);
         }
         DisplayFile();
     }//GEN-LAST:event_btnStaffActionPerformed
@@ -289,7 +289,7 @@ public void DisplayFile()
         try {
              helpURL =new File("src\\Helper\\KhachHang.html").toURI().toURL();
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Help.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HelpFunc.class.getName()).log(Level.SEVERE, null, ex);
         }
         DisplayFile();
     }//GEN-LAST:event_btnCustomerActionPerformed
@@ -298,7 +298,7 @@ public void DisplayFile()
         try {
              helpURL =new File("src\\Helper\\Kho.html").toURI().toURL();
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Help.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HelpFunc.class.getName()).log(Level.SEVERE, null, ex);
         }
         DisplayFile();
     }//GEN-LAST:event_btnKhoActionPerformed
@@ -307,7 +307,7 @@ public void DisplayFile()
         try {
              helpURL =new File("src\\Helper\\KeBanh.html").toURI().toURL();
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Help.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HelpFunc.class.getName()).log(Level.SEVERE, null, ex);
         }
         DisplayFile();
     }//GEN-LAST:event_btnKeActionPerformed
@@ -316,7 +316,7 @@ public void DisplayFile()
         try {
              helpURL =new File("src\\Helper\\Banh.html").toURI().toURL();
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Help.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HelpFunc.class.getName()).log(Level.SEVERE, null, ex);
         }
         DisplayFile();
     }//GEN-LAST:event_btnBanhActionPerformed
@@ -325,7 +325,7 @@ public void DisplayFile()
        try {
              helpURL =new File("src\\Helper\\PhieuNhap.html").toURI().toURL();
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Help.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HelpFunc.class.getName()).log(Level.SEVERE, null, ex);
         }
        DisplayFile();
     }//GEN-LAST:event_btnPNActionPerformed
@@ -334,7 +334,7 @@ public void DisplayFile()
         try {
              helpURL =new File("src\\Helper\\PhieuXuat.html").toURI().toURL();
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Help.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HelpFunc.class.getName()).log(Level.SEVERE, null, ex);
         }
         DisplayFile();
     }//GEN-LAST:event_btnPXActionPerformed
@@ -343,7 +343,7 @@ public void DisplayFile()
         try {
              helpURL =new File("src\\Helper\\ThongKe.html").toURI().toURL();
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Help.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HelpFunc.class.getName()).log(Level.SEVERE, null, ex);
         }
         DisplayFile();
     }//GEN-LAST:event_btnTKActionPerformed
@@ -352,7 +352,7 @@ public void DisplayFile()
         try {
              helpURL =new File("src\\Helper\\TrangChu.html").toURI().toURL();
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Help.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HelpFunc.class.getName()).log(Level.SEVERE, null, ex);
         }
         DisplayFile();
     }//GEN-LAST:event_btnHomeActionPerformed
@@ -379,20 +379,21 @@ public void DisplayFile()
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Help.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HelpFunc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Help.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HelpFunc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Help.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HelpFunc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Help.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HelpFunc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Help().setVisible(true);
+                new HelpFunc().setVisible(true);
             }
         });
     }
